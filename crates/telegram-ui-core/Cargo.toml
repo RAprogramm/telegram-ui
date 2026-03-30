@@ -25,6 +25,8 @@ default = []
 # Framework-specific features (examples should enable these)
 leptos = ["dep:leptos"]
 yew = ["dep:yew"]
+# WebApp SDK integration (required for Telegram WebApp functionality)
+webapp-sdk = []
 
 [dev-dependencies]
 wasm-bindgen-test = { workspace = true }

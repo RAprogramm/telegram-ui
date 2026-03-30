@@ -3,13 +3,13 @@ target = "public/index.html"
 watch = ["src", "public"]
 
 [serve]
-address = "127.0.0.1:8080"
+address = "127.0.0.1"
 port = 8080
 open = false
 
 [clean]
 dist = "dist"
-target = "index.html"
+target = "public/index.html"
 watch = ["src", "public"]
 
 [watch]
