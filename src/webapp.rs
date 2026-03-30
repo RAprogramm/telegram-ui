@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Telegram WebApp SDK integration
 //!
 //! This module provides utilities for integrating with the Telegram WebApp SDK.

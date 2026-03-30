@@ -1,3 +1,6 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!-- SPDX-FileCopyrightText: 2026 Telegram UI contributors -->
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

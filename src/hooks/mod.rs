@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
-//! Context modules
 
-pub mod platform;
+//! Hook modules

@@ -1,3 +1,6 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!-- SPDX-FileCopyrightText: 2026 Telegram UI contributors -->
+
 # Telegram UI
 
 [![CI/CD](https://github.com/RAprogramm/telegram-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/RAprogramm/telegram-ui/actions/workflows/ci.yml)

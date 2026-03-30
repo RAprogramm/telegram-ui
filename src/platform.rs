@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 /// Platform detection for Telegram UI components
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Platform {

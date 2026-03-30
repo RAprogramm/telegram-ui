@@ -1,3 +1,6 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!-- SPDX-FileCopyrightText: 2026 Telegram UI contributors -->
+
 # Contributing to Telegram UI
 
 Thank you for your interest in contributing to Telegram UI! This document provides guidelines for contributing to this project.

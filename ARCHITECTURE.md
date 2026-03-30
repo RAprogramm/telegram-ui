@@ -1,3 +1,6 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!-- SPDX-FileCopyrightText: 2026 Telegram UI contributors -->
+
 # Architecture: telegram-webapp-sdk vs telegram-ui-core
 
 ## Current State Analysis

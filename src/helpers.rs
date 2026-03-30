@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Helper functions for Telegram UI
 
 /// Check if a string is empty or contains only whitespace

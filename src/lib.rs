@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! # Telegram UI - Rust Library for Telegram Mini Apps
 //!
 //! Telegram UI is a Rust library for creating Telegram-style interfaces **exclusively for Telegram Mini Apps**.
