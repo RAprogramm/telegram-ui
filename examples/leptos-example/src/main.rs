@@ -3,7 +3,7 @@
 //! This application demonstrates how to use Telegram UI components with Leptos.
 
 use leptos::prelude::*;
-use telegram_ui_core::{Button, Spinner};
+use telegram_ui::{Button, Spinner};
 
 #[component]
 fn App() -> impl IntoView {

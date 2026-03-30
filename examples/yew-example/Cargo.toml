@@ -1,14 +1,14 @@
 [package]
 name = "yew-example"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
+edition = "2024"
+version = "0.1.0"
+license = "MIT"
 
 [dependencies]
 # Use path to local SDK
 telegram-webapp-sdk = { path = "/home/ra/Projects/telegram-webapp-sdk", features = ["macros"] }
-telegram-ui-core = { version = "0.1.0", path = "../../crates/telegram-ui-core" }
-yew = { workspace = true, features = ["csr"] }
+telegram-ui = { path = "..", features = ["yew"] }
+yew = { version = "0.23", features = ["csr"] }
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"

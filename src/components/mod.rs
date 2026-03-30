@@ -32,6 +32,9 @@ pub use layout::Container;
 pub use layout::Row;
 pub use layout::Spacer;
 
+pub use navigation::Button as NavButton;
+pub use navigation::Link;
+
 pub use overlays::Backdrop;
 pub use overlays::Modal;
 pub use overlays::Toast;

@@ -36,7 +36,7 @@
 //! # Examples
 //!
 //! ```ignore
-//! use telegram_ui_core::{Button, Spinner};
+//! use telegram_ui::{Button, Spinner};
 //!
 //! let button = Button::new()
 //!     .size("m")
@@ -62,7 +62,7 @@
 //! integrating with Telegram WebApp SDK:
 //!
 //! ```ignore
-//! use telegram_ui_core::webapp::{init_webapp, show_alert, expand};
+//! use telegram_ui::webapp::{init_webapp, show_alert, expand};
 //!
 //! fn main() {
 //!     if let Ok(true) = init_webapp() {
@@ -103,10 +103,9 @@ pub use components::Placeholder;
 
 pub use components::Alert;
 pub use components::AlertKind;
-pub use components::Badge;
 pub use components::EmptyState;
-pub use components::Progress;
 pub use components::Skeleton;
+pub use components::Progress;
 pub use components::Input;
 pub use components::Select;
 pub use components::Textarea;

@@ -1,32 +1,34 @@
-[workspace]
-resolver = "3"
-members = [
-    "crates/telegram-ui-core",
-    "examples/leptos-example",
-    "examples/yew-example",
-]
-
-[workspace.package]
+[package]
+name = "telegram-ui"
 edition = "2024"
 version = "0.1.0"
 license = "MIT"
+description = "Telegram UI components for Rust - exclusively for Telegram Mini Apps"
+keywords = ["telegram", "ui", "web", "wasm", "mini-apps", "webapp"]
+categories = ["gui", "wasm", "web-programming"]
+readme = "README.md"
 repository = "https://github.com/telegram-ui/telegram-ui"
+documentation = "https://docs.rs/telegram-ui"
+homepage = "https://github.com/telegram-ui/telegram-ui"
 
-[workspace.dependencies]
-# UI library
-telegram-ui-core = { version = "0.1.0", path = "crates/telegram-ui-core" }
+[dependencies]
+# Core dependency: Telegram WebApp SDK (required for UI functionality)
+telegram-webapp-sdk = { path = "/home/ra/Projects/telegram-webapp-sdk", features = ["macros"] }
 
-# Frameworks
-leptos = "0.8"
-leptos_router = "0.8"
-yew = "0.23"
-yew_router = "0.18"
-
-# WebAssembly
+# WebAssembly bindings
 wasm-bindgen = "0.2"
-web-sys = "0.3"
-console_error_panic_hook = "0.1"
 
-# Dev dependencies
-wasm-bindgen-test = "0.3"
-trunk = "0.21"
+# Optional framework support (moved to examples)
+leptos = { version = "0.8", optional = true }
+yew = { version = "0.23", optional = true }
+
+[features]
+default = []
+# Framework-specific features (examples should enable these)
+leptos = ["dep:leptos"]
+yew = ["dep:yew"]
+# WebApp SDK integration (required for Telegram WebApp functionality)
+webapp-sdk = []
+
+[dev-dependencies]
+wasm-bindgen-test = { version = "0.3" }
