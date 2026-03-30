@@ -1,0 +1,32 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/telegram-ui-core",
+    "examples/leptos-example",
+    "examples/yew-example",
+]
+
+[workspace.package]
+edition = "2024"
+version = "0.1.0"
+license = "MIT"
+repository = "https://github.com/telegram-ui/telegram-ui"
+
+[workspace.dependencies]
+# UI library
+telegram-ui-core = { version = "0.1.0", path = "crates/telegram-ui-core" }
+
+# Frameworks
+leptos = "0.8"
+leptos_router = "0.8"
+yew = "0.23"
+yew_router = "0.18"
+
+# WebAssembly
+wasm-bindgen = "0.2"
+web-sys = "0.3"
+console_error_panic_hook = "0.1"
+
+# Dev dependencies
+wasm-bindgen-test = "0.3"
+trunk = "0.21"

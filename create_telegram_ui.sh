@@ -1,0 +1,197 @@
+#!/bin/bash
+
+# Скрипт для автоматической сборки Telegram UI для Rust
+echo "Создание Telegram UI Rust пакета..."
+
+# Создание структуры проекта
+mkdir -p telegram-ui-rust/src
+mkdir -p telegram-ui-rust/src/components
+mkdir -p telegram-ui-rust/src/helpers
+
+# Создание основного Cargo.toml
+cat > telegram-ui-rust/Cargo.toml << EOF
+[package]
+name = "telegram-ui-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+leptos = "0.8.0"
+leptos_router = "0.8.0"
+yew = { version = "0.23.0", features = ["csr"] }
+yew-router = "0.18.0"
+telegram-webapp-sdk = "0.4.0"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.0"
+EOF
+
+# Создание lib.rs
+cat > telegram-ui-rust/src/lib.rs << 'EOF'
+//! Telegram UI Components for Rust
+//!
+//! A Rust implementation of the Telegram UI components library,
+//! designed for use with Leptos and Yew frameworks.
+//!
+//! This library provides a set of React-like components that replicate
+//! the Telegram interface design.
+
+pub mod components;
+pub mod helpers;
+pub mod types;
+
+// CSS стили для Telegram UI
+pub fn get_styles() -> &'static str {
+    include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/styles.css"))
+}
+EOF
+
+# Создание файла стилей
+cat > telegram-ui-rust/styles.css << 'EOF'
+/* Telegram UI Styles */
+/* Base styles for components */
+
+/* Button styles */
+.telegram-ui-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: inherit;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.telegram-ui-button--ios {
+  border-radius: 10px;
+}
+
+.telegram-ui-button--stretched {
+  width: 100%;
+}
+
+.telegram-ui-button--loading {
+  pointer-events: none;
+}
+
+.telegram-ui-button--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.telegram-ui-button--s {
+  padding: 4px 12px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.telegram-ui-button--m {
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.telegram-ui-button--l {
+  padding: 12px 20px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.telegram-ui-button--filled {
+  background-color: var(--telegram-button-filled-bg, #0088cc);
+  color: var(--telegram-button-filled-color, white);
+}
+
+.telegram-ui-button--bezeled {
+  background-color: var(--telegram-button-bezeled-bg, transparent);
+  color: var(--telegram-button-bezeled-color, #0088cc);
+  border: 1px solid var(--telegram-button-bezeled-border, #0088cc);
+}
+
+.telegram-ui-button--plain {
+  background-color: transparent;
+  color: var(--telegram-button-plain-color, #0088cc);
+}
+
+.telegram-ui-button--gray {
+  background-color: var(--telegram-button-gray-bg, #f0f0f0);
+  color: var(--telegram-button-gray-color, #333);
+}
+
+.telegram-ui-button--outline {
+  background-color: transparent;
+  color: var(--telegram-button-outline-color, #0088cc);
+  border: 1px solid var(--telegram-button-outline-border, #0088cc);
+}
+
+.telegram-ui-button--white {
+  background-color: var(--telegram-button-white-bg, white);
+  color: var(--telegram-button-white-color, #333);
+  border: 1px solid var(--telegram-button-white-border, #e0e0e0);
+}
+
+.telegram-ui-button--filled:active,
+.telegram-ui-button--bezeled:active,
+.telegram-ui-button--plain:active,
+.telegram-ui-button--gray:active,
+.telegram-ui-button--outline:active,
+.telegram-ui-button--white:active {
+  opacity: 0.7;
+}
+
+/* Spinner styles */
+.telegram-ui-spinner {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.telegram-ui-spinner--s {
+  width: 16px;
+  height: 16px;
+}
+
+.telegram-ui-spinner--l {
+  width: 24px;
+  height: 24px;
+}
+
+.telegram-ui-spinner-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--telegram-spinner-stroke, #0088cc);
+  border-top-color: transparent;
+  animation: spinner 0.8s linear infinite;
+}
+
+.telegram-ui-spinner--s .telegram-ui-spinner-circle {
+  border-width: 1.5px;
+}
+
+.telegram-ui-spinner--l .telegram-ui-spinner-circle {
+  border-width: 3px;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+EOF
+
+echo "Telegram UI Rust пакет успешно создан!"
+echo "Структура проекта:"
+find telegram-ui-rust -type f | head -20

@@ -1,0 +1,30 @@
+[package]
+name = "telegram-ui-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Telegram UI components for Rust - exclusively for Telegram Mini Apps"
+keywords = ["telegram", "ui", "web", "wasm", "mini-apps", "webapp"]
+categories = ["gui", "wasm", "web-programming"]
+readme = "../../README.md"
+repository = "https://github.com/telegram-ui/telegram-ui"
+documentation = "https://docs.rs/telegram-ui-core"
+homepage = "https://github.com/telegram-ui/telegram-ui"
+
+[dependencies]
+# Core dependency: Telegram WebApp SDK (required for UI functionality)
+# Use path to local SDK
+telegram-webapp-sdk = { path = "/home/ra/Projects/telegram-webapp-sdk", features = ["macros"] }
+
+# Optional framework support (moved to examples)
+leptos = { workspace = true, optional = true }
+yew = { workspace = true, optional = true }
+
+[features]
+default = []
+# Framework-specific features (examples should enable these)
+leptos = ["dep:leptos"]
+yew = ["dep:yew"]
+
+[dev-dependencies]
+wasm-bindgen-test = { workspace = true }

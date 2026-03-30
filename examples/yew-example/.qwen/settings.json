@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/ra/Projects/telegram-ui/crates/telegram-ui-core/**)"
+    ]
+  }
+}
