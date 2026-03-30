@@ -7,9 +7,9 @@ description = "Telegram UI components for Rust - exclusively for Telegram Mini A
 keywords = ["telegram", "ui", "web", "wasm", "mini-apps", "webapp"]
 categories = ["gui", "wasm", "web-programming"]
 readme = "README.md"
-repository = "https://github.com/telegram-ui/telegram-ui"
+repository = "https://github.com/RAprogramm/telegram-ui"
 documentation = "https://docs.rs/telegram-ui"
-homepage = "https://github.com/telegram-ui/telegram-ui"
+homepage = "https://github.com/RAprogramm/telegram-ui"
 
 [dependencies]
 # Core dependency: Telegram WebApp SDK (required for UI functionality)
