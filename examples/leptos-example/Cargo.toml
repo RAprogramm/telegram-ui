@@ -7,7 +7,7 @@ license = "MIT"
 [dependencies]
 # Use path to local SDK
 telegram-webapp-sdk = { path = "/home/ra/Projects/telegram-webapp-sdk", features = ["macros"] }
-telegram-ui = { path = "..", features = ["leptos"] }
+telegram-ui = { path = "../../", features = ["leptos"] }
 leptos = { version = "0.8", features = ["csr"] }
 
 # Dev dependencies

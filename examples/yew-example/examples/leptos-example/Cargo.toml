@@ -1,5 +1,5 @@
 [package]
-name = "yew-example"
+name = "leptos-example"
 edition = "2024"
 version = "0.1.0"
 license = "MIT"
@@ -7,8 +7,11 @@ license = "MIT"
 [dependencies]
 # Use path to local SDK
 telegram-webapp-sdk = { path = "/home/ra/Projects/telegram-webapp-sdk", features = ["macros"] }
-telegram-ui = { path = "../../", features = ["yew"] }
-yew = { version = "0.23", features = ["csr"] }
+telegram-ui = { path = "../..", features = ["leptos"] }
+leptos = { version = "0.8", features = ["csr"] }
+
+# Dev dependencies
+console_error_panic_hook = "0.1"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"
