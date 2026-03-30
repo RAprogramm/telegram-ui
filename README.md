@@ -1,17 +1,17 @@
 # Telegram UI
 
-[![CI/CD](https://github.com/telegram-ui/telegram-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/telegram-ui/telegram-ui/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/RAprogramm/telegram-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/RAprogramm/telegram-ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org)
 [![WebAssembly](https://img.shields.io/badge/WebAssembly-stable-blue.svg)](https://webassembly.org)
 
 Telegram UI is a Rust library for creating Telegram-style interfaces **exclusively for Telegram Mini Apps**. It provides a set of ready-to-use components that follow Telegram's design language, with full integration into the Telegram WebApp SDK.
 
-## ⚠️ Important: Telegram-Only Library
+## Important: Telegram-Only Library
 
 This library is designed **exclusively** for Telegram Mini Apps and cannot be used outside of Telegram. The Telegram WebApp SDK is only available when your app is running inside Telegram.
 
-## ✨ Features
+## Features
 
 - **Button Component** - Multiple styles (filled, outline, plain, gray, white) and sizes (s, m, l)
 - **Spinner Component** - Loading indicators with three size options
@@ -22,22 +22,22 @@ This library is designed **exclusively** for Telegram Mini Apps and cannot be us
 - **Comprehensive Tests** - Unit tests for all components
 - **CI/CD Pipeline** - Automated testing and deployment
 
-## 📦 Installation
+## Installation
 
 Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-telegram-ui-core = "0.1.0"
+telegram-ui = "0.1.0"
 ```
 
-## 🚀 Prerequisites
+## Prerequisites
 
 - **Telegram Bot** - You need a Telegram bot to host your Mini App
 - **Telegram Mini App** - Your app must be added to a Telegram bot as a Mini App
 - **Web Hosting** - Host your WebAssembly build on HTTPS (GitHub Pages, Vercel, etc.)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -50,7 +50,7 @@ Before starting, ensure you have:
 
 ```rust
 use leptos::prelude::*;
-use telegram_ui_core::{Button, Spinner};
+use telegram_ui::{Button, Spinner};
 
 #[component]
 fn App() -> impl IntoView {
@@ -74,7 +74,7 @@ fn App() -> impl IntoView {
 
 ```rust
 use yew::prelude::*;
-use telegram_ui_core::{Button, Spinner};
+use telegram_ui::{Button, Spinner};
 
 #[function_component(App)]
 fn app() -> Html {
@@ -94,7 +94,7 @@ fn app() -> Html {
 }
 ```
 
-## 🎨 Components
+## Components
 
 ### Button
 
@@ -132,7 +132,7 @@ Spinner::new().size("m")
 Spinner::new().size("l")
 ```
 
-## 🎨 CSS Variables
+## CSS Variables
 
 Customize the appearance using CSS custom properties:
 
@@ -154,7 +154,7 @@ Customize the appearance using CSS custom properties:
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 
@@ -162,7 +162,7 @@ Run the test suite:
 cargo test --all-targets
 ```
 
-## 📝 Documentation
+## Documentation
 
 Generate documentation:
 
@@ -170,7 +170,7 @@ Generate documentation:
 cargo doc --no-deps --document-private-items
 ```
 
-## 🌐 Deployment
+## Deployment
 
 ### Telegram Mini App Requirements
 
@@ -203,7 +203,7 @@ cargo doc --no-deps --document-private-items
 3. Configure Mini App URL in BotFather
 4. Test your app in Telegram
 
-## 🔧 Development
+## Development
 
 ### Prerequisites
 
@@ -235,7 +235,7 @@ cargo clippy --all-targets
 cargo fmt
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -245,23 +245,22 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Run tests and linter
 5. Submit a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Telegram for the beautiful design language
 - The Rust web framework communities for inspiration
 
-## 📞 Support
+## Support
 
-- 📧 Email: support@telegram-ui.dev
-- 🐛 Report issues: [GitHub Issues](https://github.com/telegram-ui/telegram-ui/issues)
-- 💬 Discussion: [GitHub Discussions](https://github.com/telegram-ui/telegram-ui/discussions)
-- 📚 Telegram WebApp Docs: [https://docs.telegram.org/apps/intro](https://docs.telegram.org/apps/intro)
+- Report issues: [GitHub Issues](https://github.com/RAprogramm/telegram-ui/issues)
+- Discussion: [GitHub Discussions](https://github.com/RAprogramm/telegram-ui/discussions)
+- Telegram WebApp Docs: [https://docs.telegram.org/apps/intro](https://docs.telegram.org/apps/intro)
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Telegram Mini Apps Documentation](https://docs.telegram.org/apps/intro)
 - [Telegram WebApp SDK](https://docs.rs/telegram-webapp-sdk)
@@ -269,4 +268,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ---
 
-Made with ❤️ using Rust, WebAssembly, and Telegram WebApp SDK
+Made with Rust, WebAssembly, and Telegram WebApp SDK
