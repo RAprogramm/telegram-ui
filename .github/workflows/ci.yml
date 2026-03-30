@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -12,8 +12,8 @@ env:
   RUST_BACKTRACE: 1
 
 jobs:
-  test:
-    name: Run Tests
+  fmt:
+    name: Rustfmt
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,7 +22,37 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          components: clippy, rustfmt
+          components: rustfmt
+
+      - name: Run rustfmt check
+        run: cargo fmt --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    needs: fmt
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Run clippy
+        run: cargo clippy --all-targets -- -D warnings
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: clippy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -37,17 +67,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
-      - name: Install trunk
-        uses: jetli/trunk-action@v0.4.0
-
       - name: Run cargo test
         run: cargo test --all-targets
-
-      - name: Run clippy
-        run: cargo clippy --all-targets -- -D warnings
-
-      - name: Run rustfmt check
-        run: cargo fmt --all -- --check
 
   build:
     name: Build Examples
@@ -98,7 +119,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  docs:
+  doc:
     name: Documentation
     runs-on: ubuntu-latest
     needs: test
@@ -117,3 +138,19 @@ jobs:
         with:
           name: documentation
           path: target/doc/
+
+  reuse-lint:
+    name: REUSE Compliance
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Run reuse lint
+        run: |
+          pip install reuse
+          reuse lint

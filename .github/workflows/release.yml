@@ -41,6 +41,11 @@ jobs:
       - name: Build documentation
         run: cargo doc --no-deps --document-private-items
 
+      - name: Run reuse lint
+        run: |
+          pip install reuse
+          reuse lint
+
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
