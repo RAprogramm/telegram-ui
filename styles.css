@@ -1,19 +1,51 @@
-/*
- * SPDX-License-Identifier: MIT
- * SPDX-FileCopyrightText: 2026 Telegram UI contributors
- */
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 
-/* Telegram UI Core Styles */
-/* Matches official Telegram UI component naming conventions */
+/*
+ * Telegram UI Core Styles
+ * Matches official Telegram UI component naming conventions
+ * 
+ * CSS Variables Reference:
+ * 
+ * Telegram Theme Variables (injected by Telegram WebApp SDK):
+ *   --tg-theme-bg-color
+ *   --tg-theme-text-color
+ *   --tg-theme-hint-color
+ *   --tg-theme-link-color
+ *   --tg-theme-button-color
+ *   --tg-theme-button-text-color
+ *   --tg-theme-secondary-bg-color
+ *   --tg-theme-header-bg-color (TMA 7.0+)
+ *   --tg-theme-accent-text-color (TMA 7.0+)
+ *   --tg-theme-section-bg-color (TMA 7.0+)
+ *   --tg-theme-section-header-text-color (TMA 7.0+)
+ *   --tg-theme-subtitle-text-color (TMA 7.0+)
+ *   --tg-theme-destructive-text-color (TMA 7.0+)
+ * 
+ * Internal Tokens (tgui--):
+ *   --tgui-bg: mapped to --tg-theme-bg-color
+ *   --tgui-text: mapped to --tg-theme-text-color
+ *   --tgui-hint: mapped to --tg-theme-hint-color
+ *   --tgui-link: mapped to --tg-theme-link-color
+ *   --tgui-button-bg: mapped to --tg-theme-button-color
+ *   --tgui-button-text: mapped to --tg-theme-button-text-color
+ *   --tgui-secondary-bg: mapped to --tg-theme-secondary-bg-color
+ *   --tgui-header-bg: mapped to --tg-theme-header-bg-color
+ *   --tgui-accent: mapped to --tg-theme-accent-text-color
+ *   --tgui-section-bg: mapped to --tg-theme-section-bg-color
+ *   --tgui-section-header: mapped to --tg-theme-section-header-text-color
+ *   --tgui-subtitle: mapped to --tg-theme-subtitle-text-color
+ *   --tgui-destructive: mapped to --tg-theme-destructive-text-color
+ */
 
 /* ==================== Button Styles ==================== */
 .telegram-ui-button {
   align-items: center;
-  background: var(--telegram-button-color, #007aff);
+  background: var(--tgui-button-bg, var(--tg-theme-button-color, #2481cc));
   border: none;
   border-radius: 8px;
   box-sizing: border-box;
-  color: var(--telegram-button-text-color, #fff);
+  color: var(--tgui-button-text, var(--tg-theme-button-text-color, #ffffff));
   cursor: pointer;
   display: inline-flex;
   flex-direction: row;
@@ -62,36 +94,36 @@
 }
 
 .telegram-ui-button--filled {
-  --telegram-button-color: var(--telegram-button-filled-bg, #0088cc);
-  --telegram-button-text-color: var(--telegram-button-filled-color, #fff);
+  --tgui-button-bg: var(--tg-theme-button-color, #2481cc);
+  --tgui-button-text: var(--tg-theme-button-text-color, #ffffff);
 }
 
 .telegram-ui-button--bezeled {
-  --telegram-button-color: var(--telegram-button-bezeled-bg, transparent);
-  --telegram-button-text-color: var(--telegram-button-bezeled-color, #0088cc);
-  border: 1px solid var(--telegram-button-bezeled-border, #0088cc);
+  --tgui-button-bg: var(--tg-theme-secondary-bg-color, transparent);
+  --tgui-button-text: var(--tg-theme-accent-text-color, #2481cc);
+  border: 1px solid var(--tg-theme-accent-text-color, #2481cc);
 }
 
 .telegram-ui-button--plain {
-  --telegram-button-color: var(--telegram-button-plain-bg, transparent);
-  --telegram-button-text-color: var(--telegram-button-plain-color, #0088cc);
+  --tgui-button-bg: transparent;
+  --tgui-button-text: var(--tg-theme-link-color, #2481cc);
 }
 
 .telegram-ui-button--gray {
-  --telegram-button-color: var(--telegram-button-gray-bg, #f0f0f0);
-  --telegram-button-text-color: var(--telegram-button-gray-color, #333);
+  --tgui-button-bg: var(--tg-theme-secondary-bg-color, #f0f0f0);
+  --tgui-button-text: var(--tg-theme-text-color, #333333);
 }
 
 .telegram-ui-button--outline {
-  --telegram-button-color: var(--telegram-button-outline-bg, transparent);
-  --telegram-button-text-color: var(--telegram-button-outline-color, #0088cc);
-  border: 1px solid var(--telegram-button-outline-border, #0088cc);
+  --tgui-button-bg: transparent;
+  --tgui-button-text: var(--tg-theme-accent-text-color, #2481cc);
+  border: 1px solid var(--tg-theme-accent-text-color, #2481cc);
 }
 
 .telegram-ui-button--white {
-  --telegram-button-color: var(--telegram-button-white-bg, #fff);
-  --telegram-button-text-color: var(--telegram-button-white-color, #0088cc);
-  border: 1px solid var(--telegram-button-white-border, #e0e0e0);
+  --tgui-button-bg: var(--tg-theme-bg-color, #ffffff);
+  --tgui-button-text: var(--tg-theme-accent-text-color, #2481cc);
+  border: 1px solid var(--tg-theme-secondary-bg-color, #e0e0e0);
 }
 
 .telegram-ui-button--stretched {
@@ -103,53 +135,18 @@
   pointer-events: none;
 }
 
-.telegram-ui-button--disabled {
-  cursor: default;
-  opacity: 0.4;
-}
-
-/* Button before/after elements */
-.telegram-ui-button .before,
-.telegram-ui-button .after {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-/* Button content */
-.telegram-ui-button .content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  z-index: 1;
-}
-
-/* Button spinner */
-.telegram-ui-button .spinner {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 /* ==================== Spinner Styles ==================== */
 .telegram-ui-spinner {
-  align-items: center;
-  display: flex;
-  justify-content: center;
   position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
 }
 
 .telegram-ui-spinner--s {
   width: 16px;
   height: 16px;
-}
-
-.telegram-ui-spinner--m {
-  width: 20px;
-  height: 20px;
 }
 
 .telegram-ui-spinner--l {
@@ -158,15 +155,13 @@
 }
 
 .telegram-ui-spinner-circle {
-  animation: telegram-ui-spinner-rotate 0.8s linear infinite;
-  border: 2px solid var(--telegram-spinner-color, #007aff);
-  border-radius: 50%;
-  border-top-color: transparent;
-  box-sizing: border-box;
-  display: block;
   position: absolute;
   width: 100%;
   height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--tgui-button-bg, var(--tg-theme-button-color, #2481cc));
+  border-top-color: transparent;
+  animation: spinner 0.8s linear infinite;
 }
 
 .telegram-ui-spinner--s .telegram-ui-spinner-circle {
@@ -177,7 +172,7 @@
   border-width: 3px;
 }
 
-@keyframes telegram-ui-spinner-rotate {
+@keyframes spinner {
   0% {
     transform: rotate(0deg);
   }
@@ -186,334 +181,122 @@
   }
 }
 
-/* ==================== Typography Styles ==================== */
-.telegram-ui-text {
-  font-size: var(--telegram-text-font-size, 17px);
-  line-height: var(--telegram-text-line-height, 24px);
+/* ==================== Cell Styles ==================== */
+.telegram-ui-cell {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  position: relative;
 }
 
-.telegram-ui-title {
-  font-size: var(--telegram-title-font-size, 28px);
-  line-height: var(--telegram-title-line-height, 36px);
-  font-weight: var(--telegram-title-font-weight, 700);
+.telegram-ui-cell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--tgui-hint, var(--tg-theme-hint-color, #e5e5e5));
+  transform: scaleY(0.5);
+  transform-origin: top;
 }
 
-.telegram-ui-subtitle {
-  font-size: var(--telegram-subtitle-font-size, 20px);
-  line-height: var(--telegram-subtitle-line-height, 26px);
-  font-weight: var(--telegram-subtitle-font-weight, 600);
+.telegram-ui-cell:last-child::before {
+  display: none;
 }
 
-.telegram-ui-headline {
-  font-size: var(--telegram-headline-font-size, 19px);
-  line-height: var(--telegram-headline-line-height, 26px);
-  font-weight: var(--telegram-headline-font-weight, 600);
+.telegram-ui-cell--ios {
+  border-radius: 8px;
+  margin: 4px 8px;
 }
 
-.telegram-ui-caption {
-  font-size: var(--telegram-caption-font-size, 13px);
-  line-height: var(--telegram-caption-line-height, 18px);
+.telegram-ui-cell--hovered {
+  background: var(--tgui-secondary-bg, var(--tg-theme-secondary-bg-color, #f5f5f5));
+}
+
+.telegram-ui-cell .before,
+.telegram-ui-cell .middle,
+.telegram-ui-cell .after {
+  display: flex;
+  align-items: center;
+}
+
+.telegram-ui-cell .before {
+  margin-right: 12px;
+}
+
+.telegram-ui-cell .after {
+  margin-left: 12px;
 }
 
 /* ==================== Card Styles ==================== */
 .telegram-ui-card {
-  background: var(--telegram-card-bg, #fff);
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 16px;
-  position: relative;
+  margin: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .telegram-ui-card--ambient {
-  background: var(--telegram-card-ambient-bg, #f4f4f7);
+  background: var(--tgui-secondary-bg, var(--tg-theme-secondary-bg-color, #f0f0f0));
   box-shadow: none;
-}
-
-/* ==================== Cell Styles ==================== */
-.telegram-ui-cell {
-  align-items: center;
-  background: var(--telegram-cell-bg, #fff);
-  display: flex;
-  gap: 12px;
-  padding: 12px 16px;
-  position: relative;
-}
-
-.telegram-ui-cell:active {
-  background: var(--telegram-cell-active-bg, #f4f4f7);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .telegram-ui-cell:hover {
-    background: var(--telegram-cell-hover-bg, #f4f4f7);
-  }
-}
-
-.telegram-ui-cell--ios {
-  border-radius: 10px;
-}
-
-.telegram-ui-cell--hovered {
-  background: var(--telegram-cell-hover-bg, #f4f4f7);
-}
-
-/* Cell before/after */
-.telegram-ui-cell .before,
-.telegram-ui-cell .after {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-/* Cell middle content */
-.telegram-ui-cell .middle {
-  flex: 1 1 0;
-  overflow: hidden;
 }
 
 /* ==================== List Styles ==================== */
 .telegram-ui-list {
-  background: var(--telegram-list-bg, #fff);
-  border-radius: 12px;
-  overflow: hidden;
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
 }
 
-.telegram-ui-list--ios {
-  border-radius: 0;
+/* ==================== Input Styles ==================== */
+.telegram-ui-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  outline: none;
+  border: 1px solid var(--tgui-hint, var(--tg-theme-hint-color, #e5e5e5));
 }
 
-/* ==================== Placeholder Styles ==================== */
-.telegram-ui-placeholder {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
-  padding: 48px 24px;
-  text-align: center;
+.telegram-ui-input:focus {
+  border-color: var(--tgui-accent, var(--tg-theme-accent-text-color, #2481cc));
 }
 
-.telegram-ui-placeholder-title {
+.telegram-ui-input::placeholder {
+  color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
+}
+
+/* ==================== Text Styles ==================== */
+.telegram-ui-text {
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+.telegram-ui-title {
   font-size: 24px;
   font-weight: 600;
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  margin: 16px 0 8px;
 }
 
-.telegram-ui-placeholder-description {
-  color: var(--telegram-placeholder-color, #707579);
+.telegram-ui-subtitle {
   font-size: 15px;
+  color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
+  margin: 8px 0;
 }
 
-/* ==================== Divider Styles ==================== */
-.telegram-ui-divider {
-  border-bottom: 1px solid var(--telegram-divider-color, rgba(0, 0, 0, 0.15));
-  margin: 0;
-}
-
-/* ==================== Badge Styles ==================== */
-.telegram-ui-badge {
-  align-items: center;
-  background: var(--telegram-badge-bg, #007aff);
-  border-radius: 50%;
-  color: var(--telegram-badge-color, #fff);
-  display: flex;
-  font-size: 11px;
+.telegram-ui-headline {
+  font-size: 28px;
   font-weight: 600;
-  justify-content: center;
-  min-height: 20px;
-  min-width: 20px;
-  padding: 0 6px;
-  white-space: nowrap;
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  margin: 16px 0;
 }
 
-.telegram-ui-badge--dot {
-  border-radius: 50%;
-  height: 6px;
-  min-width: 6px;
-  padding: 0;
-}
-
-.telegram-ui-badge--primary {
-  background: var(--telegram-badge-primary-bg, #007aff);
-  color: var(--telegram-badge-primary-color, #fff);
-}
-
-.telegram-ui-badge--critical {
-  background: var(--telegram-badge-critical-bg, #ff3b30);
-  color: var(--telegram-badge-critical-color, #fff);
-}
-
-/* ==================== Alert Styles ==================== */
-.telegram-ui-alert {
-  border-radius: 12px;
-  padding: 16px;
-  position: relative;
-}
-
-.telegram-ui-alert--info {
-  background: var(--telegram-alert-info-bg, rgba(0, 136, 204, 0.1));
-  border: 1px solid var(--telegram-alert-info-border, #0088cc);
-}
-
-.telegram-ui-alert--success {
-  background: var(--telegram-alert-success-bg, rgba(40, 167, 69, 0.1));
-  border: 1px solid var(--telegram-alert-success-border, #28a745);
-}
-
-.telegram-ui-alert--warning {
-  background: var(--telegram-alert-warning-bg, rgba(255, 193, 7, 0.1));
-  border: 1px solid var(--telegram-alert-warning-border, #ffc107);
-}
-
-.telegram-ui-alert--error {
-  background: var(--telegram-alert-error-bg, rgba(220, 53, 69, 0.1));
-  border: 1px solid var(--telegram-alert-error-border, #dc3545);
-}
-
-.telegram-ui-alert-title {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.telegram-ui-alert-message {
-  color: var(--telegram-alert-color, #333);
-}
-
-/* ==================== Modal Styles ==================== */
-.telegram-ui-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.telegram-ui-modal-content {
-  background: var(--telegram-modal-bg, #fff);
-  border-radius: 12px;
-  padding: 24px;
-  max-width: 90%;
-  width: 400px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.telegram-ui-modal-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.telegram-ui-modal-footer {
-  margin-top: 24px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-/* ==================== Toast Styles ==================== */
-.telegram-ui-toast {
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  background: var(--telegram-toast-bg, #333);
-  color: var(--telegram-toast-color, #fff);
-  border-radius: 8px;
-  padding: 16px;
-  font-size: 14px;
-  z-index: 2000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  animation: telegram-ui-toast-slide 0.3s ease-out;
-}
-
-@keyframes telegram-ui-toast-slide {
-  from {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* ==================== Progress Styles ==================== */
-.telegram-ui-progress {
-  width: 100%;
-  background: var(--telegram-progress-bg, #e0e0e0);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.telegram-ui-progress--s {
-  height: 4px;
-}
-
-.telegram-ui-progress--m {
-  height: 8px;
-}
-
-.telegram-ui-progress--l {
-  height: 12px;
-}
-
-.telegram-ui-progress-bar {
-  height: 100%;
-  background: var(--telegram-progress-bar-bg, #0088cc);
-  border-radius: 4px;
-  transition: width 0.3s ease;
-}
-
-/* ==================== Skeleton Styles ==================== */
-.telegram-ui-skeleton {
-  background: var(--telegram-skeleton-bg, #e0e0e0);
-  border-radius: 4px;
-  animation: telegram-ui-skeleton-pulse 1.5s ease-in-out infinite;
-}
-
-.telegram-ui-skeleton--rounded {
-  border-radius: 8px;
-}
-
-@keyframes telegram-ui-skeleton-pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* ==================== Empty State Styles ==================== */
-.telegram-ui-empty-state {
-  text-align: center;
-  padding: 48px 24px;
-}
-
-.telegram-ui-empty-state-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-  opacity: 0.5;
-}
-
-.telegram-ui-empty-state-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.telegram-ui-empty-state-description {
-  color: var(--telegram-empty-state-color, #707579);
-  margin-bottom: 16px;
-}
-
-.telegram-ui-empty-state-action {
-  margin-top: 24px;
+.telegram-ui-caption {
+  font-size: 12px;
+  color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
 }
