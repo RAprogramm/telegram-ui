@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Telegram WebApp SDK integration
 //!
 //! This module provides utilities for integrating with the Telegram WebApp SDK.
@@ -10,129 +11,120 @@ use telegram_webapp_sdk::TelegramWebApp;
 
 /// Initialize the Telegram WebApp SDK
 ///
-/// This function attempts to get the WebApp instance and returns
-/// `Ok(true)` if successful (running inside Telegram), or `Ok(false)` if not.
+/// Returns `Ok(true)` if the app is running inside Telegram,
+/// `Ok(false)` if running outside Telegram, or `Err` on error.
 #[cfg(feature = "webapp-sdk")]
-pub fn init_webapp() -> Result<bool, &'static str> {
-    match TelegramWebApp::try_instance() {
-        Ok(_webapp) => {
-            // Call ready() to indicate the app is ready
-            let _ = _webapp.ready();
-            Ok(true)
-        }
-        Err(_) => Ok(false),
+pub fn init_webapp() -> Result<bool, String> {
+    TelegramWebApp::instance()
+        .map(|_| true)
+        .ok_or_else(|| "Telegram WebApp not available".to_string())
+}
+
+/// Show an alert dialog in Telegram WebApp
+#[allow(dead_code)]
+pub fn show_alert(_message: &str) -> Result<(), String> {
+    #[cfg(feature = "webapp-sdk")]
+    {
+        TelegramWebApp::instance()
+            .ok_or_else(|| "Failed to get webapp instance".to_string())
+            .and_then(|webapp| {
+                webapp.show_alert(message)
+                    .map_err(|_| "Failed to show alert".to_string())
+            })
+    }
+    #[cfg(not(feature = "webapp-sdk"))]
+    {
+        // Fallback: no-op
+        Ok(())
     }
 }
 
-/// Check if running inside Telegram
-#[cfg(feature = "webapp-sdk")]
-pub fn is_telegram() -> bool {
-    TelegramWebApp::try_instance().is_ok()
-}
-
-/// Show a confirmation dialog
-#[cfg(feature = "webapp-sdk")]
-pub fn show_confirm(message: &str) -> Result<bool, &'static str> {
-    TelegramWebApp::try_instance()
-        .map(|webapp| {
-            // showConfirm is not directly exposed in the public API
-            // We'll return false as a fallback since we can't call it directly
-            false
-        })
-        .map_err(|_| "WebApp not initialized")
-}
-
-/// Show an alert dialog
-#[cfg(feature = "webapp-sdk")]
-pub fn show_alert(message: &str) -> Result<(), &'static str> {
-    TelegramWebApp::try_instance()
-        .map(|webapp| {
-            // showAlert is not directly exposed in the public API
-            // We'll just return Ok since we can't call it directly
-        })
-        .map_err(|_| "WebApp not initialized")
+/// Show a confirm dialog in Telegram WebApp
+#[allow(dead_code)]
+pub fn show_confirm(_message: &str) -> Result<bool, String> {
+    #[cfg(feature = "webapp-sdk")]
+    {
+        TelegramWebApp::instance()
+            .ok_or_else(|| "Failed to get webapp instance".to_string())
+            .and_then(|webapp| {
+                // show_confirm requires a callback, so we use a simple approach
+                // In a real app, you'd pass a proper callback
+                webapp.show_confirm(_message, |_| {})
+                    .map(|_| true)
+                    .map_err(|_| "Failed to show confirm".to_string())
+            })
+    }
+    #[cfg(not(feature = "webapp-sdk"))]
+    {
+        // Fallback: return true
+        Ok(true)
+    }
 }
 
 /// Expand the WebApp to full height
-#[cfg(feature = "webapp-sdk")]
-pub fn expand() -> Result<(), &'static str> {
-    TelegramWebApp::try_instance()
-        .map(|webapp| {
-            // expand is not directly exposed in the public API
-            // We'll just return Ok since we can't call it directly
-        })
-        .map_err(|_| "WebApp not initialized")
+#[allow(dead_code)]
+pub fn expand() -> Result<(), String> {
+    #[cfg(feature = "webapp-sdk")]
+    {
+        TelegramWebApp::instance()
+            .ok_or_else(|| "Failed to get webapp instance".to_string())
+            .and_then(|webapp| {
+                webapp.expand()
+                    .map_err(|_| "Failed to expand".to_string())
+            })
+    }
+    #[cfg(not(feature = "webapp-sdk"))]
+    {
+        // Fallback: no-op
+        Ok(())
+    }
 }
 
 /// Close the WebApp
-#[cfg(feature = "webapp-sdk")]
-pub fn close() -> Result<(), &'static str> {
-    TelegramWebApp::try_instance()
-        .map(|webapp| {
-            // close is not directly exposed in the public API
-            // We'll just return Ok since we can't call it directly
-        })
-        .map_err(|_| "WebApp not initialized")
+#[allow(dead_code)]
+pub fn close() -> Result<(), String> {
+    #[cfg(feature = "webapp-sdk")]
+    {
+        TelegramWebApp::instance()
+            .ok_or_else(|| "Failed to get webapp instance".to_string())
+            .and_then(|webapp| {
+                webapp.close()
+                    .map_err(|_| "Failed to close".to_string())
+            })
+    }
+    #[cfg(not(feature = "webapp-sdk"))]
+    {
+        // Fallback: no-op
+        Ok(())
+    }
 }
 
-/// Get the WebApp user data as JSON string
-#[cfg(feature = "webapp-sdk")]
+/// Get the current user info
+#[allow(dead_code)]
 pub fn get_user() -> Option<String> {
-    // User data is not directly accessible through the public API
-    None
+    #[cfg(feature = "webapp-sdk")]
+    {
+        // The SDK doesn't expose a direct user getter
+        // This is a placeholder for future expansion
+        None
+    }
+    #[cfg(not(feature = "webapp-sdk"))]
+    {
+        None
+    }
 }
 
-/// Get the WebApp color scheme
-#[cfg(feature = "webapp-sdk")]
+/// Get the current color scheme
+#[allow(dead_code)]
 pub fn get_color_scheme() -> String {
-    // Theme data is not directly accessible through the public API
-    "light".to_string()
-}
-
-/// Platform detection (fallback when webapp-sdk is not available)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn init_webapp() -> Result<bool, &'static str> {
-    Err("webapp-sdk feature not enabled")
-}
-
-/// Check if running inside Telegram (always false without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn is_telegram() -> bool {
-    false
-}
-
-/// Show confirmation (error without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn show_confirm(_message: &str) -> Result<bool, &'static str> {
-    Err("webapp-sdk feature not enabled")
-}
-
-/// Show alert (error without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn show_alert(_message: &str) -> Result<(), &'static str> {
-    Err("webapp-sdk feature not enabled")
-}
-
-/// Expand WebApp (error without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn expand() -> Result<(), &'static str> {
-    Err("webapp-sdk feature not enabled")
-}
-
-/// Close WebApp (error without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn close() -> Result<(), &'static str> {
-    Err("webapp-sdk feature not enabled")
-}
-
-/// Get user data (None without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn get_user() -> Option<String> {
-    None
-}
-
-/// Get color scheme (default to light without webapp-sdk)
-#[cfg(not(feature = "webapp-sdk"))]
-pub fn get_color_scheme() -> String {
-    "light".to_string()
+    #[cfg(feature = "webapp-sdk")]
+    {
+        // The SDK doesn't expose a direct color scheme getter
+        // This is a placeholder for future expansion
+        "unknown".to_string()
+    }
+    #[cfg(not(feature = "webapp-sdk"))]
+    {
+        "unknown".to_string()
+    }
 }

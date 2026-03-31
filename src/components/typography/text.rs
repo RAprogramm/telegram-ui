@@ -19,8 +19,18 @@ impl Text {
         }
     }
 
+    pub fn with_text(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
     pub fn text(&self) -> &str {
         &self.text
+    }
+
+    pub fn with_color(mut self, color: &str) -> Self {
+        self.color = color.to_string();
+        self
     }
 
     pub fn color(&self) -> &str {
@@ -53,7 +63,7 @@ mod tests {
 
     #[test]
     fn test_text_custom() {
-        let text = Text::new().text("Hello").color("#ff0000");
+        let text = Text::new().with_text("Hello").with_color("#ff0000");
         assert_eq!(text.text(), "Hello");
         assert_eq!(text.color(), "#ff0000");
     }

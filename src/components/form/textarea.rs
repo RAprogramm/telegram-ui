@@ -21,30 +21,30 @@ impl Textarea {
         }
     }
 
-    pub fn value(&mut self, value: &str) -> &mut Self {
+    pub fn with_value(mut self, value: &str) -> Self {
         self.value = value.to_string();
         self
     }
 
-    pub fn value_value(&self) -> &str {
+    pub fn value(&self) -> &str {
         &self.value
     }
 
-    pub fn placeholder(&mut self, placeholder: &str) -> &mut Self {
+    pub fn with_placeholder(mut self, placeholder: &str) -> Self {
         self.placeholder = placeholder.to_string();
         self
     }
 
-    pub fn placeholder_value(&self) -> &str {
+    pub fn placeholder(&self) -> &str {
         &self.placeholder
     }
 
-    pub fn rows(&mut self, rows: u32) -> &mut Self {
+    pub fn with_rows(mut self, rows: u32) -> Self {
         self.rows = rows;
         self
     }
 
-    pub fn rows_value(&self) -> u32 {
+    pub fn rows(&self) -> u32 {
         self.rows
     }
 }
@@ -68,19 +68,19 @@ mod tests {
     #[test]
     fn test_textarea_default() {
         let textarea = Textarea::new();
-        assert_eq!(textarea.value_value(), "");
-        assert_eq!(textarea.placeholder_value(), "");
-        assert_eq!(textarea.rows_value(), 3);
+        assert_eq!(textarea.value(), "");
+        assert_eq!(textarea.placeholder(), "");
+        assert_eq!(textarea.rows(), 3);
     }
 
     #[test]
     fn test_textarea_custom() {
         let textarea = Textarea::new()
-            .value("text")
-            .placeholder("Enter text")
-            .rows(5);
-        assert_eq!(textarea.value_value(), "text");
-        assert_eq!(textarea.placeholder_value(), "Enter text");
-        assert_eq!(textarea.rows_value(), 5);
+            .with_value("text")
+            .with_placeholder("Enter text")
+            .with_rows(5);
+        assert_eq!(textarea.value(), "text");
+        assert_eq!(textarea.placeholder(), "Enter text");
+        assert_eq!(textarea.rows(), 5);
     }
 }

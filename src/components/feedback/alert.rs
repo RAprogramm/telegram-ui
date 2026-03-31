@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
-// SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Alert component
 
-#[derive(Clone, Copy, Debug)]
+use std::fmt;
+
+#[derive(Clone, Debug, Default, PartialEq)]
 pub enum AlertKind {
+    #[default]
     Info,
     Success,
     Warning,
@@ -19,18 +21,42 @@ pub struct Alert {
 }
 
 impl Alert {
-    pub fn new(kind: AlertKind, message: &str) -> Self {
+    pub fn new() -> Self {
         Self {
-            kind,
-            message: message.to_string(),
+            kind: AlertKind::Info,
+            message: String::new(),
         }
     }
 
-    pub fn kind(&self) -> AlertKind {
-        self.kind
+    pub fn kind(&self) -> &AlertKind {
+        &self.kind
     }
 
     pub fn message(&self) -> &str {
         &self.message
+    }
+}
+
+impl Default for Alert {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for Alert {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Alert: {}", self.message)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_alert_default() {
+        let alert = Alert::new();
+        assert_eq!(*alert.kind(), AlertKind::Info);
+        assert_eq!(alert.message(), "");
     }
 }

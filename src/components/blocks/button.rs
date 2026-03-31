@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Button component for Telegram UI
 
 use std::fmt;
 
 /// Button mode/style variants
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub enum ButtonMode {
     /// Filled button with solid background
+    #[default]
     Filled,
     /// Bezeled button with border
     Bezeled,
@@ -19,12 +21,6 @@ pub enum ButtonMode {
     Outline,
     /// White button
     White,
-}
-
-impl Default for ButtonMode {
-    fn default() -> Self {
-        Self::Filled
-    }
 }
 
 impl ButtonMode {
@@ -42,20 +38,15 @@ impl ButtonMode {
 }
 
 /// Button size variants
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub enum ButtonSize {
     /// Small size
     S,
     /// Medium size (default)
+    #[default]
     M,
     /// Large size
     L,
-}
-
-impl Default for ButtonSize {
-    fn default() -> Self {
-        Self::M
-    }
 }
 
 impl ButtonSize {

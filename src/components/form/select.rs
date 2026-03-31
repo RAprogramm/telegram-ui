@@ -19,21 +19,21 @@ impl Select {
         }
     }
 
-    pub fn value(&mut self, value: &str) -> &mut Self {
+    pub fn with_value(mut self, value: &str) -> Self {
         self.value = value.to_string();
         self
     }
 
-    pub fn value_value(&self) -> &str {
+    pub fn value(&self) -> &str {
         &self.value
     }
 
-    pub fn options(&mut self, options: Vec<String>) -> &mut Self {
+    pub fn with_options(mut self, options: Vec<String>) -> Self {
         self.options = options;
         self
     }
 
-    pub fn options_value(&self) -> &[String] {
+    pub fn options(&self) -> &[String] {
         &self.options
     }
 }
@@ -57,16 +57,16 @@ mod tests {
     #[test]
     fn test_select_default() {
         let select = Select::new();
-        assert_eq!(select.value_value(), "");
-        assert!(select.options_value().is_empty());
+        assert_eq!(select.value(), "");
+        assert!(select.options().is_empty());
     }
 
     #[test]
     fn test_select_custom() {
         let select = Select::new()
-            .value("option1")
-            .options(vec!["option1".to_string(), "option2".to_string()]);
-        assert_eq!(select.value_value(), "option1");
-        assert_eq!(select.options_value().len(), 2);
+            .with_value("option1")
+            .with_options(vec!["option1".to_string(), "option2".to_string()]);
+        assert_eq!(select.value(), "option1");
+        assert_eq!(select.options().len(), 2);
     }
 }

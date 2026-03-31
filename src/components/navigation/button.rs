@@ -1,50 +1,53 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
-// SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2026 Telegram UI contributors
-//! Button component (navigation)
 
-#[derive(Clone, Copy, Debug)]
-pub enum ButtonSize {
-    S,
-    M,
-    L,
-}
+//! Button component for navigation
 
-#[derive(Clone, Copy, Debug)]
-pub enum ButtonMode {
-    Filled,
-    Outline,
-    Plain,
-    Gray,
-    White,
-}
+use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Button {
-    size: ButtonSize,
-    mode: ButtonMode,
-    label: String,
+    text: String,
+    active: bool,
 }
 
 impl Button {
     pub fn new() -> Self {
         Self {
-            size: ButtonSize::M,
-            mode: ButtonMode::Filled,
-            label: String::new(),
+            text: String::new(),
+            active: false,
         }
     }
 
-    pub fn size(&self) -> ButtonSize {
-        self.size
+    pub fn text(&self) -> &str {
+        &self.text
     }
 
-    pub fn mode(&self) -> ButtonMode {
-        self.mode
+    pub fn active(&self) -> bool {
+        self.active
     }
+}
 
-    pub fn label(&self) -> &str {
-        &self.label
+impl Default for Button {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for Button {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Button: {}", self.text)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_button_default() {
+        let button = Button::new();
+        assert_eq!(button.text(), "");
+        assert!(!button.active());
     }
 }

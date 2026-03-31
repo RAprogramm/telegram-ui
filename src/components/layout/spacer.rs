@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
-// SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Spacer component
+
+use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Spacer {
@@ -18,5 +19,28 @@ impl Spacer {
 
     pub fn size(&self) -> u32 {
         self.size
+    }
+}
+
+impl Default for Spacer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for Spacer {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Spacer")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_spacer_default() {
+        let spacer = Spacer::new();
+        assert_eq!(spacer.size(), 16);
     }
 }

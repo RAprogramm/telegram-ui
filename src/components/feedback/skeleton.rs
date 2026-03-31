@@ -1,4 +1,9 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Skeleton component
+
+use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Skeleton {
@@ -20,5 +25,29 @@ impl Skeleton {
 
     pub fn height(&self) -> &str {
         &self.height
+    }
+}
+
+impl Default for Skeleton {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for Skeleton {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Skeleton")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_skeleton_default() {
+        let skeleton = Skeleton::new();
+        assert_eq!(skeleton.width(), "100%");
+        assert_eq!(skeleton.height(), "100px");
     }
 }

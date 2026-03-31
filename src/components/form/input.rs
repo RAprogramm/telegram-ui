@@ -19,21 +19,21 @@ impl Input {
         }
     }
 
-    pub fn value(&mut self, value: &str) -> &mut Self {
+    pub fn with_value(mut self, value: &str) -> Self {
         self.value = value.to_string();
         self
     }
 
-    pub fn value_value(&self) -> &str {
+    pub fn value(&self) -> &str {
         &self.value
     }
 
-    pub fn placeholder(&mut self, placeholder: &str) -> &mut Self {
+    pub fn with_placeholder(mut self, placeholder: &str) -> Self {
         self.placeholder = placeholder.to_string();
         self
     }
 
-    pub fn placeholder_value(&self) -> &str {
+    pub fn placeholder(&self) -> &str {
         &self.placeholder
     }
 }
@@ -57,14 +57,14 @@ mod tests {
     #[test]
     fn test_input_default() {
         let input = Input::new();
-        assert_eq!(input.value_value(), "");
-        assert_eq!(input.placeholder_value(), "");
+        assert_eq!(input.value(), "");
+        assert_eq!(input.placeholder(), "");
     }
 
     #[test]
     fn test_input_custom() {
-        let input = Input::new().value("test").placeholder("Enter text");
-        assert_eq!(input.value_value(), "test");
-        assert_eq!(input.placeholder_value(), "Enter text");
+        let input = Input::new().with_value("test").with_placeholder("Enter text");
+        assert_eq!(input.value(), "test");
+        assert_eq!(input.placeholder(), "Enter text");
     }
 }

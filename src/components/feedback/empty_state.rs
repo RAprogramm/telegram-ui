@@ -1,22 +1,21 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
-// SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2026 Telegram UI contributors
-//! Empty state component
+
+//! EmptyState component
+
+use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct EmptyState {
     title: String,
-    description: String,
-    action: Option<String>,
+    description: Option<String>,
 }
 
 impl EmptyState {
-    pub fn new(title: &str, description: &str) -> Self {
+    pub fn new() -> Self {
         Self {
-            title: title.to_string(),
-            description: description.to_string(),
-            action: None,
+            title: String::new(),
+            description: None,
         }
     }
 
@@ -24,11 +23,31 @@ impl EmptyState {
         &self.title
     }
 
-    pub fn description(&self) -> &str {
-        &self.description
+    pub fn description(&self) -> Option<&str> {
+        self.description.as_deref()
     }
+}
 
-    pub fn action(&self) -> Option<&str> {
-        self.action.as_deref()
+impl Default for EmptyState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for EmptyState {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "EmptyState: {}", self.title)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_empty_state_default() {
+        let empty_state = EmptyState::new();
+        assert_eq!(empty_state.title(), "");
+        assert!(empty_state.description().is_none());
     }
 }
