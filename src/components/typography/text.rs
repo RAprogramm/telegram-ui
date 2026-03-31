@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Text component
+
+use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Text {
@@ -22,5 +25,36 @@ impl Text {
 
     pub fn color(&self) -> &str {
         &self.color
+    }
+}
+
+impl Default for Text {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for Text {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.text)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_text_default() {
+        let text = Text::new();
+        assert_eq!(text.text(), "");
+        assert_eq!(text.color(), "#000000");
+    }
+
+    #[test]
+    fn test_text_custom() {
+        let text = Text::new().text("Hello").color("#ff0000");
+        assert_eq!(text.text(), "Hello");
+        assert_eq!(text.color(), "#ff0000");
     }
 }

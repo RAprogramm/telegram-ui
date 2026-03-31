@@ -13,7 +13,7 @@ homepage = "https://github.com/RAprogramm/telegram-ui"
 
 [dependencies]
 # Core dependency: Telegram WebApp SDK (required for UI functionality)
-telegram-webapp-sdk = { path = "/home/ra/Projects/telegram-webapp-sdk", features = ["macros"] }
+telegram-webapp-sdk = { path = "../telegram-webapp-sdk", features = ["macros"] }
 
 # WebAssembly bindings
 wasm-bindgen = "0.2"

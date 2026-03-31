@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
+
 //! Caption component
+
+use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Caption {
@@ -16,11 +19,52 @@ impl Caption {
         }
     }
 
+    pub fn with_text(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
     pub fn text(&self) -> &str {
         &self.text
     }
 
-    pub fn bold(&self) -> bool {
+    pub fn with_bold(mut self, bold: bool) -> Self {
+        self.bold = bold;
+        self
+    }
+
+    pub fn is_bold(&self) -> bool {
         self.bold
+    }
+}
+
+impl Default for Caption {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl fmt::Display for Caption {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.text)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_caption_default() {
+        let caption = Caption::new();
+        assert_eq!(caption.text(), "");
+        assert!(!caption.is_bold());
+    }
+
+    #[test]
+    fn test_caption_custom() {
+        let caption = Caption::new().with_text("Caption").with_bold(true);
+        assert_eq!(caption.text(), "Caption");
+        assert!(caption.is_bold());
     }
 }

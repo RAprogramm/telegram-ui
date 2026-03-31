@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Spacer component
 
 #[derive(Clone, Debug)]
