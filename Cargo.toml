@@ -1,6 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
-<!-- SPDX-FileCopyrightText: 2026 Telegram UI contributors -->
-
 [package]
 name = "telegram-ui"
 edition = "2024"
