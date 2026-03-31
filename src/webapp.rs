@@ -28,7 +28,7 @@ pub fn show_alert(_message: &str) -> Result<(), String> {
         TelegramWebApp::instance()
             .ok_or_else(|| "Failed to get webapp instance".to_string())
             .and_then(|webapp| {
-                webapp.show_alert(message)
+                webapp.show_alert(_message)
                     .map_err(|_| "Failed to show alert".to_string())
             })
     }
