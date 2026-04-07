@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Card component for Telegram UI
 
+use crate::helpers::escape_html;
 use std::fmt;
 
 /// Card component
@@ -52,7 +53,8 @@ impl Card {
 
         format!(
             "<div class=\"{}\">{}</div>",
-            class, self.children
+            class,
+            escape_html(&self.children)
         )
     }
 }
@@ -92,7 +94,7 @@ mod tests {
         let card = Card::new().children("<p>Hello</p>");
         let html = card.render();
         assert!(html.contains("telegram-ui-card"));
-        assert!(html.contains("<p>Hello</p>"));
+        assert!(html.contains("&lt;p&gt;Hello&lt;/p&gt;"));
     }
 
     #[test]
