@@ -28,6 +28,11 @@ impl Title {
         &self.text
     }
 
+    pub fn text_mut(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
     pub fn with_align(mut self, align: &str) -> Self {
         self.align = align.to_string();
         self
@@ -35,6 +40,13 @@ impl Title {
 
     pub fn align(&self) -> &str {
         &self.align
+    }
+
+    pub fn render(&self) -> String {
+        format!(
+            "<div class=\"telegram-ui-title\" style=\"text-align: {}\">{}</div>",
+            self.align, self.text
+        )
     }
 }
 

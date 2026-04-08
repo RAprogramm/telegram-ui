@@ -678,7 +678,7 @@ impl ThemeContext {
         for (key, value) in self.css_vars() {
             style
                 .set_property(&key, &value)
-                .map_err(|e| format!("Failed to set {}: {}", key, e))?;
+                .map_err(|e| format!("Failed to set {}: {:?}", key, e))?;
         }
 
         Ok(())

@@ -28,6 +28,11 @@ impl Headline {
         &self.text
     }
 
+    pub fn text_mut(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
     pub fn with_level(mut self, level: u32) -> Self {
         self.level = level;
         self
@@ -35,6 +40,10 @@ impl Headline {
 
     pub fn level(&self) -> u32 {
         self.level
+    }
+
+    pub fn render(&self) -> String {
+        format!("<div class=\"telegram-ui-headline\">{}</div>", self.text)
     }
 }
 

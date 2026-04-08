@@ -1,0 +1,10 @@
+[build]
+targets = ["wasm32-unknown-unknown"]
+
+[serve]
+port = 8080
+open = false
+
+[[bin]]
+name = "live-preview"
+path = "src/main.rs"

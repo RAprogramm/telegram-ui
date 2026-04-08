@@ -30,6 +30,11 @@ impl Text {
         &self.text
     }
 
+    pub fn text_mut(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
     pub fn with_color(mut self, color: &str) -> Self {
         self.color = color.to_string();
         self
@@ -37,6 +42,14 @@ impl Text {
 
     pub fn color(&self) -> &str {
         &self.color
+    }
+
+    pub fn render(&self) -> String {
+        format!(
+            "<div class=\"telegram-ui-text\" style=\"color: {}\">{}</div>",
+            self.color,
+            escape_html(&self.text)
+        )
     }
 }
 

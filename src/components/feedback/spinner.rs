@@ -28,6 +28,22 @@ impl Spinner {
     pub fn size(&self) -> &SpinnerSize {
         &self.size
     }
+
+    pub fn set_size(mut self, size: SpinnerSize) -> Self {
+        self.size = size;
+        self
+    }
+
+    pub fn render(&self) -> String {
+        format!(
+            "<div class=\"telegram-ui-spinner telegram-ui-spinner--{}\"></div>",
+            match self.size {
+                SpinnerSize::S => "s",
+                SpinnerSize::M => "m",
+                SpinnerSize::L => "l"
+            }
+        )
+    }
 }
 
 impl Default for Spinner {

@@ -25,6 +25,15 @@ impl Subtitle {
     pub fn text(&self) -> &str {
         &self.text
     }
+
+    pub fn text_mut(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
+    pub fn render(&self) -> String {
+        format!("<div class=\"telegram-ui-subtitle\">{}</div>", self.text)
+    }
 }
 
 impl Default for Subtitle {

@@ -17,7 +17,15 @@ telegram-webapp-sdk = { path = "../telegram-webapp-sdk", features = ["macros"] }
 
 # WebAssembly bindings
 wasm-bindgen = "0.2"
-web-sys = "0.3"
+web-sys = { version = "0.3", features = [
+  "Navigator",
+  "Window",
+  "Document",
+  "HtmlElement",
+  "Element",
+  "Node",
+  "EventTarget",
+] }
 
 # Optional framework support (moved to examples)
 leptos = { version = "0.8", optional = true }

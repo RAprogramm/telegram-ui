@@ -28,6 +28,11 @@ impl Caption {
         &self.text
     }
 
+    pub fn text_mut(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
     pub fn with_bold(mut self, bold: bool) -> Self {
         self.bold = bold;
         self
@@ -35,6 +40,14 @@ impl Caption {
 
     pub fn is_bold(&self) -> bool {
         self.bold
+    }
+
+    pub fn render(&self) -> String {
+        let bold_style = if self.bold { "font-weight: bold;" } else { "" };
+        format!(
+            "<div class=\"telegram-ui-caption\" style=\"{}\">{}</div>",
+            bold_style, self.text
+        )
     }
 }
 

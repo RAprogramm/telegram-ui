@@ -15,8 +15,14 @@ pub mod typography;
 
 // Re-export all components
 pub use app::AppRoot;
-pub use blocks::{button::Button, card::Card, cell::Cell, list::List, placeholder::Placeholder};
-pub use feedback::{Alert, AlertKind, EmptyState, Skeleton, Spinner};
+pub use blocks::{
+    button::{Button, ButtonMode, ButtonSize},
+    card::Card,
+    cell::Cell,
+    list::List,
+    placeholder::Placeholder
+};
+pub use feedback::{Alert, AlertKind, EmptyState, Skeleton, Spinner, spinner::SpinnerSize};
 pub use form::{Checkbox, Input, Radio, Select, Switch, Textarea};
 pub use layout::{Column, Container, Row, Spacer};
 pub use navigation::{Button as NavButton, Link};
