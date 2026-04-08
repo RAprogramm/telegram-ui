@@ -1,5 +1,7 @@
+use js_sys::Array;
 use wasm_bindgen::prelude::*;
-use web_sys::{Element, HtmlElement};
+use wasm_bindgen::JsCast;
+use web_sys::HtmlElement;
 
 mod pages;
 
@@ -27,15 +29,16 @@ pub fn main() -> Result<(), JsValue> {
     // Build navigation
     let nav = document.create_element("nav")?.dyn_into::<HtmlElement>()?;
     nav.set_class_name("app-nav");
+    nav.set_id("main-nav");
     nav.set_inner_html(
-        "<a href='javascript:void(0)' data-page='home' class='nav-item active'>🏠 Home</a>\
-         <a href='javascript:void(0)' data-page='buttons' class='nav-item'>🔘 Buttons</a>\
-         <a href='javascript:void(0)' data-page='forms' class='nav-item'>📝 Forms</a>\
-         <a href='javascript:void(0)' data-page='feedback' class='nav-item'>⚡ Feedback</a>\
-         <a href='javascript:void(0)' data-page='layout' class='nav-item'>📦 Layout</a>\
-         <a href='javascript:void(0)' data-page='typography' class='nav-item'>📝 Typography</a>\
-         <a href='javascript:void(0)' data-page='overlays' class='nav-item'>🪟 Overlays</a>\
-         <a href='javascript:void(0)' data-page='service' class='nav-item'>⚙️ Service</a>",
+        "<a href='#' class='nav-item active' data-page='home'>🏠 Home</a>\
+         <a href='#' class='nav-item' data-page='buttons'>🔘 Buttons</a>\
+         <a href='#' class='nav-item' data-page='forms'>📝 Forms</a>\
+         <a href='#' class='nav-item' data-page='feedback'>⚡ Feedback</a>\
+         <a href='#' class='nav-item' data-page='layout'>📦 Layout</a>\
+         <a href='#' class='nav-item' data-page='typography'>📝 Typography</a>\
+         <a href='#' class='nav-item' data-page='overlays'>🪟 Overlays</a>\
+         <a href='#' class='nav-item' data-page='service'>⚙️ Service</a>",
     );
     container.append_child(&nav)?;
 
@@ -47,36 +50,42 @@ pub fn main() -> Result<(), JsValue> {
     // Show home page
     show_page(&document, &content, "home")?;
 
-    // Simple navigation handler using global click
-    let document_clone = document.clone();
-    let content_clone = content.clone();
+    // Navigation click handler
     let nav_clone = nav.clone();
+    let doc_clone = document.clone();
+    let content_clone = content.clone();
 
-    let closure = Closure::wrap(Box::new(move |_e: web_sys::MouseEvent| {
-        let target = _e.target().unwrap().dyn_into::<HtmlElement>();
-        if let Some(elem) = target {
-            if elem.class_list().contains("nav-item") {
-                _e.prevent_default();
-                let page = elem.get_attribute("data-page").unwrap_or_default();
+    let active_arr = Array::new();
+    active_arr.push(&"active".into());
 
-                // Update active nav
-                if let Ok(items) = nav_clone.query_selector_all(".nav-item") {
-                    for i in 0..items.length() {
-                        if let Some(item) = items.get(i) {
-                            let el: HtmlElement = item.dyn_into().ok().unwrap();
-                            el.class_list().remove("active");
+    let closure = Closure::wrap(Box::new(move |e: web_sys::MouseEvent| {
+        e.prevent_default();
+        if let Some(target) = e.target() {
+            if let Ok(elem) = target.dyn_into::<HtmlElement>() {
+                if elem.class_list().contains("nav-item") {
+                    // Remove active from all
+                    if let Ok(items) = nav_clone.query_selector_all(".nav-item") {
+                        for idx in 0..items.length() {
+                            if let Some(node) = items.get(idx) {
+                                if let Ok(el) = node.dyn_into::<HtmlElement>() {
+                                    el.class_list().remove(&active_arr);
+                                }
+                            }
                         }
                     }
-                }
-                elem.class_list().add("active");
+                    // Add active to clicked
+                    elem.class_list().add(&active_arr);
 
-                // Show page
-                show_page(&document_clone, &content_clone, &page).ok();
+                    // Show page
+                    if let Some(page) = elem.get_attribute("data-page") {
+                        show_page(&doc_clone, &content_clone, &page).ok();
+                    }
+                }
             }
         }
     }) as Box<dyn FnMut(web_sys::MouseEvent)>);
 
-    container.add_event_listener_with_callback("click", closure.as_ref().unchecked_ref())?;
+    nav.add_event_listener_with_callback("click", closure.as_ref().unchecked_ref())?;
     closure.forget();
 
     Ok(())

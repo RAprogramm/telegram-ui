@@ -3,6 +3,7 @@ name = "live-preview"
 edition = "2024"
 version = "0.1.0"
 publish = false
+description = "Live preview of telegram-ui components"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -14,4 +15,9 @@ web-sys = { version = "0.3", features = [
     "Document", "Window", "Element", "HtmlElement", "NodeList", "MouseEvent", 
     "HtmlHeadElement", "DomTokenList"
 ] }
+js-sys = "0.3"
 console_error_panic_hook = "0.1"
+
+[profile.release]
+opt-level = "s"
+lto = true
