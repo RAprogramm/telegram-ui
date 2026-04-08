@@ -39,7 +39,6 @@ use std::fmt;
 /// let css_class = theme.css_class(); // Returns "tg-theme-auto"
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
-#[cfg_attr(test, derive(proptest_derive::Arbitrary))]
 pub enum Theme {
     /// Light theme - white backgrounds, dark text
     Light,
