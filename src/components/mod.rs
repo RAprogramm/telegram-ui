@@ -36,9 +36,15 @@ pub use blocks::{
 pub use feedback::{
     Alert, AlertKind, CircularProgress, EmptyState, Skeleton, Spinner, SpinnerSize, Spoiler,
 };
-pub use form::{Checkbox, Input, Radio, Select, Switch, Textarea};
+pub use form::{
+    Chip, Checkbox, ColorInput, FileInput, FormInput, Input, Multiselect, Multiselectable,
+    PinInput, Rating, Radio, Selectable, Select, Slider, Switch, Textarea,
+};
 pub use layout::{Column, Container, Row, Spacer};
 pub use navigation::{Button as NavButton, Link};
 pub use overlays::{Backdrop, Modal, Snackbar, Toast};
-pub use service::{Avatar, Badge, Divider, Progress};
+pub use service::{
+    Avatar, Badge, Divider, HorizontalScroll, Progress, RootRenderer, Tappable, Touch,
+    VisuallyHidden,
+};
 pub use typography::{Caption, Headline, Subtitle, Text, Title};

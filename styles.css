@@ -802,3 +802,387 @@
 .telegram-ui-spoiler--visible::before {
   opacity: 0;
 }
+
+/* ==================== Chip Styles ==================== */
+.telegram-ui-chip {
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.telegram-ui-chip--elevated {
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.05);
+}
+
+.telegram-ui-chip--mono {
+  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
+}
+
+.telegram-ui-chip--outline {
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--tg-theme-hint-color, #c4c4c4);
+  background: transparent;
+}
+
+.chip-text {
+  flex: 1 1 0;
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chip-before {
+  margin-right: 2px;
+}
+
+.chip-after {
+  display: flex;
+  align-items: center;
+  color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
+}
+
+/* ==================== ColorInput Styles ==================== */
+.telegram-ui-color-input {
+  display: flex;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 12px 10px 16px;
+  align-items: center;
+}
+
+.color-input-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg at 50% 50%, #0C28FF 0deg, #03FFFF 60deg, #24D627 120deg, #FDFF22 180deg, #FF2227 240deg, #FE2DF6 300deg, #7122FF 360deg);
+}
+
+.color-input-circle-inner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.color-input-circle-inner::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
+}
+
+.color-input-text {
+  flex: 1 1 0;
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+/* ==================== FileInput Styles ==================== */
+.telegram-ui-file-input {
+  display: block;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.file-input-label input {
+  display: none;
+}
+
+.file-input-icon {
+  font-size: 20px;
+}
+
+.file-input-text {
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+/* ==================== FormInput Styles ==================== */
+.telegram-ui-form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.telegram-ui-form-input--error .form-input-body {
+  border-color: var(--tg-theme-destructive-text-color, #ff3b30);
+}
+
+.telegram-ui-form-input--focused .form-input-body {
+  border-color: var(--tgui-link, var(--tg-theme-link-color, #2481cc));
+}
+
+.telegram-ui-form-input--disabled {
+  opacity: 0.5;
+}
+
+.form-input-body {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--tg-theme-hint-color, #c4c4c4);
+  border-radius: 8px;
+}
+
+.form-input-before,
+.form-input-after {
+  display: flex;
+  align-items: center;
+}
+
+.form-input-header {
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  margin-bottom: 4px;
+}
+
+/* ==================== Multiselect Styles ==================== */
+.telegram-ui-multiselect {
+  display: flex;
+  flex-direction: column;
+}
+
+.multiselect-select {
+  padding: 12px 16px;
+  border: 1px solid var(--tg-theme-hint-color, #c4c4c4);
+  border-radius: 8px;
+  background: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+.multiselect-placeholder {
+  color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
+}
+
+/* ==================== Multiselectable Styles ==================== */
+.telegram-ui-multiselectable {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.telegram-ui-multiselectable--disabled {
+  cursor: default;
+  opacity: 0.25;
+}
+
+.multiselectable-input {
+  display: none;
+}
+
+.multiselectable-icon,
+.multiselectable-checked-icon {
+  transition: opacity 0.15s ease-out;
+}
+
+.multiselectable-checked-icon {
+  position: absolute;
+  opacity: 0;
+  color: var(--tgui-link, var(--tg-theme-link-color, #2481cc));
+}
+
+.multiselectable-input:checked ~ .multiselectable-icon {
+  opacity: 0;
+}
+
+.multiselectable-input:checked ~ .multiselectable-checked-icon {
+  opacity: 1;
+}
+
+.multiselectable-label {
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+/* ==================== PinInput Styles ==================== */
+.telegram-ui-pin-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px;
+}
+
+.pin-input-header {
+  text-align: center;
+}
+
+.pin-input-title {
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  margin-bottom: 20px;
+}
+
+.pin-input-cells {
+  display: flex;
+  gap: 16px;
+}
+
+.pin-input-cell {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--tgui-hint, var(--tg-theme-hint-color, #c4c4c4));
+}
+
+/* ==================== Rating Styles ==================== */
+.telegram-ui-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.rating-star {
+  cursor: pointer;
+  color: var(--tgui-hint, var(--tg-theme-hint-color, #c4c4c4));
+  font-size: 20px;
+}
+
+.rating-star--filled {
+  color: var(--tgui-link, var(--tg-theme-link-color, #2481cc));
+}
+
+/* ==================== Selectable Styles ==================== */
+.telegram-ui-selectable {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.telegram-ui-selectable--disabled {
+  cursor: default;
+  opacity: 0.25;
+}
+
+.selectable-input {
+  display: none;
+}
+
+.selectable-icon {
+  opacity: 0;
+  color: var(--tgui-link, var(--tg-theme-link-color, #2481cc));
+  transition: opacity 0.15s ease-out;
+}
+
+.selectable-input:checked ~ .selectable-icon {
+  opacity: 1;
+}
+
+.selectable-label {
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+/* ==================== Slider Styles ==================== */
+.telegram-ui-slider {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  min-height: 52px;
+}
+
+.telegram-ui-slider--ios {
+  gap: 20px;
+  padding: 20px;
+}
+
+.telegram-ui-slider--disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.slider-input {
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
+  border-radius: 4px;
+}
+
+.slider-track-filled {
+  height: 100%;
+  background: var(--tgui-link, var(--tg-theme-link-color, #2481cc));
+  border-radius: 4px;
+}
+
+/* ==================== HorizontalScroll Styles ==================== */
+.telegram-ui-horizontal-scroll {
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.telegram-ui-horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==================== RootRenderer Styles ==================== */
+.telegram-ui-root-renderer {
+  display: block;
+}
+
+/* ==================== Tappable Styles ==================== */
+.telegram-ui-tappable {
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.15s ease-out;
+}
+
+.telegram-ui-tappable--disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.telegram-ui-tappable--interactive:active {
+  opacity: 0.65;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .telegram-ui-tappable--interactive:hover {
+    opacity: 0.85;
+  }
+}
+
+/* ==================== Touch Styles ==================== */
+.telegram-ui-touch {
+  display: block;
+}
+
+/* ==================== VisuallyHidden Styles ==================== */
+.telegram-ui-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  border: 0;
+  opacity: 0;
+}
