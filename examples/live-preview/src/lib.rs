@@ -34,11 +34,13 @@ pub fn main() -> Result<(), JsValue> {
         "<a href='#' class='nav-item active' data-page='home'>🏠 Home</a>\
          <a href='#' class='nav-item' data-page='buttons'>🔘 Buttons</a>\
          <a href='#' class='nav-item' data-page='forms'>📝 Forms</a>\
+         <a href='#' class='nav-item' data-page='forms_new'>🆕 Forms New</a>\
          <a href='#' class='nav-item' data-page='feedback'>⚡ Feedback</a>\
          <a href='#' class='nav-item' data-page='layout'>📦 Layout</a>\
          <a href='#' class='nav-item' data-page='typography'>📝 Typography</a>\
          <a href='#' class='nav-item' data-page='overlays'>🪟 Overlays</a>\
-         <a href='#' class='nav-item' data-page='service'>⚙️ Service</a>",
+         <a href='#' class='nav-item' data-page='service'>⚙️ Service</a>\
+         <a href='#' class='nav-item' data-page='service_new'>🆕 Service</a>",
     );
     container.append_child(&nav)?;
 
@@ -101,11 +103,13 @@ fn show_page(
         "home" => pages::Home::new(document)?.element,
         "buttons" => pages::Buttons::new(document)?.element,
         "forms" => pages::Forms::new(document)?.element,
+        "forms_new" => pages::FormsNew::new(document)?.element,
         "feedback" => pages::Feedback::new(document)?.element,
         "layout" => pages::Layout::new(document)?.element,
         "typography" => pages::Typography::new(document)?.element,
         "overlays" => pages::Overlays::new(document)?.element,
         "service" => pages::Service::new(document)?.element,
+        "service_new" => pages::ServiceNew::new(document)?.element,
         _ => pages::Home::new(document)?.element,
     };
     content.append_child(&page_elem)?;

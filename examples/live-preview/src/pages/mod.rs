@@ -1,17 +1,23 @@
+pub mod blocks_new;
 pub mod buttons;
 pub mod feedback;
 pub mod forms;
+pub mod forms_new;
 pub mod home;
 pub mod layout;
 pub mod overlays;
 pub mod service;
+pub mod service_new;
 pub mod typography;
 
+pub use blocks_new::BlocksNew;
 pub use buttons::Buttons;
 pub use feedback::Feedback;
 pub use forms::Forms;
+pub use forms_new::FormsNew;
 pub use home::Home;
 pub use layout::Layout;
 pub use overlays::Overlays;
 pub use service::Service;
+pub use service_new::ServiceNew;
 pub use typography::Typography;
