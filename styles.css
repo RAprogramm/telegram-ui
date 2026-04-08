@@ -373,7 +373,131 @@
   color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
 }
 
-/* ==================== Responsive Design ==================== */
+/* ==================== Avatar Styles ==================== */
+.telegram-ui-avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.telegram-ui-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==================== Checkbox Styles ==================== */
+.telegram-ui-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+.telegram-ui-checkbox input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--tg-theme-button-color, #2481cc);
+}
+
+.telegram-ui-checkbox span {
+  margin-left: 8px;
+}
+
+.telegram-ui-checkbox[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==================== Radio Styles ==================== */
+.telegram-ui-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+}
+
+.telegram-ui-radio input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--tg-theme-button-color, #2481cc);
+}
+
+.telegram-ui-radio span {
+  margin-left: 8px;
+}
+
+.telegram-ui-radio[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==================== Switch Styles ==================== */
+.telegram-ui-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  width: 52px;
+  height: 32px;
+}
+
+.telegram-ui-switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.telegram-ui-switch-track {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--tg-theme-hint-color, #c4c4c4);
+  border-radius: 16px;
+  transition: background-color 0.2s;
+}
+
+.telegram-ui-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.telegram-ui-switch[active] .telegram-ui-switch-track {
+  background: var(--tg-theme-button-color, #2481cc);
+}
+
+.telegram-ui-switch[active] .telegram-ui-switch-thumb {
+  transform: translateX(20px);
+}
+
+.telegram-ui-switch[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==================== Responsive Design ====================
 
 /* Mobile-first approach with breakpoints */
 

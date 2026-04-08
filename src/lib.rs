@@ -81,7 +81,7 @@ pub fn get_styles() -> &'static str {
 
 // Re-export all components
 pub use components::{
-    Alert, AlertKind, AppRoot, Backdrop, Button, Caption, Card, Cell, Column, Container, Divider,
-    EmptyState, Headline, Input, List, Modal, Placeholder, Progress, Row, Select, Skeleton,
-    Spacer, Spinner, Subtitle, Text, Textarea, Title, Toast
+    Alert, AlertKind, AppRoot, Avatar, Backdrop, Button, Caption, Card, Cell, Checkbox, Column,
+    Container, Divider, EmptyState, Headline, Input, List, Modal, Placeholder, Progress, Radio,
+    Row, Select, Skeleton, Spacer, Spinner, Subtitle, Switch, Text, Textarea, Title, Toast
 };
