@@ -8,14 +8,14 @@ use std::fmt;
 #[derive(Clone, Debug)]
 pub struct Badge {
     value: Option<i32>,
-    dot: bool,
+    dot:   bool
 }
 
 impl Badge {
     pub fn new() -> Self {
         Self {
             value: None,
-            dot: false,
+            dot:   false
         }
     }
 
@@ -48,7 +48,7 @@ impl fmt::Display for Badge {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.value {
             Some(v) => write!(f, "{}", v),
-            None => write!(f, "Badge"),
+            None => write!(f, "Badge")
         }
     }
 }

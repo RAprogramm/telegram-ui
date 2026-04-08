@@ -5,13 +5,15 @@ use crate::platform::Platform;
 
 #[derive(Debug, Clone)]
 pub struct PlatformContext {
-    platform: Platform,
+    platform: Platform
 }
 
 impl PlatformContext {
     /// Create a new platform context
     pub fn new(platform: Platform) -> Self {
-        Self { platform }
+        Self {
+            platform
+        }
     }
 
     /// Get the current platform

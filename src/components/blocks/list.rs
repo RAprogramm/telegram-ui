@@ -9,16 +9,16 @@ use std::fmt;
 /// List component
 #[derive(Debug, Clone)]
 pub struct List {
-    ios: bool,
-    cells: Vec<String>,
+    ios:   bool,
+    cells: Vec<String>
 }
 
 impl List {
     /// Creates a new List with default settings
     pub fn new() -> Self {
         Self {
-            ios: false,
-            cells: Vec::new(),
+            ios:   false,
+            cells: Vec::new()
         }
     }
 
@@ -74,10 +74,7 @@ impl List {
 
         let cells_html = self.cells.join("");
 
-        format!(
-            "<div class=\"{}\">{}</div>",
-            class_str, cells_html
-        )
+        format!("<div class=\"{}\">{}</div>", class_str, cells_html)
     }
 }
 

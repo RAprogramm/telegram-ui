@@ -5,6 +5,8 @@
 
 use std::fmt;
 
+use crate::helpers::escape_html;
+
 /// Button mode/style variants
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub enum ButtonMode {
@@ -20,7 +22,7 @@ pub enum ButtonMode {
     /// Outline button
     Outline,
     /// White button
-    White,
+    White
 }
 
 impl ButtonMode {
@@ -32,7 +34,7 @@ impl ButtonMode {
             ButtonMode::Plain => "--plain",
             ButtonMode::Gray => "--gray",
             ButtonMode::Outline => "--outline",
-            ButtonMode::White => "--white",
+            ButtonMode::White => "--white"
         }
     }
 }
@@ -46,7 +48,7 @@ pub enum ButtonSize {
     #[default]
     M,
     /// Large size
-    L,
+    L
 }
 
 impl ButtonSize {
@@ -55,7 +57,7 @@ impl ButtonSize {
         match self {
             ButtonSize::S => "--s",
             ButtonSize::M => "--m",
-            ButtonSize::L => "--l",
+            ButtonSize::L => "--l"
         }
     }
 }
@@ -63,28 +65,28 @@ impl ButtonSize {
 /// Button component
 #[derive(Debug, Clone)]
 pub struct Button {
-    size: ButtonSize,
-    mode: ButtonMode,
-    children: String,
+    size:      ButtonSize,
+    mode:      ButtonMode,
+    children:  String,
     stretched: bool,
-    disabled: bool,
-    loading: bool,
-    before: Option<String>,
-    after: Option<String>,
+    disabled:  bool,
+    loading:   bool,
+    before:    Option<String>,
+    after:     Option<String>
 }
 
 impl Button {
     /// Creates a new Button with default settings
     pub fn new() -> Self {
         Self {
-            size: ButtonSize::M,
-            mode: ButtonMode::Filled,
-            children: String::new(),
+            size:      ButtonSize::M,
+            mode:      ButtonMode::Filled,
+            children:  String::new(),
             stretched: false,
-            disabled: false,
-            loading: false,
-            before: None,
-            after: None,
+            disabled:  false,
+            loading:   false,
+            before:    None,
+            after:     None
         }
     }
 
@@ -99,7 +101,7 @@ impl Button {
         self.size = match size {
             "s" => ButtonSize::S,
             "l" => ButtonSize::L,
-            _ => ButtonSize::M,
+            _ => ButtonSize::M
         };
         self
     }
@@ -118,7 +120,7 @@ impl Button {
             "gray" => ButtonMode::Gray,
             "outline" => ButtonMode::Outline,
             "white" => ButtonMode::White,
-            _ => ButtonMode::Filled,
+            _ => ButtonMode::Filled
         };
         self
     }
@@ -213,16 +215,19 @@ impl Button {
         if let Some(before) = &self.before {
             html.push_str(&format!(
                 "<div class=\"before\">{}</div>",
-                before
+                escape_html(before)
             ));
         }
 
-        html.push_str(&format!("<span class=\"content\">{}</span>", self.children));
+        html.push_str(&format!(
+            "<span class=\"content\">{}</span>",
+            escape_html(&self.children)
+        ));
 
         if let Some(after) = &self.after {
             html.push_str(&format!(
                 "<div class=\"after\">{}</div>",
-                after
+                escape_html(after)
             ));
         }
 
@@ -238,7 +243,7 @@ impl Button {
         let size = match self.size {
             ButtonSize::S => "s",
             ButtonSize::M => "m",
-            ButtonSize::L => "l",
+            ButtonSize::L => "l"
         };
         format!(
             "<div class=\"telegram-ui-spinner telegram-ui-spinner--{}\"></div>",
@@ -299,10 +304,7 @@ mod tests {
 
     #[test]
     fn test_button_with_before_after() {
-        let button = Button::new()
-            .before("🔍")
-            .after("➡")
-            .children("Search");
+        let button = Button::new().before("🔍").after("➡").children("Search");
 
         let html = button.render();
         assert!(html.contains("<div class=\"before\">🔍</div>"));

@@ -2,13 +2,16 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! # Telegram UI - Rust Library for Telegram Mini Apps
 //!
-//! Telegram UI is a Rust library for creating Telegram-style interfaces **exclusively for Telegram Mini Apps**.
-//! It provides a comprehensive set of ready-to-use components that follow Telegram's design language, with full integration into the Telegram WebApp SDK.
+//! Telegram UI is a Rust library for creating Telegram-style interfaces
+//! **exclusively for Telegram Mini Apps**. It provides a comprehensive set of
+//! ready-to-use components that follow Telegram's design language, with full
+//! integration into the Telegram WebApp SDK.
 //!
 //! ## ⚠️ Important: Telegram-Only Library
 //!
-//! This library is designed **exclusively** for Telegram Mini Apps and cannot be used outside of Telegram.
-//! The Telegram WebApp SDK is only available when your app is running inside Telegram.
+//! This library is designed **exclusively** for Telegram Mini Apps and cannot
+//! be used outside of Telegram. The Telegram WebApp SDK is only available when
+//! your app is running inside Telegram.
 //!
 //! # Features
 //!
@@ -32,7 +35,8 @@
 //! - **EmptyState** - Empty state with action
 //! - **Container/Row/Column** - Layout components
 //! - **Framework Support** - Works with Leptos and Yew web frameworks
-//! - **Telegram WebApp Integration** - Full SDK integration with `webapp-sdk` feature
+//! - **Telegram WebApp Integration** - Full SDK integration with `webapp-sdk`
+//!   feature
 //! - **CSS Variables** - Customizable via CSS custom properties
 //!
 //! # Examples
@@ -50,18 +54,21 @@
 //!
 //! # CSS Variables
 //!
-//! - `--telegram-button-filled-bg`: Background color for filled buttons (#0088cc)
+//! - `--telegram-button-filled-bg`: Background color for filled buttons
+//!   (#0088cc)
 //! - `--telegram-button-filled-color`: Text color for filled buttons (white)
-//! - `--telegram-button-bezeled-bg`: Background color for bezeled buttons (transparent)
-//! - `--telegram-button-bezeled-color`: Text color for bezeled buttons (#0088cc)
+//! - `--telegram-button-bezeled-bg`: Background color for bezeled buttons
+//!   (transparent)
+//! - `--telegram-button-bezeled-color`: Text color for bezeled buttons
+//!   (#0088cc)
 //! - `--telegram-button-plain-color`: Text color for plain buttons (#0088cc)
 //! - `--telegram-button-gray-bg`: Background color for gray buttons (#f0f0f0)
 //! - `--telegram-button-gray-color`: Text color for gray buttons (#333)
 //!
 //! # Telegram WebApp Integration
 //!
-//! When compiled with the `webapp-sdk` feature, this library provides utilities for
-//! integrating with Telegram WebApp SDK:
+//! When compiled with the `webapp-sdk` feature, this library provides utilities
+//! for integrating with Telegram WebApp SDK:
 //!
 //! ```ignore
 //! use telegram_ui::webapp::{init_webapp, show_alert, expand};
@@ -96,31 +103,8 @@ pub fn get_styles() -> &'static str {
 }
 
 // Re-export all components
-pub use components::Button;
-pub use components::Spinner;
-pub use components::Card;
-pub use components::Cell;
-pub use components::List;
-pub use components::Placeholder;
-
-pub use components::Alert;
-pub use components::AlertKind;
-pub use components::EmptyState;
-pub use components::Skeleton;
-pub use components::Progress;
-pub use components::Input;
-pub use components::Select;
-pub use components::Textarea;
-pub use components::Container;
-pub use components::Row;
-pub use components::Column;
-pub use components::Spacer;
-pub use components::Backdrop;
-pub use components::Modal;
-pub use components::Toast;
-pub use components::Divider;
-pub use components::Text;
-pub use components::Title;
-pub use components::Subtitle;
-pub use components::Headline;
-pub use components::Caption;
+pub use components::{
+    Alert, AlertKind, Backdrop, Button, Caption, Card, Cell, Column, Container, Divider,
+    EmptyState, Headline, Input, List, Modal, Placeholder, Progress, Row, Select, Skeleton,
+    Spacer, Spinner, Subtitle, Text, Textarea, Title, Toast
+};

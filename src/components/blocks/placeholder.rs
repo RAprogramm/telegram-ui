@@ -9,16 +9,16 @@ use std::fmt;
 /// Placeholder component
 #[derive(Debug, Clone)]
 pub struct Placeholder {
-    title: String,
-    description: Option<String>,
+    title:       String,
+    description: Option<String>
 }
 
 impl Placeholder {
     /// Creates a new Placeholder with default settings
     pub fn new() -> Self {
         Self {
-            title: String::new(),
-            description: None,
+            title:       String::new(),
+            description: None
         }
     }
 
@@ -46,9 +46,15 @@ impl Placeholder {
 
     /// Render the placeholder as HTML string
     pub fn render(&self) -> String {
-        let description_html = self.description
+        let description_html = self
+            .description
             .as_ref()
-            .map(|d| format!("<div class=\"telegram-ui-placeholder-description\">{}</div>", d))
+            .map(|d| {
+                format!(
+                    "<div class=\"telegram-ui-placeholder-description\">{}</div>",
+                    d
+                )
+            })
             .unwrap_or_default();
 
         format!(
@@ -88,7 +94,10 @@ mod tests {
             .description("Please try again later");
 
         assert_eq!(placeholder.get_title(), "No Data");
-        assert_eq!(placeholder.get_description(), Some("Please try again later"));
+        assert_eq!(
+            placeholder.get_description(),
+            Some("Please try again later")
+        );
     }
 
     #[test]

@@ -11,7 +11,7 @@ pub enum Platform {
     Android,
     /// Base (web) platform
     #[default]
-    Base,
+    Base
 }
 
 impl Platform {

@@ -2,6 +2,22 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Helper functions for Telegram UI
 
+/// Escape HTML special characters to prevent XSS attacks
+pub fn escape_html(s: &str) -> String {
+    let mut escaped = String::with_capacity(s.len());
+    for c in s.chars() {
+        match c {
+            '<' => escaped.push_str("&lt;"),
+            '>' => escaped.push_str("&gt;"),
+            '&' => escaped.push_str("&amp;"),
+            '\"' => escaped.push_str("&quot;"),
+            '\'' => escaped.push_str("&#39;"),
+            _ => escaped.push(c)
+        }
+    }
+    escaped
+}
+
 /// Check if a string is empty or contains only whitespace
 pub fn is_empty_or_whitespace(s: &str) -> bool {
     s.trim().is_empty()

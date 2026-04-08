@@ -28,7 +28,8 @@ pub fn show_alert(_message: &str) -> Result<(), String> {
         TelegramWebApp::instance()
             .ok_or_else(|| "Failed to get webapp instance".to_string())
             .and_then(|webapp| {
-                webapp.show_alert(_message)
+                webapp
+                    .show_alert(_message)
                     .map_err(|_| "Failed to show alert".to_string())
             })
     }
@@ -49,7 +50,8 @@ pub fn show_confirm(_message: &str) -> Result<bool, String> {
             .and_then(|webapp| {
                 // show_confirm requires a callback, so we use a simple approach
                 // In a real app, you'd pass a proper callback
-                webapp.show_confirm(_message, |_| {})
+                webapp
+                    .show_confirm(_message, |_| {})
                     .map(|_| true)
                     .map_err(|_| "Failed to show confirm".to_string())
             })
@@ -68,10 +70,7 @@ pub fn expand() -> Result<(), String> {
     {
         TelegramWebApp::instance()
             .ok_or_else(|| "Failed to get webapp instance".to_string())
-            .and_then(|webapp| {
-                webapp.expand()
-                    .map_err(|_| "Failed to expand".to_string())
-            })
+            .and_then(|webapp| webapp.expand().map_err(|_| "Failed to expand".to_string()))
     }
     #[cfg(not(feature = "webapp-sdk"))]
     {
@@ -87,10 +86,7 @@ pub fn close() -> Result<(), String> {
     {
         TelegramWebApp::instance()
             .ok_or_else(|| "Failed to get webapp instance".to_string())
-            .and_then(|webapp| {
-                webapp.close()
-                    .map_err(|_| "Failed to close".to_string())
-            })
+            .and_then(|webapp| webapp.close().map_err(|_| "Failed to close".to_string()))
     }
     #[cfg(not(feature = "webapp-sdk"))]
     {

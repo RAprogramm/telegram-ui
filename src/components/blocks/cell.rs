@@ -4,28 +4,29 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Cell component for Telegram UI
 
-use crate::helpers::escape_html;
 use std::fmt;
+
+use crate::helpers::escape_html;
 
 /// Cell component
 #[derive(Debug, Clone)]
 pub struct Cell {
-    ios: bool,
+    ios:     bool,
     hovered: bool,
-    before: Option<String>,
-    after: Option<String>,
-    middle: String,
+    before:  Option<String>,
+    after:   Option<String>,
+    middle:  String
 }
 
 impl Cell {
     /// Creates a new Cell with default settings
     pub fn new() -> Self {
         Self {
-            ios: false,
+            ios:     false,
             hovered: false,
-            before: None,
-            after: None,
-            middle: String::new(),
+            before:  None,
+            after:   None,
+            middle:  String::new()
         }
     }
 

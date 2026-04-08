@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Headline {
-    text: String,
-    level: u32,
+    text:  String,
+    level: u32
 }
 
 impl Headline {
     pub fn new() -> Self {
         Self {
-            text: String::new(),
-            level: 1,
+            text:  String::new(),
+            level: 1
         }
     }
 

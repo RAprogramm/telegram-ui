@@ -7,17 +7,17 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Textarea {
-    value: String,
+    value:       String,
     placeholder: String,
-    rows: u32,
+    rows:        u32
 }
 
 impl Textarea {
     pub fn new() -> Self {
         Self {
-            value: String::new(),
+            value:       String::new(),
             placeholder: String::new(),
-            rows: 3,
+            rows:        3
         }
     }
 

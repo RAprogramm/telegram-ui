@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Input {
-    value: String,
-    placeholder: String,
+    value:       String,
+    placeholder: String
 }
 
 impl Input {
     pub fn new() -> Self {
         Self {
-            value: String::new(),
-            placeholder: String::new(),
+            value:       String::new(),
+            placeholder: String::new()
         }
     }
 
@@ -63,7 +63,9 @@ mod tests {
 
     #[test]
     fn test_input_custom() {
-        let input = Input::new().with_value("test").with_placeholder("Enter text");
+        let input = Input::new()
+            .with_value("test")
+            .with_placeholder("Enter text");
         assert_eq!(input.value(), "test");
         assert_eq!(input.placeholder(), "Enter text");
     }

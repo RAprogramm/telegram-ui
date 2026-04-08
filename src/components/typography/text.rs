@@ -5,17 +5,19 @@
 
 use std::fmt;
 
+use crate::helpers::escape_html;
+
 #[derive(Clone, Debug)]
 pub struct Text {
-    text: String,
-    color: String,
+    text:  String,
+    color: String
 }
 
 impl Text {
     pub fn new() -> Self {
         Self {
-            text: String::new(),
-            color: "#000000".to_string(),
+            text:  String::new(),
+            color: "#000000".to_string()
         }
     }
 
@@ -46,7 +48,7 @@ impl Default for Text {
 
 impl fmt::Display for Text {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.text)
+        write!(f, "{}", escape_html(&self.text))
     }
 }
 

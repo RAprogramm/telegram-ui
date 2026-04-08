@@ -8,14 +8,14 @@ use std::fmt;
 #[derive(Clone, Debug)]
 pub struct Caption {
     text: String,
-    bold: bool,
+    bold: bool
 }
 
 impl Caption {
     pub fn new() -> Self {
         Self {
             text: String::new(),
-            bold: false,
+            bold: false
         }
     }
 

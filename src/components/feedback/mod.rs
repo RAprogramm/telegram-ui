@@ -8,8 +8,7 @@ pub mod skeleton;
 pub mod spinner;
 
 // Re-export components
-pub use alert::Alert;
-pub use alert::AlertKind;
+pub use alert::{Alert, AlertKind};
 pub use empty_state::EmptyState;
 pub use skeleton::Skeleton;
 pub use spinner::Spinner;

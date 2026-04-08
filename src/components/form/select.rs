@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Select {
-    value: String,
-    options: Vec<String>,
+    value:   String,
+    options: Vec<String>
 }
 
 impl Select {
     pub fn new() -> Self {
         Self {
-            value: String::new(),
-            options: Vec::new(),
+            value:   String::new(),
+            options: Vec::new()
         }
     }
 

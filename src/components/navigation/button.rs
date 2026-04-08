@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Button {
-    text: String,
-    active: bool,
+    text:   String,
+    active: bool
 }
 
 impl Button {
     pub fn new() -> Self {
         Self {
-            text: String::new(),
-            active: false,
+            text:   String::new(),
+            active: false
         }
     }
 
