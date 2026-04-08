@@ -15,39 +15,30 @@ pub type Result<T> = std::result::Result<T, UiError>;
 #[derive(Debug, Clone, PartialEq)]
 pub enum UiError {
     /// Invalid component configuration
-    InvalidConfig {
-        component: String,
-        details:   String
-    },
+    InvalidConfig { component: String, details: String },
     /// Invalid platform specification
     InvalidPlatform(String),
     /// Missing required property
-    MissingProperty {
-        component: String,
-        property:  String
-    },
+    MissingProperty { component: String, property: String },
     /// Invalid property value
     InvalidPropertyValue {
         component: String,
-        property:  String,
-        value:     String,
-        expected:  String
+        property: String,
+        value: String,
+        expected: String,
     },
     /// Rendering error
     RenderError(String),
     /// Platform detection error
     PlatformDetectionError(String),
     /// Generic error
-    Generic(String)
+    Generic(String),
 }
 
 impl fmt::Display for UiError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            UiError::InvalidConfig {
-                component,
-                details
-            } => {
+            UiError::InvalidConfig { component, details } => {
                 write!(f, "Invalid configuration for '{}': {}", component, details)
             }
             UiError::InvalidPlatform(platform) => {
@@ -55,7 +46,7 @@ impl fmt::Display for UiError {
             }
             UiError::MissingProperty {
                 component,
-                property
+                property,
             } => {
                 write!(
                     f,
@@ -67,7 +58,7 @@ impl fmt::Display for UiError {
                 component,
                 property,
                 value,
-                expected
+                expected,
             } => {
                 write!(
                     f,
@@ -95,7 +86,7 @@ impl UiError {
     pub fn invalid_config(component: impl Into<String>, details: impl Into<String>) -> Self {
         UiError::InvalidConfig {
             component: component.into(),
-            details:   details.into()
+            details: details.into(),
         }
     }
 
@@ -103,7 +94,7 @@ impl UiError {
     pub fn missing_property(component: impl Into<String>, property: impl Into<String>) -> Self {
         UiError::MissingProperty {
             component: component.into(),
-            property:  property.into()
+            property: property.into(),
         }
     }
 
@@ -112,13 +103,13 @@ impl UiError {
         component: impl Into<String>,
         property: impl Into<String>,
         value: impl Into<String>,
-        expected: impl Into<String>
+        expected: impl Into<String>,
     ) -> Self {
         UiError::InvalidPropertyValue {
             component: component.into(),
-            property:  property.into(),
-            value:     value.into(),
-            expected:  expected.into()
+            property: property.into(),
+            value: value.into(),
+            expected: expected.into(),
         }
     }
 
@@ -130,19 +121,13 @@ impl UiError {
     /// Get the error code for this error
     pub fn code(&self) -> &'static str {
         match self {
-            UiError::InvalidConfig {
-                ..
-            } => "INVALID_CONFIG",
+            UiError::InvalidConfig { .. } => "INVALID_CONFIG",
             UiError::InvalidPlatform(_) => "INVALID_PLATFORM",
-            UiError::MissingProperty {
-                ..
-            } => "MISSING_PROPERTY",
-            UiError::InvalidPropertyValue {
-                ..
-            } => "INVALID_PROPERTY_VALUE",
+            UiError::MissingProperty { .. } => "MISSING_PROPERTY",
+            UiError::InvalidPropertyValue { .. } => "INVALID_PROPERTY_VALUE",
             UiError::RenderError(_) => "RENDER_ERROR",
             UiError::PlatformDetectionError(_) => "PLATFORM_DETECTION_ERROR",
-            UiError::Generic(_) => "GENERIC_ERROR"
+            UiError::Generic(_) => "GENERIC_ERROR",
         }
     }
 
@@ -175,9 +160,9 @@ pub struct ValidationError {
     /// The component that failed validation
     pub component: String,
     /// The property that failed validation
-    pub property:  Option<String>,
+    pub property: Option<String>,
     /// The error messages
-    pub messages:  Vec<String>
+    pub messages: Vec<String>,
 }
 
 impl ValidationError {
@@ -185,8 +170,8 @@ impl ValidationError {
     pub fn new(component: impl Into<String>, message: impl Into<String>) -> Self {
         Self {
             component: component.into(),
-            property:  None,
-            messages:  vec![message.into()]
+            property: None,
+            messages: vec![message.into()],
         }
     }
 
@@ -195,7 +180,7 @@ impl ValidationError {
         Self {
             component: component.into(),
             property: None,
-            messages
+            messages,
         }
     }
 
@@ -242,27 +227,27 @@ mod tests {
         let errors = vec![
             (
                 UiError::invalid_config("Button", "Invalid type"),
-                "Invalid configuration for 'Button': Invalid type"
+                "Invalid configuration for 'Button': Invalid type",
             ),
             (
                 UiError::InvalidPlatform("unknown".to_string()),
-                "Invalid platform: unknown"
+                "Invalid platform: unknown",
             ),
             (
                 UiError::missing_property("Card", "title"),
-                "Missing required property 'title' for 'Card'"
+                "Missing required property 'title' for 'Card'",
             ),
             (
                 UiError::invalid_value("Input", "type", "invalid", "text, number, password"),
-                "Invalid value 'invalid' for property 'type' in 'Input'. Expected: text, number, password"
+                "Invalid value 'invalid' for property 'type' in 'Input'. Expected: text, number, password",
             ),
             (
                 UiError::render("Failed to render HTML"),
-                "Render error: Failed to render HTML"
+                "Render error: Failed to render HTML",
             ),
             (
                 UiError::Generic("Something went wrong".to_string()),
-                "Error: Something went wrong"
+                "Error: Something went wrong",
             ),
         ];
 

@@ -12,7 +12,7 @@ pub enum Platform {
     Android,
     /// Base (web/desktop) platform
     #[default]
-    Base
+    Base,
 }
 
 impl Platform {
@@ -85,7 +85,7 @@ impl Platform {
         match self {
             Platform::Ios => "tgui-platform-ios",
             Platform::Android => "tgui-platform-android",
-            Platform::Base => "tgui-platform-base"
+            Platform::Base => "tgui-platform-base",
         }
     }
 
@@ -94,7 +94,7 @@ impl Platform {
         match self {
             Platform::Ios => "ios",
             Platform::Android => "android",
-            Platform::Base => "base"
+            Platform::Base => "base",
         }
     }
 }
@@ -113,7 +113,7 @@ impl std::str::FromStr for Platform {
             "ios" => Ok(Platform::Ios),
             "android" => Ok(Platform::Android),
             "base" | "web" | "desktop" => Ok(Platform::Base),
-            _ => Err(crate::error::UiError::InvalidPlatform(s.to_string()))
+            _ => Err(crate::error::UiError::InvalidPlatform(s.to_string())),
         }
     }
 }

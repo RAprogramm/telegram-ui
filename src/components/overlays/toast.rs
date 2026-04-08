@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Toast {
-    message:  String,
-    duration: u64
+    message: String,
+    duration: u64,
 }
 
 impl Toast {
     pub fn new() -> Self {
         Self {
-            message:  String::new(),
-            duration: 3000
+            message: String::new(),
+            duration: 3000,
         }
     }
 

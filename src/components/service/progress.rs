@@ -8,14 +8,14 @@ use std::fmt;
 #[derive(Clone, Debug)]
 pub struct Progress {
     value: f64,
-    max:   f64
+    max: f64,
 }
 
 impl Progress {
     pub fn new() -> Self {
         Self {
             value: 0.0,
-            max:   100.0
+            max: 100.0,
         }
     }
 

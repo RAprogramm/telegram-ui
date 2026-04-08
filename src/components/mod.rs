@@ -16,11 +16,17 @@ pub mod typography;
 // Re-export all components
 pub use app::AppRoot;
 pub use blocks::{
+    accordion::Accordion,
+    avatar_stack::AvatarStack,
+    banner::{Banner, BannerType},
     button::{Button, ButtonMode, ButtonSize},
     card::Card,
     cell::Cell,
+    image::Image,
     list::List,
-    placeholder::Placeholder
+    placeholder::Placeholder,
+    section::{Section, SectionHeader},
+    steps::{Orientation, StepState, Steps},
 };
 pub use feedback::{Alert, AlertKind, EmptyState, Skeleton, Spinner, spinner::SpinnerSize};
 pub use form::{Checkbox, Input, Radio, Select, Switch, Textarea};

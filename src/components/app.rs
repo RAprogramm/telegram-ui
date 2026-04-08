@@ -29,13 +29,13 @@ use crate::{Platform, Theme, ThemeContext, helpers::escape_html};
 /// ```
 #[derive(Debug, Default)]
 pub struct AppRoot {
-    platform:      Option<Platform>,
-    theme:         Option<Theme>,
+    platform: Option<Platform>,
+    theme: Option<Theme>,
     theme_context: Option<ThemeContext>,
-    class:         Option<String>,
-    children:      Option<String>,
-    id:            Option<String>,
-    style:         Option<String>
+    class: Option<String>,
+    children: Option<String>,
+    id: Option<String>,
+    style: Option<String>,
 }
 
 impl AppRoot {
@@ -180,7 +180,7 @@ impl AppRoot {
         match platform {
             Platform::Ios => classes.push("tgui-platform-ios".to_string()),
             Platform::Android => classes.push("tgui-platform-android".to_string()),
-            Platform::Base => classes.push("tgui-platform-base".to_string())
+            Platform::Base => classes.push("tgui-platform-base".to_string()),
         }
 
         // Add theme class
@@ -223,7 +223,7 @@ impl AppRoot {
             match platform {
                 Platform::Ios => "ios",
                 Platform::Android => "android",
-                Platform::Base => "base"
+                Platform::Base => "base",
             }
         ));
 
@@ -234,7 +234,7 @@ impl AppRoot {
             match theme {
                 Theme::Light => "light",
                 Theme::Dark => "dark",
-                Theme::Auto => "auto"
+                Theme::Auto => "auto",
             }
         ));
 

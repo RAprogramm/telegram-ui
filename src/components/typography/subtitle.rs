@@ -7,13 +7,13 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Subtitle {
-    text: String
+    text: String,
 }
 
 impl Subtitle {
     pub fn new() -> Self {
         Self {
-            text: String::new()
+            text: String::new(),
         }
     }
 

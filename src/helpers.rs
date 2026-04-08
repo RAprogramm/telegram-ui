@@ -12,7 +12,7 @@ pub fn escape_html(s: &str) -> String {
             '&' => escaped.push_str("&amp;"),
             '\"' => escaped.push_str("&quot;"),
             '\'' => escaped.push_str("&#39;"),
-            _ => escaped.push(c)
+            _ => escaped.push(c),
         }
     }
     escaped

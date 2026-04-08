@@ -5,20 +5,20 @@
 
 #[derive(Debug, Clone)]
 pub struct Radio {
-    checked:  bool,
+    checked: bool,
     disabled: bool,
-    label:    Option<String>,
-    value:    Option<String>
+    label: Option<String>,
+    value: Option<String>,
 }
 
 impl Radio {
     /// Creates a new Radio with default settings
     pub fn new() -> Self {
         Self {
-            checked:  false,
+            checked: false,
             disabled: false,
-            label:    None,
-            value:    None
+            label: None,
+            value: None,
         }
     }
 
@@ -56,7 +56,7 @@ impl Radio {
 
         html.push_str(
             ">
-            <input type=\"radio\""
+            <input type=\"radio\"",
         );
 
         if let Some(ref value) = self.value {

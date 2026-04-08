@@ -5,22 +5,22 @@
 
 #[derive(Debug, Clone)]
 pub struct Avatar {
-    src:        Option<String>,
-    initials:   Option<String>,
-    size:       String,
-    bg_color:   Option<String>,
-    text_color: Option<String>
+    src: Option<String>,
+    initials: Option<String>,
+    size: String,
+    bg_color: Option<String>,
+    text_color: Option<String>,
 }
 
 impl Avatar {
     /// Creates a new Avatar with default settings
     pub fn new() -> Self {
         Self {
-            src:        None,
-            initials:   None,
-            size:       "48px".to_string(),
-            bg_color:   None,
-            text_color: None
+            src: None,
+            initials: None,
+            size: "48px".to_string(),
+            bg_color: None,
+            text_color: None,
         }
     }
 

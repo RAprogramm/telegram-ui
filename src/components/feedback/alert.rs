@@ -11,20 +11,20 @@ pub enum AlertKind {
     Info,
     Success,
     Warning,
-    Error
+    Error,
 }
 
 #[derive(Clone, Debug)]
 pub struct Alert {
-    kind:    AlertKind,
-    message: String
+    kind: AlertKind,
+    message: String,
 }
 
 impl Alert {
     pub fn new() -> Self {
         Self {
-            kind:    AlertKind::Info,
-            message: String::new()
+            kind: AlertKind::Info,
+            message: String::new(),
         }
     }
 
@@ -51,7 +51,7 @@ impl Alert {
             AlertKind::Info => "telegram-ui-alert--info",
             AlertKind::Success => "telegram-ui-alert--success",
             AlertKind::Warning => "telegram-ui-alert--warning",
-            AlertKind::Error => "telegram-ui-alert--error"
+            AlertKind::Error => "telegram-ui-alert--error",
         };
         format!(
             "<div class=\"telegram-ui-alert {}\">{}</div>",
