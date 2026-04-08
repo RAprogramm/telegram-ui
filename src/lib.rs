@@ -88,14 +88,18 @@
 //! - Mini App configured in your bot
 //! - HTTPS hosting for your WebAssembly build
 
+mod error;
 mod platform;
+mod theme;
 mod webapp;
 
 pub mod components;
 pub mod context;
 pub mod helpers;
+pub use error::{Result, UiError, ValidationError};
 
 pub use platform::Platform;
+pub use theme::{Theme, ThemeContext};
 
 /// Get the CSS styles for Telegram UI
 pub fn get_styles() -> &'static str {
@@ -104,7 +108,7 @@ pub fn get_styles() -> &'static str {
 
 // Re-export all components
 pub use components::{
-    Alert, AlertKind, Backdrop, Button, Caption, Card, Cell, Column, Container, Divider,
+    Alert, AlertKind, AppRoot, Backdrop, Button, Caption, Card, Cell, Column, Container, Divider,
     EmptyState, Headline, Input, List, Modal, Placeholder, Progress, Row, Select, Skeleton,
-    Spacer, Spinner, Subtitle, Text, Textarea, Title, Toast
+    Spacer, Spinner, Subtitle, Text, Textarea, Title, Toast,
 };
