@@ -19,19 +19,26 @@ pub use blocks::{
     accordion::Accordion,
     avatar_stack::AvatarStack,
     banner::{Banner, BannerType},
+    blockquote::Blockquote,
     button::{Button, ButtonMode, ButtonSize},
     card::Card,
     cell::Cell,
+    icon_button::IconButton,
+    icon_container::IconContainer,
     image::Image,
+    inline_buttons::InlineButtons,
     list::List,
     placeholder::Placeholder,
     section::{Section, SectionHeader},
     steps::{Orientation, StepState, Steps},
+    timeline::Timeline,
 };
-pub use feedback::{Alert, AlertKind, EmptyState, Skeleton, Spinner, spinner::SpinnerSize};
+pub use feedback::{
+    Alert, AlertKind, CircularProgress, EmptyState, Skeleton, Spinner, SpinnerSize, Spoiler,
+};
 pub use form::{Checkbox, Input, Radio, Select, Switch, Textarea};
 pub use layout::{Column, Container, Row, Spacer};
 pub use navigation::{Button as NavButton, Link};
-pub use overlays::{Backdrop, Modal, Toast};
+pub use overlays::{Backdrop, Modal, Snackbar, Toast};
 pub use service::{Avatar, Badge, Divider, Progress};
 pub use typography::{Caption, Headline, Subtitle, Text, Title};

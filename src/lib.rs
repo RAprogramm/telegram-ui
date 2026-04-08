@@ -157,8 +157,9 @@ pub fn get_styles() -> &'static str {
 // Re-export all components
 pub use components::{
     Accordion, Alert, AlertKind, AppRoot, Avatar, AvatarStack, Backdrop, Banner, BannerType,
-    Button, ButtonMode, ButtonSize, Caption, Card, Cell, Checkbox, Column, Container, Divider,
-    EmptyState, Headline, Image, Input, List, Modal, Orientation, Placeholder, Progress, Radio,
-    Row, Section, SectionHeader, Select, Skeleton, Spacer, Spinner, SpinnerSize, StepState, Steps,
-    Subtitle, Switch, Text, Textarea, Title, Toast,
+    Blockquote, Button, ButtonMode, ButtonSize, Caption, Card, Cell, Checkbox, CircularProgress,
+    Column, Container, Divider, EmptyState, Headline, IconButton, IconContainer, Image, InlineButtons,
+    Input, List, Modal, Orientation, Placeholder, Progress, Radio, Row, Section, SectionHeader,
+    Select, Skeleton, Snackbar, Spacer, Spinner, SpinnerSize, Spoiler, StepState, Steps, Subtitle,
+    Switch, Text, Textarea, Timeline, Title, Toast,
 };

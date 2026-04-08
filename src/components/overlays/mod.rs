@@ -4,9 +4,11 @@
 
 pub mod backdrop;
 pub mod modal;
+pub mod snackbar;
 pub mod toast;
 
 // Re-export components
 pub use backdrop::Backdrop;
 pub use modal::Modal;
+pub use snackbar::Snackbar;
 pub use toast::Toast;
