@@ -7,17 +7,17 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Modal {
-    title:   String,
+    title: String,
     content: String,
-    visible: bool
+    visible: bool,
 }
 
 impl Modal {
     pub fn new() -> Self {
         Self {
-            title:   String::new(),
+            title: String::new(),
             content: String::new(),
-            visible: false
+            visible: false,
         }
     }
 

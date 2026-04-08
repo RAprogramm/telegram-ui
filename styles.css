@@ -38,6 +38,78 @@
  *   --tgui-destructive: mapped to --tg-theme-destructive-text-color
  */
 
+/* ==================== AppRoot Styles ==================== */
+.tgui-app-root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--tgui-bg, var(--tg-theme-bg-color, #ffffff));
+  color: var(--tgui-text, var(--tg-theme-text-color, #000000));
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Platform-specific base styles */
+.tgui-platform-ios {
+  /* iOS-specific styles */
+  font-size: 17px;
+}
+
+.tgui-platform-ios * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tgui-platform-android {
+  /* Android-specific styles */
+  font-size: 14px;
+}
+
+.tgui-platform-base {
+  /* Base web styles */
+  font-size: 16px;
+}
+
+/* Platform-specific scrollbar styles */
+.tgui-platform-ios ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.tgui-platform-ios ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tgui-platform-ios ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Android ripple effect */
+.tgui-platform-android .telegram-ui-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.tgui-platform-android .telegram-ui-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.tgui-platform-android .telegram-ui-button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
 /* ==================== Button Styles ==================== */
 .telegram-ui-button {
   align-items: center;

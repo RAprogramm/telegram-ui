@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Components module
 
+pub mod app;
 pub mod blocks;
 pub mod feedback;
 pub mod form;
@@ -13,6 +14,7 @@ pub mod service;
 pub mod typography;
 
 // Re-export all components
+pub use app::AppRoot;
 pub use blocks::{button::Button, card::Card, cell::Cell, list::List, placeholder::Placeholder};
 pub use feedback::{Alert, AlertKind, EmptyState, Skeleton, Spinner};
 pub use form::{Input, Select, Textarea};

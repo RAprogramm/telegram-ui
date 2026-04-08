@@ -8,14 +8,14 @@ use std::fmt;
 #[derive(Clone, Debug)]
 pub struct Link {
     href: String,
-    text: String
+    text: String,
 }
 
 impl Link {
     pub fn new() -> Self {
         Self {
             href: String::new(),
-            text: String::new()
+            text: String::new(),
         }
     }
 

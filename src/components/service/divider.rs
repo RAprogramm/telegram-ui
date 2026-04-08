@@ -7,14 +7,12 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Divider {
-    inset: bool
+    inset: bool,
 }
 
 impl Divider {
     pub fn new() -> Self {
-        Self {
-            inset: false
-        }
+        Self { inset: false }
     }
 
     pub fn with_inset(mut self, inset: bool) -> Self {

@@ -10,18 +10,18 @@ pub enum SpinnerSize {
     #[default]
     S,
     M,
-    L
+    L,
 }
 
 #[derive(Clone, Debug)]
 pub struct Spinner {
-    size: SpinnerSize
+    size: SpinnerSize,
 }
 
 impl Spinner {
     pub fn new() -> Self {
         Self {
-            size: SpinnerSize::M
+            size: SpinnerSize::M,
         }
     }
 

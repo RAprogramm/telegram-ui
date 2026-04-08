@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Title {
-    text:  String,
-    align: String
+    text: String,
+    align: String,
 }
 
 impl Title {
     pub fn new() -> Self {
         Self {
-            text:  String::new(),
-            align: "left".to_string()
+            text: String::new(),
+            align: "left".to_string(),
         }
     }
 
