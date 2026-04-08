@@ -35,8 +35,6 @@
 //! - **EmptyState** - Empty state with action
 //! - **Container/Row/Column** - Layout components
 //! - **Framework Support** - Works with Leptos and Yew web frameworks
-//! - **Telegram WebApp Integration** - Full SDK integration with `webapp-sdk`
-//!   feature
 //! - **CSS Variables** - Customizable via CSS custom properties
 //!
 //! # Examples
@@ -64,40 +62,15 @@
 //! - `--telegram-button-plain-color`: Text color for plain buttons (#0088cc)
 //! - `--telegram-button-gray-bg`: Background color for gray buttons (#f0f0f0)
 //! - `--telegram-button-gray-color`: Text color for gray buttons (#333)
-//!
-//! # Telegram WebApp Integration
-//!
-//! When compiled with the `webapp-sdk` feature, this library provides utilities
-//! for integrating with Telegram WebApp SDK:
-//!
-//! ```ignore
-//! use telegram_ui::webapp::{init_webapp, show_alert, expand};
-//!
-//! fn main() {
-//!     if let Ok(true) = init_webapp() {
-//!         // Running inside Telegram
-//!         show_alert("Welcome to Telegram WebApp!").ok();
-//!         expand().ok();
-//!     }
-//! }
-//! ```
-//!
-//! ## Prerequisites
-//!
-//! - Telegram Bot (created via @BotFather)
-//! - Mini App configured in your bot
-//! - HTTPS hosting for your WebAssembly build
 
 mod error;
 mod platform;
 mod theme;
-mod webapp;
 
 pub mod components;
 pub mod context;
 pub mod helpers;
 pub use error::{Result, UiError, ValidationError};
-
 pub use platform::Platform;
 pub use theme::{Theme, ThemeContext};
 
@@ -110,5 +83,5 @@ pub fn get_styles() -> &'static str {
 pub use components::{
     Alert, AlertKind, AppRoot, Backdrop, Button, Caption, Card, Cell, Column, Container, Divider,
     EmptyState, Headline, Input, List, Modal, Placeholder, Progress, Row, Select, Skeleton,
-    Spacer, Spinner, Subtitle, Text, Textarea, Title, Toast,
+    Spacer, Spinner, Subtitle, Text, Textarea, Title, Toast
 };

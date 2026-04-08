@@ -7,13 +7,13 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Row {
-    children: Vec<String>,
+    children: Vec<String>
 }
 
 impl Row {
     pub fn new() -> Self {
         Self {
-            children: Vec::new(),
+            children: Vec::new()
         }
     }
 

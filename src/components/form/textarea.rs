@@ -9,23 +9,23 @@ use crate::error::{Result, ValidationError};
 
 #[derive(Clone, Debug)]
 pub struct Textarea {
-    value: String,
+    value:       String,
     placeholder: String,
-    rows: u32,
-    required: bool,
-    min_length: Option<usize>,
-    max_length: Option<usize>,
+    rows:        u32,
+    required:    bool,
+    min_length:  Option<usize>,
+    max_length:  Option<usize>
 }
 
 impl Textarea {
     pub fn new() -> Self {
         Self {
-            value: String::new(),
+            value:       String::new(),
             placeholder: String::new(),
-            rows: 3,
-            required: false,
-            min_length: None,
-            max_length: None,
+            rows:        3,
+            required:    false,
+            min_length:  None,
+            max_length:  None
         }
     }
 
@@ -78,16 +78,16 @@ impl Textarea {
             errors.push("Field is required".to_string());
         }
 
-        if let Some(min_len) = self.min_length {
-            if self.value.len() < min_len {
-                errors.push(format!("Minimum length is {}", min_len));
-            }
+        if let Some(min_len) = self.min_length
+            && self.value.len() < min_len
+        {
+            errors.push(format!("Minimum length is {}", min_len));
         }
 
-        if let Some(max_len) = self.max_length {
-            if self.value.len() > max_len {
-                errors.push(format!("Maximum length is {}", max_len));
-            }
+        if let Some(max_len) = self.max_length
+            && self.value.len() > max_len
+        {
+            errors.push(format!("Maximum length is {}", max_len));
         }
 
         if errors.is_empty() {

@@ -9,16 +9,16 @@ use crate::helpers::escape_html;
 /// Card component
 #[derive(Debug, Clone)]
 pub struct Card {
-    ambient: bool,
-    children: String,
+    ambient:  bool,
+    children: String
 }
 
 impl Card {
     /// Creates a new Card with default settings
     pub fn new() -> Self {
         Self {
-            ambient: false,
-            children: String::new(),
+            ambient:  false,
+            children: String::new()
         }
     }
 

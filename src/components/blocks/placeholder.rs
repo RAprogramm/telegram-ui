@@ -9,16 +9,16 @@ use std::fmt;
 /// Placeholder component
 #[derive(Debug, Clone)]
 pub struct Placeholder {
-    title: String,
-    description: Option<String>,
+    title:       String,
+    description: Option<String>
 }
 
 impl Placeholder {
     /// Creates a new Placeholder with default settings
     pub fn new() -> Self {
         Self {
-            title: String::new(),
-            description: None,
+            title:       String::new(),
+            description: None
         }
     }
 

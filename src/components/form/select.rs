@@ -9,17 +9,17 @@ use crate::error::{Result, ValidationError};
 
 #[derive(Clone, Debug)]
 pub struct Select {
-    value: String,
-    options: Vec<String>,
-    required: bool,
+    value:    String,
+    options:  Vec<String>,
+    required: bool
 }
 
 impl Select {
     pub fn new() -> Self {
         Self {
-            value: String::new(),
-            options: Vec::new(),
-            required: false,
+            value:    String::new(),
+            options:  Vec::new(),
+            required: false
         }
     }
 

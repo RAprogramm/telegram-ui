@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Skeleton {
-    width: String,
-    height: String,
+    width:  String,
+    height: String
 }
 
 impl Skeleton {
     pub fn new() -> Self {
         Self {
-            width: "100%".to_string(),
-            height: "100px".to_string(),
+            width:  "100%".to_string(),
+            height: "100px".to_string()
         }
     }
 

@@ -3,9 +3,7 @@
 
 //! AppRoot - Root wrapper component for Telegram Mini Apps
 
-use crate::helpers::escape_html;
-use crate::Platform;
-use crate::{Theme, ThemeContext};
+use crate::{Platform, Theme, ThemeContext, helpers::escape_html};
 
 /// AppRoot is the root wrapper component for Telegram Mini Apps.
 ///
@@ -31,13 +29,13 @@ use crate::{Theme, ThemeContext};
 /// ```
 #[derive(Debug, Default)]
 pub struct AppRoot {
-    platform: Option<Platform>,
-    theme: Option<Theme>,
+    platform:      Option<Platform>,
+    theme:         Option<Theme>,
     theme_context: Option<ThemeContext>,
-    class: Option<String>,
-    children: Option<String>,
-    id: Option<String>,
-    style: Option<String>,
+    class:         Option<String>,
+    children:      Option<String>,
+    id:            Option<String>,
+    style:         Option<String>
 }
 
 impl AppRoot {
@@ -182,7 +180,7 @@ impl AppRoot {
         match platform {
             Platform::Ios => classes.push("tgui-platform-ios".to_string()),
             Platform::Android => classes.push("tgui-platform-android".to_string()),
-            Platform::Base => classes.push("tgui-platform-base".to_string()),
+            Platform::Base => classes.push("tgui-platform-base".to_string())
         }
 
         // Add theme class
@@ -225,7 +223,7 @@ impl AppRoot {
             match platform {
                 Platform::Ios => "ios",
                 Platform::Android => "android",
-                Platform::Base => "base",
+                Platform::Base => "base"
             }
         ));
 
@@ -236,7 +234,7 @@ impl AppRoot {
             match theme {
                 Theme::Light => "light",
                 Theme::Dark => "dark",
-                Theme::Auto => "auto",
+                Theme::Auto => "auto"
             }
         ));
 
@@ -244,15 +242,10 @@ impl AppRoot {
         if let Some(ref theme_context) = self.theme_context {
             let css_vars = theme_context.css_vars();
             if !css_vars.is_empty() {
-                let mut style_attrs = self
-                    .style
-                    .as_ref()
-                    .map(|s| s.as_str())
-                    .unwrap_or("")
-                    .to_string();
+                let mut style_attrs = self.style.as_deref().unwrap_or("").to_string();
                 for (key, value) in css_vars {
                     if !style_attrs.is_empty() {
-                        style_attrs.push_str(" ");
+                        style_attrs.push(' ');
                     }
                     style_attrs.push_str(&format!("{}: {}", key, value));
                 }
@@ -264,7 +257,7 @@ impl AppRoot {
             html.push_str(&format!(" style=\"{}\"", escape_html(style)));
         }
 
-        html.push_str(">");
+        html.push('>');
 
         // Children
         if let Some(ref children) = self.children {

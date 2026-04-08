@@ -11,20 +11,20 @@ pub enum AlertKind {
     Info,
     Success,
     Warning,
-    Error,
+    Error
 }
 
 #[derive(Clone, Debug)]
 pub struct Alert {
-    kind: AlertKind,
-    message: String,
+    kind:    AlertKind,
+    message: String
 }
 
 impl Alert {
     pub fn new() -> Self {
         Self {
-            kind: AlertKind::Info,
-            message: String::new(),
+            kind:    AlertKind::Info,
+            message: String::new()
         }
     }
 

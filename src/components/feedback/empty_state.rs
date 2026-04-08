@@ -7,15 +7,15 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct EmptyState {
-    title: String,
-    description: Option<String>,
+    title:       String,
+    description: Option<String>
 }
 
 impl EmptyState {
     pub fn new() -> Self {
         Self {
-            title: String::new(),
-            description: None,
+            title:       String::new(),
+            description: None
         }
     }
 

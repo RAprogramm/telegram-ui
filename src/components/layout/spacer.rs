@@ -7,12 +7,14 @@ use std::fmt;
 
 #[derive(Clone, Debug)]
 pub struct Spacer {
-    size: u32,
+    size: u32
 }
 
 impl Spacer {
     pub fn new() -> Self {
-        Self { size: 16 }
+        Self {
+            size: 16
+        }
     }
 
     pub fn size(&self) -> u32 {

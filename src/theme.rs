@@ -10,7 +10,7 @@
 //! # Example
 //!
 //! ```
-//! use telegram_ui::{Theme, ThemeContext, AppRoot};
+//! use telegram_ui::{AppRoot, Theme, ThemeContext};
 //!
 //! let theme_context = ThemeContext::default()
 //!     .with_bg_color("#ffffff")
@@ -28,7 +28,8 @@ use std::fmt;
 /// This enum represents the three theme modes supported by Telegram:
 /// - `Light` - Light theme with white backgrounds and dark text
 /// - `Dark` - Dark theme with dark backgrounds and light text
-/// - `Auto` - Automatically switches between light and dark based on system/user preference
+/// - `Auto` - Automatically switches between light and dark based on
+///   system/user preference
 ///
 /// # Example
 ///
@@ -46,7 +47,7 @@ pub enum Theme {
     Dark,
     /// Auto theme - follows system/user preference
     #[default]
-    Auto,
+    Auto
 }
 
 impl Theme {
@@ -72,7 +73,7 @@ impl Theme {
         match self {
             Theme::Light => "tg-theme-light",
             Theme::Dark => "tg-theme-dark",
-            Theme::Auto => "tg-theme-auto",
+            Theme::Auto => "tg-theme-auto"
         }
     }
 }
@@ -82,7 +83,7 @@ impl fmt::Display for Theme {
         match self {
             Theme::Light => write!(f, "light"),
             Theme::Dark => write!(f, "dark"),
-            Theme::Auto => write!(f, "auto"),
+            Theme::Auto => write!(f, "auto")
         }
     }
 }
@@ -95,19 +96,21 @@ impl std::str::FromStr for Theme {
             "light" => Ok(Theme::Light),
             "dark" => Ok(Theme::Dark),
             "auto" => Ok(Theme::Auto),
-            _ => Err(format!("Invalid theme: {}", s)),
+            _ => Err(format!("Invalid theme: {}", s))
         }
     }
 }
 
 /// Theme context containing Telegram color scheme values.
 ///
-/// This struct holds all the color parameters provided by Telegram's WebApp API.
-/// These colors can be applied to the document root or used directly in component styling.
+/// This struct holds all the color parameters provided by Telegram's WebApp
+/// API. These colors can be applied to the document root or used directly in
+/// component styling.
 ///
 /// # Color Parameters
 ///
-/// All colors should be in `#RRGGBB` format. The following parameters are supported:
+/// All colors should be in `#RRGGBB` format. The following parameters are
+/// supported:
 ///
 /// | Parameter | CSS Variable | Description |
 /// | `bg_color` | `--tg-theme-bg-color` | Primary background color |
@@ -142,35 +145,35 @@ impl std::str::FromStr for Theme {
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct ThemeContext {
     /// Primary background color
-    pub bg_color: Option<String>,
+    pub bg_color:                  Option<String>,
     /// Primary text color
-    pub text_color: Option<String>,
+    pub text_color:                Option<String>,
     /// Hint text color
-    pub hint_color: Option<String>,
+    pub hint_color:                Option<String>,
     /// Link color
-    pub link_color: Option<String>,
+    pub link_color:                Option<String>,
     /// Button background color
-    pub button_color: Option<String>,
+    pub button_color:              Option<String>,
     /// Button text color
-    pub button_text_color: Option<String>,
+    pub button_text_color:         Option<String>,
     /// Secondary background color
-    pub secondary_bg_color: Option<String>,
+    pub secondary_bg_color:        Option<String>,
     /// Header background color
-    pub header_bg_color: Option<String>,
+    pub header_bg_color:           Option<String>,
     /// Bottom bar background color
-    pub bottom_bar_bg_color: Option<String>,
+    pub bottom_bar_bg_color:       Option<String>,
     /// Accent text color
-    pub accent_text_color: Option<String>,
+    pub accent_text_color:         Option<String>,
     /// Section background color
-    pub section_bg_color: Option<String>,
+    pub section_bg_color:          Option<String>,
     /// Section header text color
     pub section_header_text_color: Option<String>,
     /// Section separator color
-    pub section_separator_color: Option<String>,
+    pub section_separator_color:   Option<String>,
     /// Subtitle text color
-    pub subtitle_text_color: Option<String>,
+    pub subtitle_text_color:       Option<String>,
     /// Destructive action text color
-    pub destructive_text_color: Option<String>,
+    pub destructive_text_color:    Option<String>
 }
 
 impl ThemeContext {
@@ -314,7 +317,10 @@ impl ThemeContext {
     /// use telegram_ui::ThemeContext;
     ///
     /// let theme_context = ThemeContext::new().with_secondary_bg_color("#f4f4f5");
-    /// assert_eq!(theme_context.secondary_bg_color, Some("#f4f4f5".to_string()));
+    /// assert_eq!(
+    ///     theme_context.secondary_bg_color,
+    ///     Some("#f4f4f5".to_string())
+    /// );
     /// ```
     pub fn with_secondary_bg_color(mut self, color: &str) -> Self {
         self.secondary_bg_color = Some(color.to_string());
@@ -352,7 +358,10 @@ impl ThemeContext {
     /// use telegram_ui::ThemeContext;
     ///
     /// let theme_context = ThemeContext::new().with_bottom_bar_bg_color("#ffffff");
-    /// assert_eq!(theme_context.bottom_bar_bg_color, Some("#ffffff".to_string()));
+    /// assert_eq!(
+    ///     theme_context.bottom_bar_bg_color,
+    ///     Some("#ffffff".to_string())
+    /// );
     /// ```
     pub fn with_bottom_bar_bg_color(mut self, color: &str) -> Self {
         self.bottom_bar_bg_color = Some(color.to_string());
@@ -409,7 +418,10 @@ impl ThemeContext {
     /// use telegram_ui::ThemeContext;
     ///
     /// let theme_context = ThemeContext::new().with_section_header_text_color("#707579");
-    /// assert_eq!(theme_context.section_header_text_color, Some("#707579".to_string()));
+    /// assert_eq!(
+    ///     theme_context.section_header_text_color,
+    ///     Some("#707579".to_string())
+    /// );
     /// ```
     pub fn with_section_header_text_color(mut self, color: &str) -> Self {
         self.section_header_text_color = Some(color.to_string());
@@ -428,7 +440,10 @@ impl ThemeContext {
     /// use telegram_ui::ThemeContext;
     ///
     /// let theme_context = ThemeContext::new().with_section_separator_color("#c8c7cc");
-    /// assert_eq!(theme_context.section_separator_color, Some("#c8c7cc".to_string()));
+    /// assert_eq!(
+    ///     theme_context.section_separator_color,
+    ///     Some("#c8c7cc".to_string())
+    /// );
     /// ```
     pub fn with_section_separator_color(mut self, color: &str) -> Self {
         self.section_separator_color = Some(color.to_string());
@@ -447,7 +462,10 @@ impl ThemeContext {
     /// use telegram_ui::ThemeContext;
     ///
     /// let theme_context = ThemeContext::new().with_subtitle_text_color("#707579");
-    /// assert_eq!(theme_context.subtitle_text_color, Some("#707579".to_string()));
+    /// assert_eq!(
+    ///     theme_context.subtitle_text_color,
+    ///     Some("#707579".to_string())
+    /// );
     /// ```
     pub fn with_subtitle_text_color(mut self, color: &str) -> Self {
         self.subtitle_text_color = Some(color.to_string());
@@ -466,7 +484,10 @@ impl ThemeContext {
     /// use telegram_ui::ThemeContext;
     ///
     /// let theme_context = ThemeContext::new().with_destructive_text_color("#e53935");
-    /// assert_eq!(theme_context.destructive_text_color, Some("#e53935".to_string()));
+    /// assert_eq!(
+    ///     theme_context.destructive_text_color,
+    ///     Some("#e53935".to_string())
+    /// );
     /// ```
     pub fn with_destructive_text_color(mut self, color: &str) -> Self {
         self.destructive_text_color = Some(color.to_string());
@@ -478,7 +499,8 @@ impl ThemeContext {
     /// # Returns
     ///
     /// A `HashMap` where each key is a CSS variable name like
-    /// `"--tg-theme-bg-color"`, and the corresponding value is the `#RRGGBB` color string.
+    /// `"--tg-theme-bg-color"`, and the corresponding value is the `#RRGGBB`
+    /// color string.
     ///
     /// # Example
     ///
@@ -490,8 +512,14 @@ impl ThemeContext {
     ///     .with_text_color("#000000");
     ///
     /// let vars = theme_context.css_vars();
-    /// assert_eq!(vars.get("--tg-theme-bg-color"), Some(&"#ffffff".to_string()));
-    /// assert_eq!(vars.get("--tg-theme-text-color"), Some(&"#000000".to_string()));
+    /// assert_eq!(
+    ///     vars.get("--tg-theme-bg-color"),
+    ///     Some(&"#ffffff".to_string())
+    /// );
+    /// assert_eq!(
+    ///     vars.get("--tg-theme-text-color"),
+    ///     Some(&"#000000".to_string())
+    /// );
     /// ```
     pub fn css_vars(&self) -> std::collections::HashMap<String, String> {
         let mut vars: std::collections::HashMap<String, String> =
@@ -516,16 +544,16 @@ impl ThemeContext {
         push("section-bg-color", self.section_bg_color.as_ref());
         push(
             "section-header-text-color",
-            self.section_header_text_color.as_ref(),
+            self.section_header_text_color.as_ref()
         );
         push(
             "section-separator-color",
-            self.section_separator_color.as_ref(),
+            self.section_separator_color.as_ref()
         );
         push("subtitle-text-color", self.subtitle_text_color.as_ref());
         push(
             "destructive-text-color",
-            self.destructive_text_color.as_ref(),
+            self.destructive_text_color.as_ref()
         );
 
         vars
@@ -618,7 +646,8 @@ impl ThemeContext {
     ///
     /// # Returns
     ///
-    /// `Ok(())` if successful, `Err(String)` if running outside a browser environment.
+    /// `Ok(())` if successful, `Err(String)` if running outside a browser
+    /// environment.
     ///
     /// # Example
     ///
@@ -661,7 +690,8 @@ impl ThemeContext {
     ///
     /// # Returns
     ///
-    /// Always returns `Err` with a message indicating this is only available in WASM.
+    /// Always returns `Err` with a message indicating this is only available in
+    /// WASM.
     #[cfg(not(target_arch = "wasm32"))]
     pub fn apply_to_root(&self) -> Result<(), String> {
         Err("apply_to_root is only available on wasm32 targets".to_string())
