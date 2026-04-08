@@ -4,6 +4,7 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Cell component for Telegram UI
 
+use crate::helpers::escape_html;
 use std::fmt;
 
 /// Cell component
@@ -100,19 +101,25 @@ impl Cell {
         let mut content = String::new();
 
         if let Some(before) = &self.before {
-            content.push_str(&format!("<div class=\"before\">{}</div>", before));
+            content.push_str(&format!(
+                "<div class=\"before\">{}</div>",
+                escape_html(before)
+            ));
         }
 
-        content.push_str(&format!("<div class=\"middle\">{}</div>", self.middle));
+        content.push_str(&format!(
+            "<div class=\"middle\">{}</div>",
+            escape_html(&self.middle)
+        ));
 
         if let Some(after) = &self.after {
-            content.push_str(&format!("<div class=\"after\">{}</div>", after));
+            content.push_str(&format!(
+                "<div class=\"after\">{}</div>",
+                escape_html(after)
+            ));
         }
 
-        format!(
-            "<div class=\"{}\">{}</div>",
-            class_str, content
-        )
+        format!("<div class=\"{}\">{}</div>", class_str, content)
     }
 }
 
@@ -165,11 +172,15 @@ mod tests {
     }
 
     #[test]
+    fn test_cell_render_xss() {
+        let cell = Cell::new().middle("<script>alert(1)</script>");
+        let html = cell.render();
+        assert!(html.contains("&lt;script&gt;alert(1)&lt;/script&gt;"));
+    }
+
+    #[test]
     fn test_cell_with_before_after() {
-        let cell = Cell::new()
-            .before("Icon")
-            .after("Arrow")
-            .middle("Text");
+        let cell = Cell::new().before("Icon").after("Arrow").middle("Text");
 
         let html = cell.render();
         assert!(html.contains("<div class=\"before\">Icon</div>"));
