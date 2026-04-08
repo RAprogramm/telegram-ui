@@ -372,3 +372,137 @@
   font-size: 12px;
   color: var(--tgui-hint, var(--tg-theme-hint-color, #999999));
 }
+
+/* ==================== Responsive Design ==================== */
+
+/* Mobile-first approach with breakpoints */
+
+/* Small devices (phones) - default styles already optimized */
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) {
+  .tgui-app-root {
+    font-size: 16px;
+  }
+
+  .telegram-ui-card {
+    margin: 16px;
+    padding: 24px;
+  }
+
+  .telegram-ui-container {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .telegram-ui-button--stretched {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Large devices (desktop) */
+@media (min-width: 1024px) {
+  .tgui-app-root {
+    font-size: 16px;
+  }
+
+  .telegram-ui-card {
+    margin: 24px;
+    padding: 32px;
+  }
+
+  .telegram-ui-container {
+    max-width: 960px;
+  }
+
+  .telegram-ui-headline {
+    font-size: 32px;
+  }
+
+  .telegram-ui-title {
+    font-size: 28px;
+  }
+}
+
+/* Extra large devices */
+@media (min-width: 1280px) {
+  .telegram-ui-container {
+    max-width: 1200px;
+  }
+}
+
+/* Touch-friendly adjustments */
+@media (hover: none) and (pointer: coarse) {
+  .telegram-ui-button {
+    min-height: 48px;
+    padding: 12px 20px;
+  }
+
+  .telegram-ui-cell {
+    min-height: 48px;
+    padding: 16px;
+  }
+
+  .telegram-ui-input,
+  .telegram-ui-textarea {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .tgui-app-root {
+    font-size: 14px;
+  }
+
+  .telegram-ui-button {
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+
+  .telegram-ui-card {
+    margin: 4px;
+    padding: 12px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .telegram-ui-button {
+    border-width: 2px;
+  }
+
+  .telegram-ui-input,
+  .telegram-ui-textarea {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .telegram-ui-spinner-circle,
+  .telegram-ui-button::after {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Dark mode preference detection */
+@media (prefers-color-scheme: dark) {
+  .tg-theme-auto .tgui-app-root:not([data-theme]) {
+    background-color: #17212b;
+    color: #ffffff;
+  }
+}
+
+/* Light mode preference detection */
+@media (prefers-color-scheme: light) {
+  .tg-theme-auto .tgui-app-root:not([data-theme]) {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
