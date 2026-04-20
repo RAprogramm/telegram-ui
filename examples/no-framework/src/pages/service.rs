@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Avatar, Progress};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -60,11 +59,5 @@ impl Service {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Service {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

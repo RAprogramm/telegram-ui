@@ -1,16 +1,16 @@
 #[derive(Debug, Clone)]
 pub struct Tappable {
     interactive: bool,
-    disabled: bool,
-    children: String,
+    disabled:    bool,
+    children:    String
 }
 
 impl Tappable {
     pub fn new() -> Self {
         Self {
             interactive: true,
-            disabled: false,
-            children: String::new(),
+            disabled:    false,
+            children:    String::new()
         }
     }
 
@@ -45,5 +45,11 @@ impl Tappable {
             "<div class=\"telegram-ui-tappable {} {}\">{}</div>",
             interactive_class, disabled_class, self.children
         )
+    }
+}
+
+impl Default for Tappable {
+    fn default() -> Self {
+        Self::new()
     }
 }

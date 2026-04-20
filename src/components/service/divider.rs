@@ -5,14 +5,17 @@
 
 use std::fmt;
 
+/// Divider component
 #[derive(Clone, Debug)]
 pub struct Divider {
-    inset: bool,
+    inset: bool
 }
 
 impl Divider {
     pub fn new() -> Self {
-        Self { inset: false }
+        Self {
+            inset: false
+        }
     }
 
     pub fn with_inset(mut self, inset: bool) -> Self {
@@ -22,6 +25,16 @@ impl Divider {
 
     pub fn is_inset(&self) -> bool {
         self.inset
+    }
+
+    pub fn render(&self) -> String {
+        let class = if self.inset {
+            "telegram-ui-divider telegram-ui-divider--inset"
+        } else {
+            "telegram-ui-divider"
+        };
+
+        format!("<div class=\"{}\"></div>", class)
     }
 }
 
@@ -51,5 +64,13 @@ mod tests {
     fn test_divider_custom() {
         let divider = Divider::new().with_inset(true);
         assert!(divider.is_inset());
+    }
+
+    #[test]
+    fn test_divider_render() {
+        let divider = Divider::new();
+        let html = divider.render();
+        assert!(html.contains("telegram-ui-divider"));
+        assert!(html.contains("</div>"));
     }
 }

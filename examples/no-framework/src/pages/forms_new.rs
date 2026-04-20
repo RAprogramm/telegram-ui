@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Chip, ColorInput, FileInput, FormInput, Rating, Slider};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -72,11 +71,5 @@ impl FormsNew {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for FormsNew {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

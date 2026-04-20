@@ -16,18 +16,18 @@ pub enum BannerType {
     /// Picture banner
     Picture,
     /// Promo banner
-    Promo,
+    Promo
 }
 
 /// Banner component
 #[derive(Debug, Clone)]
 pub struct Banner {
     banner_type: BannerType,
-    title: String,
-    subtitle: Option<String>,
+    title:       String,
+    subtitle:    Option<String>,
     description: Option<String>,
-    link: Option<String>,
-    image: Option<String>,
+    link:        Option<String>,
+    image:       Option<String>
 }
 
 impl Banner {
@@ -35,11 +35,11 @@ impl Banner {
     pub fn new() -> Self {
         Self {
             banner_type: BannerType::Regular,
-            title: String::new(),
-            subtitle: None,
+            title:       String::new(),
+            subtitle:    None,
             description: None,
-            link: None,
-            image: None,
+            link:        None,
+            image:       None
         }
     }
 
@@ -84,7 +84,7 @@ impl Banner {
         let type_class = match self.banner_type {
             BannerType::Regular => "banner--regular",
             BannerType::Picture => "banner--picture",
-            BannerType::Promo => "banner--promo",
+            BannerType::Promo => "banner--promo"
         };
 
         let mut html = format!(

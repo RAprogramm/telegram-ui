@@ -1,22 +1,22 @@
 #[derive(Debug, Clone)]
 pub struct Slider {
-    min: f64,
-    max: f64,
-    value: f64,
-    step: f64,
+    min:      f64,
+    max:      f64,
+    value:    f64,
+    step:     f64,
     disabled: bool,
-    ios: bool,
+    ios:      bool
 }
 
 impl Slider {
     pub fn new() -> Self {
         Self {
-            min: 0.0,
-            max: 100.0,
-            value: 50.0,
-            step: 1.0,
+            min:      0.0,
+            max:      100.0,
+            value:    50.0,
+            step:     1.0,
             disabled: false,
-            ios: false,
+            ios:      false
         }
     }
 
@@ -76,5 +76,11 @@ impl Slider {
             if self.disabled { "disabled" } else { "" },
             percentage
         )
+    }
+}
+
+impl Default for Slider {
+    fn default() -> Self {
+        Self::new()
     }
 }

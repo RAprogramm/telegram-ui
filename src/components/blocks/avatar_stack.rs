@@ -8,32 +8,33 @@ use std::fmt;
 /// AvatarStack component - displays overlapping avatars
 #[derive(Debug, Clone)]
 pub struct AvatarStack {
-    avatars: Vec<AvatarItem>,
-    max_display: usize,
-    overflow_count: Option<usize>,
+    avatars:        Vec<AvatarItem>,
+    max_display:    usize,
+    #[expect(dead_code)]
+    overflow_count: Option<usize>
 }
 
 #[derive(Debug, Clone)]
 struct AvatarItem {
-    src: Option<String>,
-    initials: String,
+    src:      Option<String>,
+    initials: String
 }
 
 impl AvatarStack {
     /// Create a new AvatarStack
     pub fn new() -> Self {
         Self {
-            avatars: Vec::new(),
-            max_display: 5,
-            overflow_count: None,
+            avatars:        Vec::new(),
+            max_display:    5,
+            overflow_count: None
         }
     }
 
     /// Add an avatar (by initials)
     pub fn add_avatar(mut self, initials: &str) -> Self {
         self.avatars.push(AvatarItem {
-            src: None,
-            initials: initials.to_string(),
+            src:      None,
+            initials: initials.to_string()
         });
         self
     }
@@ -41,8 +42,8 @@ impl AvatarStack {
     /// Add an avatar with image
     pub fn add_avatar_with_image(mut self, initials: &str, src: &str) -> Self {
         self.avatars.push(AvatarItem {
-            src: Some(src.to_string()),
-            initials: initials.to_string(),
+            src:      Some(src.to_string()),
+            initials: initials.to_string()
         });
         self
     }

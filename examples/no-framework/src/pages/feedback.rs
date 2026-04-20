@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Alert, AlertKind, Spinner, SpinnerSize};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -69,11 +68,5 @@ impl Feedback {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Feedback {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

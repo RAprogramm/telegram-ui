@@ -1,16 +1,16 @@
 #[derive(Debug, Clone)]
 pub struct Multiselect {
     placeholder: String,
-    options: Vec<(String, String)>,
-    selected: Vec<String>,
+    options:     Vec<(String, String)>,
+    selected:    Vec<String>
 }
 
 impl Multiselect {
     pub fn new() -> Self {
         Self {
             placeholder: "Select options".to_string(),
-            options: Vec::new(),
-            selected: Vec::new(),
+            options:     Vec::new(),
+            selected:    Vec::new()
         }
     }
 
@@ -34,7 +34,7 @@ impl Multiselect {
             .options
             .iter()
             .map(|(value, label)| {
-                let selected = if self.selected.contains(value) {
+                let _selected = if self.selected.contains(value) {
                     "selected"
                 } else {
                     ""
@@ -59,5 +59,11 @@ impl Multiselect {
             "<div class=\"telegram-ui-multiselect\">{}<select class=\"multiselect-select\">{}</select></div>",
             placeholder, options_html
         )
+    }
+}
+
+impl Default for Multiselect {
+    fn default() -> Self {
+        Self::new()
     }
 }

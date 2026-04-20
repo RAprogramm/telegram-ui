@@ -47,7 +47,7 @@ pub enum Theme {
     Dark,
     /// Auto theme - follows system/user preference
     #[default]
-    Auto,
+    Auto
 }
 
 impl Theme {
@@ -73,7 +73,7 @@ impl Theme {
         match self {
             Theme::Light => "tg-theme-light",
             Theme::Dark => "tg-theme-dark",
-            Theme::Auto => "tg-theme-auto",
+            Theme::Auto => "tg-theme-auto"
         }
     }
 }
@@ -83,7 +83,7 @@ impl fmt::Display for Theme {
         match self {
             Theme::Light => write!(f, "light"),
             Theme::Dark => write!(f, "dark"),
-            Theme::Auto => write!(f, "auto"),
+            Theme::Auto => write!(f, "auto")
         }
     }
 }
@@ -96,7 +96,7 @@ impl std::str::FromStr for Theme {
             "light" => Ok(Theme::Light),
             "dark" => Ok(Theme::Dark),
             "auto" => Ok(Theme::Auto),
-            _ => Err(format!("Invalid theme: {}", s)),
+            _ => Err(format!("Invalid theme: {}", s))
         }
     }
 }
@@ -145,35 +145,35 @@ impl std::str::FromStr for Theme {
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct ThemeContext {
     /// Primary background color
-    pub bg_color: Option<String>,
+    pub bg_color:                  Option<String>,
     /// Primary text color
-    pub text_color: Option<String>,
+    pub text_color:                Option<String>,
     /// Hint text color
-    pub hint_color: Option<String>,
+    pub hint_color:                Option<String>,
     /// Link color
-    pub link_color: Option<String>,
+    pub link_color:                Option<String>,
     /// Button background color
-    pub button_color: Option<String>,
+    pub button_color:              Option<String>,
     /// Button text color
-    pub button_text_color: Option<String>,
+    pub button_text_color:         Option<String>,
     /// Secondary background color
-    pub secondary_bg_color: Option<String>,
+    pub secondary_bg_color:        Option<String>,
     /// Header background color
-    pub header_bg_color: Option<String>,
+    pub header_bg_color:           Option<String>,
     /// Bottom bar background color
-    pub bottom_bar_bg_color: Option<String>,
+    pub bottom_bar_bg_color:       Option<String>,
     /// Accent text color
-    pub accent_text_color: Option<String>,
+    pub accent_text_color:         Option<String>,
     /// Section background color
-    pub section_bg_color: Option<String>,
+    pub section_bg_color:          Option<String>,
     /// Section header text color
     pub section_header_text_color: Option<String>,
     /// Section separator color
-    pub section_separator_color: Option<String>,
+    pub section_separator_color:   Option<String>,
     /// Subtitle text color
-    pub subtitle_text_color: Option<String>,
+    pub subtitle_text_color:       Option<String>,
     /// Destructive action text color
-    pub destructive_text_color: Option<String>,
+    pub destructive_text_color:    Option<String>
 }
 
 impl ThemeContext {
@@ -544,16 +544,16 @@ impl ThemeContext {
         push("section-bg-color", self.section_bg_color.as_ref());
         push(
             "section-header-text-color",
-            self.section_header_text_color.as_ref(),
+            self.section_header_text_color.as_ref()
         );
         push(
             "section-separator-color",
-            self.section_separator_color.as_ref(),
+            self.section_separator_color.as_ref()
         );
         push("subtitle-text-color", self.subtitle_text_color.as_ref());
         push(
             "destructive-text-color",
-            self.destructive_text_color.as_ref(),
+            self.destructive_text_color.as_ref()
         );
 
         vars

@@ -1,12 +1,12 @@
 #[derive(Debug, Clone)]
 pub struct FileInput {
-    label: String,
+    label: String
 }
 
 impl FileInput {
     pub fn new() -> Self {
         Self {
-            label: "Attach file".to_string(),
+            label: "Attach file".to_string()
         }
     }
 
@@ -26,5 +26,11 @@ impl FileInput {
 </div>"#,
             self.label
         )
+    }
+}
+
+impl Default for FileInput {
+    fn default() -> Self {
+        Self::new()
     }
 }

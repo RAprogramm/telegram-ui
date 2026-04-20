@@ -5,18 +5,49 @@
 
 use std::fmt;
 
+use crate::helpers::escape_html;
+
+/// Backdrop component
 #[derive(Clone, Debug)]
 pub struct Backdrop {
-    visible: bool,
+    visible:  bool,
+    children: String
 }
 
 impl Backdrop {
     pub fn new() -> Self {
-        Self { visible: false }
+        Self {
+            visible:  false,
+            children: String::new()
+        }
     }
 
-    pub fn visible(&self) -> bool {
+    pub fn visible(mut self, visible: bool) -> Self {
+        self.visible = visible;
+        self
+    }
+
+    pub fn children(mut self, children: &str) -> Self {
+        self.children = children.to_string();
+        self
+    }
+
+    pub fn is_visible(&self) -> bool {
         self.visible
+    }
+
+    pub fn render(&self) -> String {
+        let class = if self.visible {
+            "telegram-ui-backdrop telegram-ui-backdrop--visible"
+        } else {
+            "telegram-ui-backdrop"
+        };
+
+        format!(
+            "<div class=\"{}\">{}</div>",
+            class,
+            escape_html(&self.children)
+        )
     }
 }
 
@@ -39,6 +70,20 @@ mod tests {
     #[test]
     fn test_backdrop_default() {
         let backdrop = Backdrop::new();
-        assert!(!backdrop.visible());
+        assert!(!backdrop.is_visible());
+    }
+
+    #[test]
+    fn test_backdrop_builder() {
+        let backdrop = Backdrop::new().visible(true).children("<div>Content</div>");
+
+        assert!(backdrop.is_visible());
+    }
+
+    #[test]
+    fn test_backdrop_render() {
+        let backdrop = Backdrop::new().visible(true).children("<div>Test</div>");
+        let html = backdrop.render();
+        assert!(html.contains("telegram-ui-backdrop--visible"));
     }
 }

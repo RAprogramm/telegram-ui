@@ -1,3 +1,4 @@
+pub mod all_components;
 pub mod blocks_new;
 pub mod buttons;
 pub mod feedback;
@@ -10,6 +11,7 @@ pub mod service;
 pub mod service_new;
 pub mod typography;
 
+pub use all_components::AllComponents;
 pub use blocks_new::BlocksNew;
 pub use buttons::Buttons;
 pub use feedback::Feedback;

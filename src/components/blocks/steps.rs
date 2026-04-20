@@ -16,24 +16,25 @@ pub enum StepState {
     /// Step is completed
     Completed,
     /// Step failed
-    Failed,
+    Failed
 }
 
 /// Individual step
 #[derive(Debug, Clone)]
 pub struct Step {
-    number: usize,
-    title: String,
+    number:   usize,
+    title:    String,
     subtitle: Option<String>,
-    state: StepState,
+    #[expect(dead_code)]
+    state:    StepState
 }
 
 /// Steps component - a vertical or horizontal step indicator
 #[derive(Debug, Clone)]
 pub struct Steps {
-    steps: Vec<Step>,
-    current: usize,
-    orientation: Orientation,
+    steps:       Vec<Step>,
+    current:     usize,
+    orientation: Orientation
 }
 
 /// Steps orientation
@@ -43,16 +44,16 @@ pub enum Orientation {
     /// Vertical orientation
     Vertical,
     /// Horizontal orientation
-    Horizontal,
+    Horizontal
 }
 
 impl Steps {
     /// Create a new Steps
     pub fn new() -> Self {
         Self {
-            steps: Vec::new(),
-            current: 0,
-            orientation: Orientation::Vertical,
+            steps:       Vec::new(),
+            current:     0,
+            orientation: Orientation::Vertical
         }
     }
 
@@ -62,7 +63,7 @@ impl Steps {
             number,
             title: title.to_string(),
             subtitle: None,
-            state: StepState::Pending,
+            state: StepState::Pending
         });
         self
     }
@@ -91,7 +92,7 @@ impl Steps {
     pub fn render(&self) -> String {
         let orient_class = match self.orientation {
             Orientation::Vertical => "steps--vertical",
-            Orientation::Horizontal => "steps--horizontal",
+            Orientation::Horizontal => "steps--horizontal"
         };
 
         let mut html = format!(

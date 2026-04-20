@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Caption, Headline, Subtitle, Text, Title};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -40,11 +39,5 @@ impl Typography {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Typography {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

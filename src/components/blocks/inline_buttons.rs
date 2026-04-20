@@ -1,29 +1,27 @@
 #[derive(Debug, Clone)]
 pub struct InlineButtons {
-    mode: InlineButtonsMode,
-    ios: bool,
-    items: Vec<String>,
+    mode:  InlineButtonsMode,
+    ios:   bool,
+    items: Vec<String>
 }
 
 #[derive(Debug, Clone, Default)]
 pub enum InlineButtonsMode {
     #[default]
-    Default,
+    Default
 }
 
 impl InlineButtons {
     pub fn new() -> Self {
         Self {
-            mode: InlineButtonsMode::Default,
-            ios: false,
-            items: Vec::new(),
+            mode:  InlineButtonsMode::Default,
+            ios:   false,
+            items: Vec::new()
         }
     }
 
-    pub fn mode(mut self, mode: &str) -> Self {
-        self.mode = match mode {
-            _ => InlineButtonsMode::Default,
-        };
+    pub fn mode(mut self, _mode: &str) -> Self {
+        self.mode = InlineButtonsMode::Default;
         self
     }
 
@@ -45,5 +43,11 @@ impl InlineButtons {
             ios_class,
             self.items.join("")
         )
+    }
+}
+
+impl Default for InlineButtons {
+    fn default() -> Self {
+        Self::new()
     }
 }

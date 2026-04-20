@@ -1186,3 +1186,317 @@
   border: 0;
   opacity: 0;
 }
+
+/* ==================== TabBar Styles ==================== */
+.tgui-tab-bar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tgui-tab-bar__tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tgui-tab-bar--scrollable .tgui-tab-bar__tabs {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tgui-tab-bar--scrollable .tgui-tab-bar__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tgui-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease-out;
+  position: relative;
+}
+
+.tgui-tab:active {
+  opacity: 0.65;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tgui-tab:hover {
+    opacity: 0.85;
+  }
+}
+
+.tgui-tab--active {
+  color: var(--tg-theme-accent-text-color, #2481cc);
+}
+
+.tgui-tab--disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.tgui-tab__icon {
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.tgui-tab__label {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.tgui-tab-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: var(--tg-theme-destructive-text-color, #e53935);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ==================== SegmentedControl Styles ==================== */
+.tgui-segmented-control {
+  display: flex;
+  width: 100%;
+  background: var(--tgui-secondary-bg, var(--tg-theme-secondary-bg-color, #f4f4f5));
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.tgui-segmented-control:disabled {
+  opacity: 0.5;
+}
+
+.tgui-segmented-control__container {
+  display: flex;
+  width: 100%;
+}
+
+.tgui-segment {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+  position: relative;
+  min-width: 0;
+}
+
+.tgui-segment:active {
+  opacity: 0.85;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tgui-segment:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.tgui-segment--active {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tgui-segment--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tgui-segment--first {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.tgui-segment--last {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.tgui-segment--first.tgui-segment--active {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tgui-segment--last.tgui-segment--active {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tgui-segmented-control--s .tgui-segment {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.tgui-segmented-control--m .tgui-segment {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.tgui-segmented-control--l .tgui-segment {
+  padding: 10px 14px;
+  font-size: 16px;
+}
+
+.tgui-segment__icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.tgui-segment__label {
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.tgui-segmented-control--stretched {
+  display: flex;
+}
+
+.tgui-segmented-control--stretched .tgui-segment {
+  flex: 1;
+  min-width: auto;
+}
+
+/* ==================== Layout Helper Styles ==================== */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.link-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.link-card {
+  display: block;
+  padding: 16px;
+  background: var(--tg-theme-secondary-bg-color);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--tg-theme-text-color);
+  transition: background-color 0.15s ease-out;
+}
+
+.link-card:active {
+  background: var(--tg-theme-bg-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-card:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.component-section {
+  margin-bottom: 32px;
+}
+
+.component-section h2 {
+  margin-bottom: 16px;
+  color: var(--tg-theme-text-color);
+}
+
+.page {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  margin-bottom: 12px;
+  font-size: 28px;
+  color: var(--tg-theme-text-color);
+}
+
+.page h2 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  color: var(--tg-theme-text-color);
+}
+
+.page .lead {
+  color: var(--tg-theme-hint-color);
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.page .link-grid {
+  margin: 24px 0;
+}
+
+.app-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--tg-theme-bg-color);
+  border-top: 1px solid var(--tg-theme-section-separator-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 12px 0;
+  z-index: 100;
+}
+
+.app-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: var(--tg-theme-hint-color);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+}
+
+.app-nav .nav-item.active {
+  color: var(--tg-theme-accent-text-color);
+}
+
+.app-nav .nav-item:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .app-nav .nav-item:hover {
+    color: var(--tg-theme-text-color);
+  }
+}
+
+#page-content {
+  padding-bottom: 60px;
+}

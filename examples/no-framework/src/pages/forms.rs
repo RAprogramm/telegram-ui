@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Checkbox, Radio, Switch};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -55,11 +54,5 @@ impl Forms {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Forms {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

@@ -1,12 +1,12 @@
 #[derive(Debug, Clone)]
 pub struct IconContainer {
-    children: String,
+    children: String
 }
 
 impl IconContainer {
     pub fn new() -> Self {
         Self {
-            children: String::new(),
+            children: String::new()
         }
     }
 
@@ -20,5 +20,11 @@ impl IconContainer {
             "<div class=\"telegram-ui-icon-container\">{}</div>",
             self.children
         )
+    }
+}
+
+impl Default for IconContainer {
+    fn default() -> Self {
+        Self::new()
     }
 }

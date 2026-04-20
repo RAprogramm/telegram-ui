@@ -1,16 +1,16 @@
 #[derive(Debug, Clone)]
 pub struct Rating {
     max_stars: usize,
-    value: f64,
-    size: String,
+    value:     f64,
+    size:      String
 }
 
 impl Rating {
     pub fn new() -> Self {
         Self {
             max_stars: 5,
-            value: 0.0,
-            size: "m".to_string(),
+            value:     0.0,
+            size:      "m".to_string()
         }
     }
 
@@ -45,5 +45,11 @@ impl Rating {
             "<div class=\"telegram-ui-rating rating--{}\">{}</div>",
             self.size, stars
         )
+    }
+}
+
+impl Default for Rating {
+    fn default() -> Self {
+        Self::new()
     }
 }

@@ -14,7 +14,7 @@ pub mod visually_hidden;
 
 // Re-export components
 pub use avatar::Avatar;
-pub use badge::Badge;
+pub use badge::{Badge, BadgeMode, BadgeType};
 pub use divider::Divider;
 pub use horizontal_scroll::HorizontalScroll;
 pub use progress::Progress;

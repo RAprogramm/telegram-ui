@@ -1,20 +1,20 @@
 #[derive(Debug, Clone)]
 pub struct Snackbar {
     message: String,
-    action: Option<String>,
-    before: Option<String>,
-    after: Option<String>,
-    ios: bool,
+    action:  Option<String>,
+    before:  Option<String>,
+    after:   Option<String>,
+    ios:     bool
 }
 
 impl Snackbar {
     pub fn new() -> Self {
         Self {
             message: String::new(),
-            action: None,
-            before: None,
-            after: None,
-            ios: false,
+            action:  None,
+            before:  None,
+            after:   None,
+            ios:     false
         }
     }
 
@@ -72,5 +72,11 @@ impl Snackbar {
 </div>"#,
             ios_class, before_html, self.message, action_html, after_html
         )
+    }
+}
+
+impl Default for Snackbar {
+    fn default() -> Self {
+        Self::new()
     }
 }

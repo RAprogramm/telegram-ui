@@ -1,7 +1,7 @@
 #[derive(Debug, Clone)]
 pub struct CircularProgress {
-    size: CircularProgressSize,
-    progress: f64,
+    size:     CircularProgressSize,
+    progress: f64
 }
 
 #[derive(Debug, Clone, Default)]
@@ -9,14 +9,14 @@ pub enum CircularProgressSize {
     #[default]
     Medium,
     Small,
-    Large,
+    Large
 }
 
 impl CircularProgress {
     pub fn new() -> Self {
         Self {
-            size: CircularProgressSize::Medium,
-            progress: 0.0,
+            size:     CircularProgressSize::Medium,
+            progress: 0.0
         }
     }
 
@@ -24,7 +24,7 @@ impl CircularProgress {
         self.size = match size {
             "small" => CircularProgressSize::Small,
             "large" => CircularProgressSize::Large,
-            _ => CircularProgressSize::Medium,
+            _ => CircularProgressSize::Medium
         };
         self
     }
@@ -38,7 +38,7 @@ impl CircularProgress {
         let (size, stroke_width) = match self.size {
             CircularProgressSize::Small => (24.0, 3.0),
             CircularProgressSize::Medium => (32.0, 4.0),
-            CircularProgressSize::Large => (48.0, 6.0),
+            CircularProgressSize::Large => (48.0, 6.0)
         };
 
         let radius = (size - stroke_width) / 2.0;
@@ -63,5 +63,11 @@ impl CircularProgress {
             circumference as i32,
             dash_offset as i32
         )
+    }
+}
+
+impl Default for CircularProgress {
+    fn default() -> Self {
+        Self::new()
     }
 }

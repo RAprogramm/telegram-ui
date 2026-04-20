@@ -1,10 +1,10 @@
 #[derive(Debug, Clone)]
 pub struct Chip {
-    mode: ChipMode,
-    value: String,
+    mode:     ChipMode,
+    value:    String,
     selected: bool,
-    before: Option<String>,
-    after: Option<String>,
+    before:   Option<String>,
+    after:    Option<String>
 }
 
 #[derive(Debug, Clone, Default)]
@@ -12,17 +12,17 @@ pub enum ChipMode {
     #[default]
     Elevated,
     Mono,
-    Outline,
+    Outline
 }
 
 impl Chip {
     pub fn new(value: &str) -> Self {
         Self {
-            mode: ChipMode::Elevated,
-            value: value.to_string(),
+            mode:     ChipMode::Elevated,
+            value:    value.to_string(),
             selected: false,
-            before: None,
-            after: None,
+            before:   None,
+            after:    None
         }
     }
 
@@ -30,7 +30,7 @@ impl Chip {
         self.mode = match mode {
             "mono" => ChipMode::Mono,
             "outline" => ChipMode::Outline,
-            _ => ChipMode::Elevated,
+            _ => ChipMode::Elevated
         };
         self
     }
@@ -54,7 +54,7 @@ impl Chip {
         let mode_class = match self.mode {
             ChipMode::Elevated => "chip--elevated",
             ChipMode::Mono => "chip--mono",
-            ChipMode::Outline => "chip--outline",
+            ChipMode::Outline => "chip--outline"
         };
 
         let before_html = self

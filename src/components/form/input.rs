@@ -9,21 +9,21 @@ use crate::error::{Result, ValidationError};
 
 #[derive(Clone, Debug)]
 pub struct Input {
-    value: String,
+    value:       String,
     placeholder: String,
-    required: bool,
-    min_length: Option<usize>,
-    max_length: Option<usize>,
+    required:    bool,
+    min_length:  Option<usize>,
+    max_length:  Option<usize>
 }
 
 impl Input {
     pub fn new() -> Self {
         Self {
-            value: String::new(),
+            value:       String::new(),
             placeholder: String::new(),
-            required: false,
-            min_length: None,
-            max_length: None,
+            required:    false,
+            min_length:  None,
+            max_length:  None
         }
     }
 

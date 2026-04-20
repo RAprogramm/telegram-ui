@@ -1,12 +1,12 @@
 #[derive(Debug, Clone)]
 pub struct HorizontalScroll {
-    children: String,
+    children: String
 }
 
 impl HorizontalScroll {
     pub fn new() -> Self {
         Self {
-            children: String::new(),
+            children: String::new()
         }
     }
 
@@ -20,5 +20,11 @@ impl HorizontalScroll {
             "<div class=\"telegram-ui-horizontal-scroll\">{}</div>",
             self.children
         )
+    }
+}
+
+impl Default for HorizontalScroll {
+    fn default() -> Self {
+        Self::new()
     }
 }

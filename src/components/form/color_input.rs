@@ -1,14 +1,14 @@
 #[derive(Debug, Clone)]
 pub struct ColorInput {
     value: String,
-    text: Option<String>,
+    text:  Option<String>
 }
 
 impl ColorInput {
     pub fn new() -> Self {
         Self {
             value: String::new(),
-            text: None,
+            text:  None
         }
     }
 
@@ -38,5 +38,11 @@ impl ColorInput {
 </div>"#,
             self.value, text_html
         )
+    }
+}
+
+impl Default for ColorInput {
+    fn default() -> Self {
+        Self::new()
     }
 }

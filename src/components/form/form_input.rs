@@ -1,22 +1,22 @@
 #[derive(Debug, Clone)]
 pub struct FormInput {
-    header: Option<String>,
-    status: String,
-    before: Option<String>,
-    after: Option<String>,
+    header:   Option<String>,
+    status:   String,
+    before:   Option<String>,
+    after:    Option<String>,
     disabled: bool,
-    children: String,
+    children: String
 }
 
 impl FormInput {
     pub fn new() -> Self {
         Self {
-            header: None,
-            status: "default".to_string(),
-            before: None,
-            after: None,
+            header:   None,
+            status:   "default".to_string(),
+            before:   None,
+            after:    None,
             disabled: false,
-            children: String::new(),
+            children: String::new()
         }
     }
 
@@ -78,12 +78,13 @@ impl FormInput {
 
         format!(
             "<div class=\"telegram-ui-form-input {} {}\">{}<label class=\"form-input-body\">{}{}{}</label></div>",
-            status_class,
-            disabled_class,
-            header_html,
-            before_html,
-            self.children,
-            after_html
+            status_class, disabled_class, header_html, before_html, self.children, after_html
         )
+    }
+}
+
+impl Default for FormInput {
+    fn default() -> Self {
+        Self::new()
     }
 }

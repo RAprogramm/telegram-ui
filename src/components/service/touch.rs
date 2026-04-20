@@ -1,12 +1,12 @@
 #[derive(Debug, Clone)]
 pub struct Touch {
-    children: String,
+    children: String
 }
 
 impl Touch {
     pub fn new() -> Self {
         Self {
-            children: String::new(),
+            children: String::new()
         }
     }
 
@@ -17,5 +17,11 @@ impl Touch {
 
     pub fn render(&self) -> String {
         format!("<div class=\"telegram-ui-touch\">{}</div>", self.children)
+    }
+}
+
+impl Default for Touch {
+    fn default() -> Self {
+        Self::new()
     }
 }

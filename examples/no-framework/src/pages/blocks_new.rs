@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Chip, CircularProgress, Spoiler};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -87,11 +86,5 @@ impl BlocksNew {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for BlocksNew {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

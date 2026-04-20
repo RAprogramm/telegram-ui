@@ -11,8 +11,8 @@ use crate::helpers::escape_html;
 #[derive(Debug, Clone)]
 pub struct Accordion {
     expanded: bool,
-    summary: String,
-    content: String,
+    summary:  String,
+    content:  String
 }
 
 impl Accordion {
@@ -20,8 +20,8 @@ impl Accordion {
     pub fn new() -> Self {
         Self {
             expanded: false,
-            summary: String::new(),
-            content: String::new(),
+            summary:  String::new(),
+            content:  String::new()
         }
     }
 

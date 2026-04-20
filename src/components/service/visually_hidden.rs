@@ -1,12 +1,12 @@
 #[derive(Debug, Clone)]
 pub struct VisuallyHidden {
-    children: String,
+    children: String
 }
 
 impl VisuallyHidden {
     pub fn new() -> Self {
         Self {
-            children: String::new(),
+            children: String::new()
         }
     }
 
@@ -20,5 +20,11 @@ impl VisuallyHidden {
             "<div class=\"telegram-ui-visually-hidden\">{}</div>",
             self.children
         )
+    }
+}
+
+impl Default for VisuallyHidden {
+    fn default() -> Self {
+        Self::new()
     }
 }

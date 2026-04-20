@@ -16,26 +16,26 @@ pub enum SectionHeader {
     /// Medium header
     Medium,
     /// Small header
-    Small,
+    Small
 }
 
 /// Section component - a container with optional header
 #[derive(Debug, Clone)]
 pub struct Section {
-    header: Option<String>,
+    header:     Option<String>,
     header_var: SectionHeader,
-    footer: Option<String>,
-    content: String,
+    footer:     Option<String>,
+    content:    String
 }
 
 impl Section {
     /// Create a new Section
     pub fn new() -> Self {
         Self {
-            header: None,
+            header:     None,
             header_var: SectionHeader::Large,
-            footer: None,
-            content: String::new(),
+            footer:     None,
+            content:    String::new()
         }
     }
 
@@ -68,7 +68,7 @@ impl Section {
         let header_class = match self.header_var {
             SectionHeader::Large => "section-header--large",
             SectionHeader::Medium => "section-header--medium",
-            SectionHeader::Small => "section-header--small",
+            SectionHeader::Small => "section-header--small"
         };
 
         let mut html = String::from("<div class=\"telegram-ui-section\">");

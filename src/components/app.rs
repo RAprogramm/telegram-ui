@@ -29,13 +29,13 @@ use crate::{Platform, Theme, ThemeContext, helpers::escape_html};
 /// ```
 #[derive(Debug, Default)]
 pub struct AppRoot {
-    platform: Option<Platform>,
-    theme: Option<Theme>,
+    platform:      Option<Platform>,
+    theme:         Option<Theme>,
     theme_context: Option<ThemeContext>,
-    class: Option<String>,
-    children: Option<String>,
-    id: Option<String>,
-    style: Option<String>,
+    class:         Option<String>,
+    children:      Option<String>,
+    id:            Option<String>,
+    style:         Option<String>
 }
 
 impl AppRoot {
@@ -180,7 +180,7 @@ impl AppRoot {
         match platform {
             Platform::Ios => classes.push("tgui-platform-ios".to_string()),
             Platform::Android => classes.push("tgui-platform-android".to_string()),
-            Platform::Base => classes.push("tgui-platform-base".to_string()),
+            Platform::Base => classes.push("tgui-platform-base".to_string())
         }
 
         // Add theme class
@@ -211,19 +211,45 @@ impl AppRoot {
         let class = self.build_class();
         html.push_str(&format!(" class=\"{}\"", escape_html(&class)));
 
+        // Collect all style properties
+        let mut style_attrs = String::new();
+
+        // Apply theme context CSS variables as style if provided
+        if let Some(ref theme_context) = self.theme_context {
+            for (key, value) in theme_context.css_vars() {
+                if !style_attrs.is_empty() {
+                    style_attrs.push(' ');
+                }
+                style_attrs.push_str(&format!("{}: {}", key, value));
+            }
+        }
+
+        // Add custom style if provided
+        if let Some(ref custom_style) = self.style {
+            if !style_attrs.is_empty() {
+                style_attrs.push(' ');
+            }
+            style_attrs.push_str(custom_style);
+        }
+
+        // Add safe-area-inset styles for iOS
+        let platform = self.get_platform();
+        if platform == Platform::Ios {
+            style_attrs.push_str(" padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);");
+        }
+
         // Style attribute
-        if let Some(ref style) = self.style {
-            html.push_str(&format!(" style=\"{}\"", escape_html(style)));
+        if !style_attrs.is_empty() {
+            html.push_str(&format!(" style=\"{}\"", escape_html(&style_attrs)));
         }
 
         // Data attributes for platform
-        let platform = self.get_platform();
         html.push_str(&format!(
             " data-platform=\"{}\"",
             match platform {
                 Platform::Ios => "ios",
                 Platform::Android => "android",
-                Platform::Base => "base",
+                Platform::Base => "base"
             }
         ));
 
@@ -234,37 +260,23 @@ impl AppRoot {
             match theme {
                 Theme::Light => "light",
                 Theme::Dark => "dark",
-                Theme::Auto => "auto",
+                Theme::Auto => "auto"
             }
         ));
 
-        // Apply theme context CSS variables as style if provided
-        if let Some(ref theme_context) = self.theme_context {
-            let css_vars = theme_context.css_vars();
-            if !css_vars.is_empty() {
-                let mut style_attrs = self.style.as_deref().unwrap_or("").to_string();
-                for (key, value) in css_vars {
-                    if !style_attrs.is_empty() {
-                        style_attrs.push(' ');
-                    }
-                    style_attrs.push_str(&format!("{}: {}", key, value));
-                }
-                if !style_attrs.is_empty() {
-                    html.push_str(&format!(" style=\"{}\"", escape_html(&style_attrs)));
-                }
-            }
-        } else if let Some(ref style) = self.style {
-            html.push_str(&format!(" style=\"{}\"", escape_html(style)));
-        }
-
         html.push('>');
 
-        // Children
+        // Add AppRootContext.Provider equivalent as a comment
+        // In Rust we use HTML data attributes instead of React Context
+        // <AppRootContext.Provider value={contextValue}>
+
+        // Children (raw HTML, not escaped)
         if let Some(ref children) = self.children {
             html.push_str(&escape_html(children));
         }
 
-        // Close tag
+        // </AppRootContext.Provider> - end of context provider
+        // </div>
         html.push_str("</div>");
 
         html

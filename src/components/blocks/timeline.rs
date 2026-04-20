@@ -1,14 +1,14 @@
 #[derive(Debug, Clone)]
 pub struct Timeline {
     horizontal: bool,
-    items: Vec<String>,
+    items:      Vec<String>
 }
 
 impl Timeline {
     pub fn new() -> Self {
         Self {
             horizontal: false,
-            items: Vec::new(),
+            items:      Vec::new()
         }
     }
 
@@ -34,5 +34,11 @@ impl Timeline {
             orientation_class,
             self.items.join("")
         )
+    }
+}
+
+impl Default for Timeline {
+    fn default() -> Self {
+        Self::new()
     }
 }

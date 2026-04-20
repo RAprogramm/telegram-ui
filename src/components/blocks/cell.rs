@@ -11,22 +11,22 @@ use crate::helpers::escape_html;
 /// Cell component
 #[derive(Debug, Clone)]
 pub struct Cell {
-    ios: bool,
+    ios:     bool,
     hovered: bool,
-    before: Option<String>,
-    after: Option<String>,
-    middle: String,
+    before:  Option<String>,
+    after:   Option<String>,
+    middle:  String
 }
 
 impl Cell {
     /// Creates a new Cell with default settings
     pub fn new() -> Self {
         Self {
-            ios: false,
+            ios:     false,
             hovered: false,
-            before: None,
-            after: None,
-            middle: String::new(),
+            before:  None,
+            after:   None,
+            middle:  String::new()
         }
     }
 
@@ -90,11 +90,11 @@ impl Cell {
         let mut classes = vec!["telegram-ui-cell"];
 
         if self.ios {
-            classes.push("--ios");
+            classes.push("telegram-ui-cell--ios");
         }
 
         if self.hovered {
-            classes.push("--hovered");
+            classes.push("telegram-ui-cell--hovered");
         }
 
         let class_str = classes.join(" ");
@@ -192,13 +192,13 @@ mod tests {
     fn test_cell_ios() {
         let cell = Cell::new().ios(true);
         let html = cell.render();
-        assert!(html.contains("--ios"));
+        assert!(html.contains("telegram-ui-cell--ios"));
     }
 
     #[test]
     fn test_cell_hovered() {
         let cell = Cell::new().hovered(true);
         let html = cell.render();
-        assert!(html.contains("--hovered"));
+        assert!(html.contains("telegram-ui-cell--hovered"));
     }
 }

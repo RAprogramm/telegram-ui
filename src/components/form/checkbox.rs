@@ -5,18 +5,18 @@
 
 #[derive(Debug, Clone)]
 pub struct Checkbox {
-    checked: bool,
+    checked:  bool,
     disabled: bool,
-    label: Option<String>,
+    label:    Option<String>
 }
 
 impl Checkbox {
     /// Creates a new Checkbox with default settings
     pub fn new() -> Self {
         Self {
-            checked: false,
+            checked:  false,
             disabled: false,
-            label: None,
+            label:    None
         }
     }
 
@@ -48,7 +48,7 @@ impl Checkbox {
 
         html.push_str(
             ">
-            <input type=\"checkbox\"",
+            <input type=\"checkbox\""
         );
 
         if self.checked {

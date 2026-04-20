@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{HorizontalScroll, Tappable, VisuallyHidden};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -61,11 +60,5 @@ impl ServiceNew {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for ServiceNew {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

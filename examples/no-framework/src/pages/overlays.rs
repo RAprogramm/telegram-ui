@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Button, ButtonMode, ButtonSize};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -55,11 +54,5 @@ impl Overlays {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Overlays {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

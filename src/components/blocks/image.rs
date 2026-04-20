@@ -16,32 +16,32 @@ pub enum ImageFit {
     /// Stretch to fill
     Fill,
     /// Use none
-    None,
+    None
 }
 
 /// Image component with lazy loading support
 #[derive(Debug, Clone)]
 pub struct Image {
-    src: String,
-    alt: String,
-    width: Option<String>,
-    height: Option<String>,
-    fit: ImageFit,
-    lazy: bool,
-    rounded: bool,
+    src:     String,
+    alt:     String,
+    width:   Option<String>,
+    height:  Option<String>,
+    fit:     ImageFit,
+    lazy:    bool,
+    rounded: bool
 }
 
 impl Image {
     /// Create a new Image
     pub fn new(src: &str) -> Self {
         Self {
-            src: src.to_string(),
-            alt: String::new(),
-            width: None,
-            height: None,
-            fit: ImageFit::Cover,
-            lazy: true,
-            rounded: false,
+            src:     src.to_string(),
+            alt:     String::new(),
+            width:   None,
+            height:  None,
+            fit:     ImageFit::Cover,
+            lazy:    true,
+            rounded: false
         }
     }
 
@@ -87,7 +87,7 @@ impl Image {
             ImageFit::Cover => "image--cover",
             ImageFit::Contain => "image--contain",
             ImageFit::Fill => "image--fill",
-            ImageFit::None => "image--none",
+            ImageFit::None => "image--none"
         };
 
         let rounded_class = if self.rounded { " image--rounded" } else { "" };

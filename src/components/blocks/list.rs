@@ -9,16 +9,16 @@ use std::fmt;
 /// List component
 #[derive(Debug, Clone)]
 pub struct List {
-    ios: bool,
-    cells: Vec<String>,
+    ios:   bool,
+    cells: Vec<String>
 }
 
 impl List {
     /// Creates a new List with default settings
     pub fn new() -> Self {
         Self {
-            ios: false,
-            cells: Vec::new(),
+            ios:   false,
+            cells: Vec::new()
         }
     }
 
@@ -67,7 +67,7 @@ impl List {
         let mut classes = vec!["telegram-ui-list"];
 
         if self.ios {
-            classes.push("--ios");
+            classes.push("telegram-ui-list--ios");
         }
 
         let class_str = classes.join(" ");
@@ -131,6 +131,6 @@ mod tests {
     fn test_list_ios() {
         let list = List::new().ios(true);
         let html = list.render();
-        assert!(html.contains("--ios"));
+        assert!(html.contains("telegram-ui-list--ios"));
     }
 }

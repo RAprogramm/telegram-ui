@@ -12,10 +12,6 @@ documentation = "https://docs.rs/telegram-ui"
 homepage = "https://github.com/RAprogramm/telegram-ui"
 
 [dependencies]
-# Core dependency: Telegram WebApp SDK (required for UI functionality)
-telegram-webapp-sdk = { path = "../telegram-webapp-sdk", features = ["macros"] }
-
-# WebAssembly bindings
 wasm-bindgen = "0.2"
 web-sys = { version = "0.3", features = [
   "Navigator",
@@ -26,18 +22,13 @@ web-sys = { version = "0.3", features = [
   "Node",
   "EventTarget",
 ] }
-
-# Optional framework support (moved to examples)
 leptos = { version = "0.8", optional = true }
 yew = { version = "0.23", optional = true }
 
 [features]
 default = []
-# Framework-specific features (examples should enable these)
 leptos = ["dep:leptos"]
 yew = ["dep:yew"]
-# WebApp SDK integration (required for Telegram WebApp functionality)
-webapp-sdk = []
 
 [dev-dependencies]
 wasm-bindgen-test = { version = "0.3" }

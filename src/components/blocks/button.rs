@@ -22,19 +22,19 @@ pub enum ButtonMode {
     /// Outline button
     Outline,
     /// White button
-    White,
+    White
 }
 
 impl ButtonMode {
     /// Convert to CSS class suffix
     pub fn css_class(&self) -> &'static str {
         match self {
-            ButtonMode::Filled => "--filled",
-            ButtonMode::Bezeled => "--bezeled",
-            ButtonMode::Plain => "--plain",
-            ButtonMode::Gray => "--gray",
-            ButtonMode::Outline => "--outline",
-            ButtonMode::White => "--white",
+            ButtonMode::Filled => "telegram-ui-button--filled",
+            ButtonMode::Bezeled => "telegram-ui-button--bezeled",
+            ButtonMode::Plain => "telegram-ui-button--plain",
+            ButtonMode::Gray => "telegram-ui-button--gray",
+            ButtonMode::Outline => "telegram-ui-button--outline",
+            ButtonMode::White => "telegram-ui-button--white"
         }
     }
 }
@@ -48,16 +48,16 @@ pub enum ButtonSize {
     #[default]
     M,
     /// Large size
-    L,
+    L
 }
 
 impl ButtonSize {
     /// Convert to CSS class suffix
     pub fn css_class(&self) -> &'static str {
         match self {
-            ButtonSize::S => "--s",
-            ButtonSize::M => "--m",
-            ButtonSize::L => "--l",
+            ButtonSize::S => "telegram-ui-button--s",
+            ButtonSize::M => "telegram-ui-button--m",
+            ButtonSize::L => "telegram-ui-button--l"
         }
     }
 }
@@ -65,28 +65,28 @@ impl ButtonSize {
 /// Button component
 #[derive(Debug, Clone)]
 pub struct Button {
-    size: ButtonSize,
-    mode: ButtonMode,
-    children: String,
+    size:      ButtonSize,
+    mode:      ButtonMode,
+    children:  String,
     stretched: bool,
-    disabled: bool,
-    loading: bool,
-    before: Option<String>,
-    after: Option<String>,
+    disabled:  bool,
+    loading:   bool,
+    before:    Option<String>,
+    after:     Option<String>
 }
 
 impl Button {
     /// Creates a new Button with default settings
     pub fn new() -> Self {
         Self {
-            size: ButtonSize::M,
-            mode: ButtonMode::Filled,
-            children: String::new(),
+            size:      ButtonSize::M,
+            mode:      ButtonMode::Filled,
+            children:  String::new(),
             stretched: false,
-            disabled: false,
-            loading: false,
-            before: None,
-            after: None,
+            disabled:  false,
+            loading:   false,
+            before:    None,
+            after:     None
         }
     }
 
@@ -101,7 +101,7 @@ impl Button {
         self.size = match size {
             "s" => ButtonSize::S,
             "l" => ButtonSize::L,
-            _ => ButtonSize::M,
+            _ => ButtonSize::M
         };
         self
     }
@@ -120,7 +120,7 @@ impl Button {
             "gray" => ButtonMode::Gray,
             "outline" => ButtonMode::Outline,
             "white" => ButtonMode::White,
-            _ => ButtonMode::Filled,
+            _ => ButtonMode::Filled
         };
         self
     }
@@ -187,21 +187,21 @@ impl Button {
         classes.push(self.mode.css_class());
 
         // Add platform class
-        classes.push("--ios");
+        classes.push("telegram-ui-button--ios");
 
         // Add stretched class
         if self.stretched {
-            classes.push("--stretched");
+            classes.push("telegram-ui-button--stretched");
         }
 
         // Add loading class
         if self.loading {
-            classes.push("--loading");
+            classes.push("telegram-ui-button--loading");
         }
 
         // Add disabled class
         if self.disabled {
-            classes.push("--disabled");
+            classes.push("telegram-ui-button--disabled");
         }
 
         let class_str = classes.join(" ");
@@ -243,7 +243,7 @@ impl Button {
         let size = match self.size {
             ButtonSize::S => "s",
             ButtonSize::M => "m",
-            ButtonSize::L => "l",
+            ButtonSize::L => "l"
         };
         format!(
             "<div class=\"telegram-ui-spinner telegram-ui-spinner--{}\"></div>",
@@ -297,8 +297,8 @@ mod tests {
 
         let html = button.render();
         assert!(html.contains("telegram-ui-button"));
-        assert!(html.contains("--m"));
-        assert!(html.contains("--filled"));
+        assert!(html.contains("telegram-ui-button--m"));
+        assert!(html.contains("telegram-ui-button--filled"));
         assert!(html.contains("Submit"));
     }
 

@@ -5,16 +5,16 @@
 
 #[derive(Debug, Clone)]
 pub struct Switch {
-    checked: bool,
-    disabled: bool,
+    checked:  bool,
+    disabled: bool
 }
 
 impl Switch {
     /// Creates a new Switch with default settings
     pub fn new() -> Self {
         Self {
-            checked: false,
-            disabled: false,
+            checked:  false,
+            disabled: false
         }
     }
 
@@ -44,7 +44,7 @@ impl Switch {
 
         html.push_str(
             ">
-            <input type=\"checkbox\" class=\"telegram-ui-switch-input\"",
+            <input type=\"checkbox\" class=\"telegram-ui-switch-input\""
         );
 
         if self.checked {
@@ -59,7 +59,7 @@ impl Switch {
             "/>
             <span class=\"telegram-ui-switch-track\"></span>
             <span class=\"telegram-ui-switch-thumb\"></span>
-        </div>",
+        </div>"
         );
         html
     }

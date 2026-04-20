@@ -9,15 +9,15 @@ use crate::helpers::escape_html;
 
 #[derive(Clone, Debug)]
 pub struct Text {
-    text: String,
-    color: String,
+    text:  String,
+    color: String
 }
 
 impl Text {
     pub fn new() -> Self {
         Self {
-            text: String::new(),
-            color: "#000000".to_string(),
+            text:  String::new(),
+            color: "#000000".to_string()
         }
     }
 

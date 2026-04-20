@@ -1,4 +1,3 @@
-use crate::Page;
 use telegram_ui::{Button, ButtonMode, ButtonSize};
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
@@ -34,23 +33,17 @@ impl Home {
         // Navigation cards
         html.push_str("<h2>Browse Components</h2>\n");
         html.push_str("<div class='link-grid'>\n");
-        html.push_str("<a href='#buttons' class='link-card'>🔘 Buttons</a>\n");
-        html.push_str("<a href='#forms' class='link-card'>📝 Forms</a>\n");
-        html.push_str("<a href='#feedback' class='link-card'>⚡ Feedback</a>\n");
-        html.push_str("<a href='#layout' class='link-card'>📦 Layout</a>\n");
-        html.push_str("<a href='#typography' class='link-card'>📝 Typography</a>\n");
-        html.push_str("<a href='#overlays' class='link-card'>🪟 Overlays</a>\n");
-        html.push_str("<a href='#service' class='link-card'>⚙️ Service</a>\n");
+        html.push_str("<a href='#buttons' class='link-card'>Buttons</a>\n");
+        html.push_str("<a href='#forms' class='link-card'>Forms</a>\n");
+        html.push_str("<a href='#feedback' class='link-card'>Feedback</a>\n");
+        html.push_str("<a href='#layout' class='link-card'>Layout</a>\n");
+        html.push_str("<a href='#typography' class='link-card'>Typography</a>\n");
+        html.push_str("<a href='#overlays' class='link-card'>Overlays</a>\n");
+        html.push_str("<a href='#service' class='link-card'>Service</a>\n");
         html.push_str("</div>\n");
 
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Home {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

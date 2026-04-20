@@ -1,14 +1,14 @@
 #[derive(Debug, Clone)]
 pub struct Spoiler {
-    visible: bool,
-    children: String,
+    visible:  bool,
+    children: String
 }
 
 impl Spoiler {
     pub fn new() -> Self {
         Self {
-            visible: false,
-            children: String::new(),
+            visible:  false,
+            children: String::new()
         }
     }
 
@@ -29,5 +29,11 @@ impl Spoiler {
             "<div class=\"telegram-ui-spoiler {}\">{}</div>",
             visible_class, self.children
         )
+    }
+}
+
+impl Default for Spoiler {
+    fn default() -> Self {
+        Self::new()
     }
 }

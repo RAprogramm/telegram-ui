@@ -8,14 +8,14 @@ use std::fmt;
 #[derive(Clone, Debug)]
 pub struct Container {
     children: Vec<String>,
-    padding: u32,
+    padding:  u32
 }
 
 impl Container {
     pub fn new() -> Self {
         Self {
             children: Vec::new(),
-            padding: 16,
+            padding:  16
         }
     }
 

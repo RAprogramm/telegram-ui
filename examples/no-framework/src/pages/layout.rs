@@ -1,4 +1,3 @@
-use crate::Page;
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
 
@@ -54,11 +53,5 @@ impl Layout {
         section.set_inner_html(&html);
 
         Ok(Self { element: section })
-    }
-}
-
-impl Page for Layout {
-    fn element(&self) -> &HtmlElement {
-        &self.element
     }
 }

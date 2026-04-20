@@ -2,17 +2,6 @@
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! # Telegram UI - Rust Library for Telegram Mini Apps
 //!
-//! Telegram UI is a Rust library for creating Telegram-style interfaces
-//! **exclusively for Telegram Mini Apps**. It provides a comprehensive set of
-//! ready-to-use components that follow Telegram's design language, with full
-//! integration into the Telegram WebApp SDK.
-//!
-//! ## ⚠️ Important: Telegram-Only Library
-//!
-//! This library is designed **exclusively** for Telegram Mini Apps and cannot
-//! be used outside of Telegram. The Telegram WebApp SDK is only available when
-//! your app is running inside Telegram.
-//!
 //! # Features
 //!
 //! - **Button** - Multiple button styles (filled, outline, plain, gray, white)
@@ -156,11 +145,13 @@ pub fn get_styles() -> &'static str {
 
 // Re-export all components
 pub use components::{
-    Accordion, Alert, AlertKind, AppRoot, Avatar, AvatarStack, Backdrop, Banner, BannerType,
-    Blockquote, Button, ButtonMode, ButtonSize, Caption, Card, Cell, Checkbox, Chip, CircularProgress,
-    ColorInput, Column, Container, Divider, EmptyState, FileInput, FormInput, Headline, HorizontalScroll,
-    IconButton, IconContainer, Image, InlineButtons, Input, List, Modal, Multiselect, Multiselectable,
-    Orientation, PinInput, Placeholder, Progress, Rating, Radio, RootRenderer, Row, Select, Selectable,
-    Skeleton, Slider, Snackbar, Spacer, Spinner, SpinnerSize, Spoiler, StepState, Steps, Subtitle,
-    Switch, Tappable, Text, Textarea, Timeline, Title, Toast, Touch, VisuallyHidden,
+    Accordion, Alert, AlertKind, AppRoot, Avatar, AvatarStack, Backdrop, Badge, BadgeMode,
+    BadgeType, Banner, BannerType, Blockquote, Button, ButtonMode, ButtonSize, Caption, Card,
+    Cell, Checkbox, Chip, CircularProgress, ColorInput, Column, Container, Divider, EmptyState,
+    FileInput, FormInput, Headline, HorizontalScroll, IconButton, IconContainer, Image,
+    InlineButtons, Input, List, Modal, Multiselect, Multiselectable, Orientation, PinInput,
+    Placeholder, Progress, Radio, Rating, RootRenderer, Row, Section, SectionHeader, Segment,
+    SegmentedControl, SegmentedControlSize, Select, Selectable, Skeleton, Slider, Snackbar,
+    Spacer, Spinner, SpinnerSize, Spoiler, StepState, Steps, Subtitle, Switch, Tab, TabBar,
+    Tappable, Text, Textarea, Timeline, Title, Toast, Touch, VisuallyHidden
 };

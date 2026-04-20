@@ -1,18 +1,18 @@
 #[derive(Debug, Clone)]
 pub struct Multiselectable {
-    value: String,
-    label: String,
-    checked: bool,
-    disabled: bool,
+    value:    String,
+    label:    String,
+    checked:  bool,
+    disabled: bool
 }
 
 impl Multiselectable {
     pub fn new(value: &str) -> Self {
         Self {
-            value: value.to_string(),
-            label: String::new(),
-            checked: false,
-            disabled: false,
+            value:    value.to_string(),
+            label:    String::new(),
+            checked:  false,
+            disabled: false
         }
     }
 

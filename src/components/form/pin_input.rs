@@ -1,16 +1,16 @@
 #[derive(Debug, Clone)]
 pub struct PinInput {
     length: usize,
-    title: Option<String>,
-    ios: bool,
+    title:  Option<String>,
+    ios:    bool
 }
 
 impl PinInput {
     pub fn new() -> Self {
         Self {
             length: 4,
-            title: None,
-            ios: false,
+            title:  None,
+            ios:    false
         }
     }
 
@@ -46,5 +46,11 @@ impl PinInput {
             "<div class=\"telegram-ui-pin-input {}\"><div class=\"pin-input-header\">{}</div><div class=\"pin-input-cells\">{}</div></div>",
             ios_class, title_html, cells
         )
+    }
+}
+
+impl Default for PinInput {
+    fn default() -> Self {
+        Self::new()
     }
 }

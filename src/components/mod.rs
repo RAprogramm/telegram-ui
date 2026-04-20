@@ -30,21 +30,23 @@ pub use blocks::{
     list::List,
     placeholder::Placeholder,
     section::{Section, SectionHeader},
+    segmented_control::{Segment, SegmentedControl, SegmentedControlSize},
     steps::{Orientation, StepState, Steps},
-    timeline::Timeline,
+    tab_bar::{Tab, TabBar},
+    timeline::Timeline
 };
 pub use feedback::{
-    Alert, AlertKind, CircularProgress, EmptyState, Skeleton, Spinner, SpinnerSize, Spoiler,
+    Alert, AlertKind, CircularProgress, EmptyState, Skeleton, Spinner, SpinnerSize, Spoiler
 };
 pub use form::{
-    Chip, Checkbox, ColorInput, FileInput, FormInput, Input, Multiselect, Multiselectable,
-    PinInput, Rating, Radio, Selectable, Select, Slider, Switch, Textarea,
+    Checkbox, Chip, ColorInput, FileInput, FormInput, Input, Multiselect, Multiselectable,
+    PinInput, Radio, Rating, Select, Selectable, Slider, Switch, Textarea
 };
 pub use layout::{Column, Container, Row, Spacer};
 pub use navigation::{Button as NavButton, Link};
 pub use overlays::{Backdrop, Modal, Snackbar, Toast};
 pub use service::{
-    Avatar, Badge, Divider, HorizontalScroll, Progress, RootRenderer, Tappable, Touch,
-    VisuallyHidden,
+    Avatar, Badge, BadgeMode, BadgeType, Divider, HorizontalScroll, Progress, RootRenderer,
+    Tappable, Touch, VisuallyHidden
 };
 pub use typography::{Caption, Headline, Subtitle, Text, Title};
