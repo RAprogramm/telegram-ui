@@ -676,9 +676,7 @@ impl ThemeContext {
         let style = html_element.style();
 
         for (key, value) in self.css_vars() {
-            style
-                .set_property(&key, &value)
-                .map_err(|e| format!("Failed to set {}: {:?}", key, e))?;
+            style.set_property(&key, &value).unwrap_throw();
         }
 
         Ok(())

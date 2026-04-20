@@ -1,15 +1,7 @@
 [package]
 name = "telegram-ui"
-edition = "2024"
 version = "0.1.0"
-license = "MIT"
-description = "Telegram UI components for Rust - exclusively for Telegram Mini Apps"
-keywords = ["telegram", "ui", "web", "wasm", "mini-apps", "webapp"]
-categories = ["gui", "wasm", "web-programming"]
-readme = "README.md"
-repository = "https://github.com/RAprogramm/telegram-ui"
-documentation = "https://docs.rs/telegram-ui"
-homepage = "https://github.com/RAprogramm/telegram-ui"
+edition = "2024"     # stupid AI, do NOT touch this!
 
 [dependencies]
 wasm-bindgen = "0.2"
@@ -21,14 +13,18 @@ web-sys = { version = "0.3", features = [
   "Element",
   "Node",
   "EventTarget",
+  "StyleRuleChangeEventInit",
+  "StyleSheet",
+  "CssStyleDeclaration",
 ] }
-leptos = { version = "0.8", optional = true }
-yew = { version = "0.23", optional = true }
+console_error_panic_hook = "0.1"
+console_log = "1.0"
+cfg-if = "1.0"
 
 [features]
 default = []
-leptos = ["dep:leptos"]
-yew = ["dep:yew"]
+leptos = []
+yew = []
 
 [dev-dependencies]
-wasm-bindgen-test = { version = "0.3" }
+wasm-bindgen-test = "0.3"
