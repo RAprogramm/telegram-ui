@@ -13,13 +13,15 @@ pub enum CircularProgressSize {
 }
 
 impl CircularProgress {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             size:     CircularProgressSize::Medium,
             progress: 0.0
         }
     }
 
+    #[must_use]
     pub fn size(mut self, size: &str) -> Self {
         self.size = match size {
             "small" => CircularProgressSize::Small,
@@ -29,11 +31,13 @@ impl CircularProgress {
         self
     }
 
-    pub fn progress(mut self, progress: f64) -> Self {
+    #[must_use]
+    pub const fn progress(mut self, progress: f64) -> Self {
         self.progress = progress.clamp(0.0, 100.0);
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let (size, stroke_width) = match self.size {
             CircularProgressSize::Small => (24.0, 3.0),

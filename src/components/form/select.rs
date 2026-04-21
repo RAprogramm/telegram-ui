@@ -15,7 +15,8 @@ pub struct Select {
 }
 
 impl Select {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             value:    String::new(),
             options:  Vec::new(),
@@ -23,25 +24,30 @@ impl Select {
         }
     }
 
+    #[must_use]
     pub fn with_value(mut self, value: &str) -> Self {
         self.value = value.to_string();
         self
     }
 
+    #[must_use]
     pub fn value(&self) -> &str {
         &self.value
     }
 
+    #[must_use]
     pub fn with_options(mut self, options: Vec<String>) -> Self {
         self.options = options;
         self
     }
 
+    #[must_use]
     pub fn options(&self) -> &[String] {
         &self.options
     }
 
-    pub fn with_required(mut self, required: bool) -> Self {
+    #[must_use]
+    pub const fn with_required(mut self, required: bool) -> Self {
         self.required = required;
         self
     }

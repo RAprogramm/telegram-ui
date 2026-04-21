@@ -14,6 +14,7 @@ pub struct Avatar {
 
 impl Avatar {
     /// Creates a new Avatar with default settings
+    #[must_use]
     pub fn new() -> Self {
         Self {
             src:        None,
@@ -55,6 +56,7 @@ impl Avatar {
     }
 
     /// Renders the avatar to HTML
+    #[must_use]
     pub fn render(&self) -> String {
         let mut html = String::from("<div class=\"telegram-ui-avatar\"");
 
@@ -66,14 +68,14 @@ impl Avatar {
 
         // Background color
         if let Some(ref bg) = self.bg_color {
-            html.push_str(&format!("background-color: {}; ", bg));
+            html.push_str(&format!("background-color: {bg}; "));
         } else {
             html.push_str("background-color: var(--tg-theme-button-color, #2481cc); ");
         }
 
         // Text color
         if let Some(ref text) = self.text_color {
-            html.push_str(&format!("color: {}; ", text));
+            html.push_str(&format!("color: {text}; "));
         } else {
             html.push_str("color: var(--tg-theme-button-text-color, #ffffff); ");
         }
@@ -86,8 +88,7 @@ impl Avatar {
 
         if let Some(ref src) = self.src {
             html.push_str(&format!(
-                "<img src=\"{}\" alt=\"Avatar\" style=\"width: 100%; height: 100%; object-fit: cover;\"/>",
-                src
+                "<img src=\"{src}\" alt=\"Avatar\" style=\"width: 100%; height: 100%; object-fit: cover;\"/>"
             ));
         } else if let Some(ref initials) = self.initials {
             html.push_str(initials);

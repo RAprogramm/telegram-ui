@@ -11,26 +11,31 @@ pub struct Subtitle {
 }
 
 impl Subtitle {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             text: String::new()
         }
     }
 
+    #[must_use]
     pub fn with_text(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn text(&self) -> &str {
         &self.text
     }
 
+    #[must_use]
     pub fn text_mut(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!("<div class=\"telegram-ui-subtitle\">{}</div>", self.text)
     }

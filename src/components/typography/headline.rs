@@ -12,36 +12,43 @@ pub struct Headline {
 }
 
 impl Headline {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             text:  String::new(),
             level: 1
         }
     }
 
+    #[must_use]
     pub fn with_text(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn text(&self) -> &str {
         &self.text
     }
 
+    #[must_use]
     pub fn text_mut(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
-    pub fn with_level(mut self, level: u32) -> Self {
+    #[must_use]
+    pub const fn with_level(mut self, level: u32) -> Self {
         self.level = level;
         self
     }
 
-    pub fn level(&self) -> u32 {
+    #[must_use]
+    pub const fn level(&self) -> u32 {
         self.level
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!("<div class=\"telegram-ui-headline\">{}</div>", self.text)
     }

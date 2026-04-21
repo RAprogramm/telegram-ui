@@ -9,6 +9,7 @@ pub struct FormInput {
 }
 
 impl FormInput {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             header:   None,
@@ -20,36 +21,43 @@ impl FormInput {
         }
     }
 
+    #[must_use]
     pub fn header(mut self, header: &str) -> Self {
         self.header = Some(header.to_string());
         self
     }
 
+    #[must_use]
     pub fn status(mut self, status: &str) -> Self {
         self.status = status.to_string();
         self
     }
 
+    #[must_use]
     pub fn before(mut self, before: &str) -> Self {
         self.before = Some(before.to_string());
         self
     }
 
+    #[must_use]
     pub fn after(mut self, after: &str) -> Self {
         self.after = Some(after.to_string());
         self
     }
 
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let status_class = format!("form-input--{}", self.status);
         let disabled_class = if self.disabled {
@@ -61,19 +69,19 @@ impl FormInput {
         let before_html = self
             .before
             .as_ref()
-            .map(|b| format!("<span class=\"form-input-before\">{}</span>", b))
+            .map(|b| format!("<span class=\"form-input-before\">{b}</span>"))
             .unwrap_or_default();
 
         let after_html = self
             .after
             .as_ref()
-            .map(|a| format!("<span class=\"form-input-after\">{}</span>", a))
+            .map(|a| format!("<span class=\"form-input-after\">{a}</span>"))
             .unwrap_or_default();
 
         let header_html = self
             .header
             .as_ref()
-            .map(|h| format!("<div class=\"form-input-header\">{}</div>", h))
+            .map(|h| format!("<div class=\"form-input-header\">{h}</div>"))
             .unwrap_or_default();
 
         format!(

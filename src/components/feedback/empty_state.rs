@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 
-//! EmptyState component
+//! `EmptyState` component
 
 use std::fmt;
 
@@ -16,7 +16,8 @@ pub struct EmptyState {
 }
 
 impl EmptyState {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             header:      String::new(),
             description: String::new(),
@@ -24,33 +25,40 @@ impl EmptyState {
         }
     }
 
+    #[must_use]
     pub fn header(mut self, header: &str) -> Self {
         self.header = header.to_string();
         self
     }
 
+    #[must_use]
     pub fn description(mut self, description: &str) -> Self {
         self.description = description.to_string();
         self
     }
 
+    #[must_use]
     pub fn action(mut self, action: &str) -> Self {
         self.action = action.to_string();
         self
     }
 
+    #[must_use]
     pub fn header_text(&self) -> &str {
         &self.header
     }
 
+    #[must_use]
     pub fn description_text(&self) -> &str {
         &self.description
     }
 
+    #[must_use]
     pub fn action_text(&self) -> &str {
         &self.action
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!(
             "<div class=\"telegram-ui-empty-state\">\n  <h3>{}</h3>\n  <p>{}</p>\n  <p>{}</p>\n</div>",

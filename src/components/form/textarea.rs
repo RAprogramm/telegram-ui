@@ -18,7 +18,8 @@ pub struct Textarea {
 }
 
 impl Textarea {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             value:       String::new(),
             placeholder: String::new(),
@@ -29,44 +30,53 @@ impl Textarea {
         }
     }
 
+    #[must_use]
     pub fn with_value(mut self, value: &str) -> Self {
         self.value = value.to_string();
         self
     }
 
+    #[must_use]
     pub fn value(&self) -> &str {
         &self.value
     }
 
+    #[must_use]
     pub fn with_placeholder(mut self, placeholder: &str) -> Self {
         self.placeholder = placeholder.to_string();
         self
     }
 
+    #[must_use]
     pub fn placeholder(&self) -> &str {
         &self.placeholder
     }
 
-    pub fn with_rows(mut self, rows: u32) -> Self {
+    #[must_use]
+    pub const fn with_rows(mut self, rows: u32) -> Self {
         self.rows = rows;
         self
     }
 
-    pub fn rows(&self) -> u32 {
+    #[must_use]
+    pub const fn rows(&self) -> u32 {
         self.rows
     }
 
-    pub fn with_required(mut self, required: bool) -> Self {
+    #[must_use]
+    pub const fn with_required(mut self, required: bool) -> Self {
         self.required = required;
         self
     }
 
-    pub fn with_min_length(mut self, min_length: usize) -> Self {
+    #[must_use]
+    pub const fn with_min_length(mut self, min_length: usize) -> Self {
         self.min_length = Some(min_length);
         self
     }
 
-    pub fn with_max_length(mut self, max_length: usize) -> Self {
+    #[must_use]
+    pub const fn with_max_length(mut self, max_length: usize) -> Self {
         self.max_length = Some(max_length);
         self
     }
@@ -81,13 +91,13 @@ impl Textarea {
         if let Some(min_len) = self.min_length
             && self.value.len() < min_len
         {
-            errors.push(format!("Minimum length is {}", min_len));
+            errors.push(format!("Minimum length is {min_len}"));
         }
 
         if let Some(max_len) = self.max_length
             && self.value.len() > max_len
         {
-            errors.push(format!("Maximum length is {}", max_len));
+            errors.push(format!("Maximum length is {max_len}"));
         }
 
         if errors.is_empty() {

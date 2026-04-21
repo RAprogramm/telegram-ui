@@ -12,7 +12,7 @@ use std::fmt;
 pub type Result<T> = std::result::Result<T, UiError>;
 
 /// Error types for Telegram UI components
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UiError {
     /// Invalid component configuration
     InvalidConfig {
@@ -44,26 +44,25 @@ pub enum UiError {
 impl fmt::Display for UiError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            UiError::InvalidConfig {
+            Self::InvalidConfig {
                 component,
                 details
             } => {
-                write!(f, "Invalid configuration for '{}': {}", component, details)
+                write!(f, "Invalid configuration for '{component}': {details}")
             }
-            UiError::InvalidPlatform(platform) => {
-                write!(f, "Invalid platform: {}", platform)
+            Self::InvalidPlatform(platform) => {
+                write!(f, "Invalid platform: {platform}")
             }
-            UiError::MissingProperty {
+            Self::MissingProperty {
                 component,
                 property
             } => {
                 write!(
                     f,
-                    "Missing required property '{}' for '{}'",
-                    property, component
+                    "Missing required property '{property}' for '{component}'"
                 )
             }
-            UiError::InvalidPropertyValue {
+            Self::InvalidPropertyValue {
                 component,
                 property,
                 value,
@@ -71,18 +70,17 @@ impl fmt::Display for UiError {
             } => {
                 write!(
                     f,
-                    "Invalid value '{}' for property '{}' in '{}'. Expected: {}",
-                    value, property, component, expected
+                    "Invalid value '{value}' for property '{property}' in '{component}'. Expected: {expected}"
                 )
             }
-            UiError::RenderError(msg) => {
-                write!(f, "Render error: {}", msg)
+            Self::RenderError(msg) => {
+                write!(f, "Render error: {msg}")
             }
-            UiError::PlatformDetectionError(msg) => {
-                write!(f, "Platform detection error: {}", msg)
+            Self::PlatformDetectionError(msg) => {
+                write!(f, "Platform detection error: {msg}")
             }
-            UiError::Generic(msg) => {
-                write!(f, "Error: {}", msg)
+            Self::Generic(msg) => {
+                write!(f, "Error: {msg}")
             }
         }
     }
@@ -93,7 +91,7 @@ impl std::error::Error for UiError {}
 impl UiError {
     /// Create a new invalid configuration error
     pub fn invalid_config(component: impl Into<String>, details: impl Into<String>) -> Self {
-        UiError::InvalidConfig {
+        Self::InvalidConfig {
             component: component.into(),
             details:   details.into()
         }
@@ -101,7 +99,7 @@ impl UiError {
 
     /// Create a new missing property error
     pub fn missing_property(component: impl Into<String>, property: impl Into<String>) -> Self {
-        UiError::MissingProperty {
+        Self::MissingProperty {
             component: component.into(),
             property:  property.into()
         }
@@ -114,7 +112,7 @@ impl UiError {
         value: impl Into<String>,
         expected: impl Into<String>
     ) -> Self {
-        UiError::InvalidPropertyValue {
+        Self::InvalidPropertyValue {
             component: component.into(),
             property:  property.into(),
             value:     value.into(),
@@ -124,53 +122,55 @@ impl UiError {
 
     /// Create a new render error
     pub fn render(msg: impl Into<String>) -> Self {
-        UiError::RenderError(msg.into())
+        Self::RenderError(msg.into())
     }
 
     /// Get the error code for this error
-    pub fn code(&self) -> &'static str {
+    #[must_use]
+    pub const fn code(&self) -> &'static str {
         match self {
-            UiError::InvalidConfig {
+            Self::InvalidConfig {
                 ..
             } => "INVALID_CONFIG",
-            UiError::InvalidPlatform(_) => "INVALID_PLATFORM",
-            UiError::MissingProperty {
+            Self::InvalidPlatform(_) => "INVALID_PLATFORM",
+            Self::MissingProperty {
                 ..
             } => "MISSING_PROPERTY",
-            UiError::InvalidPropertyValue {
+            Self::InvalidPropertyValue {
                 ..
             } => "INVALID_PROPERTY_VALUE",
-            UiError::RenderError(_) => "RENDER_ERROR",
-            UiError::PlatformDetectionError(_) => "PLATFORM_DETECTION_ERROR",
-            UiError::Generic(_) => "GENERIC_ERROR"
+            Self::RenderError(_) => "RENDER_ERROR",
+            Self::PlatformDetectionError(_) => "PLATFORM_DETECTION_ERROR",
+            Self::Generic(_) => "GENERIC_ERROR"
         }
     }
 
     /// Check if this error is recoverable
-    pub fn is_recoverable(&self) -> bool {
+    #[must_use]
+    pub const fn is_recoverable(&self) -> bool {
         matches!(
             self,
-            UiError::InvalidConfig { .. }
-                | UiError::MissingProperty { .. }
-                | UiError::InvalidPropertyValue { .. }
+            Self::InvalidConfig { .. }
+                | Self::MissingProperty { .. }
+                | Self::InvalidPropertyValue { .. }
         )
     }
 }
 
 impl From<String> for UiError {
     fn from(msg: String) -> Self {
-        UiError::Generic(msg)
+        Self::Generic(msg)
     }
 }
 
 impl From<&str> for UiError {
     fn from(msg: &str) -> Self {
-        UiError::Generic(msg.to_string())
+        Self::Generic(msg.to_string())
     }
 }
 
 /// Validation error for component properties
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ValidationError {
     /// The component that failed validation
     pub component: String,
@@ -200,12 +200,14 @@ impl ValidationError {
     }
 
     /// Specify the property that failed validation
+    #[must_use]
     pub fn with_property(mut self, property: impl Into<String>) -> Self {
         self.property = Some(property.into());
         self
     }
 
     /// Get all error messages as a combined string
+    #[must_use]
     pub fn combined_message(&self) -> String {
         self.messages.join(", ")
     }
@@ -229,7 +231,7 @@ impl fmt::Display for ValidationError {
 
 impl From<ValidationError> for UiError {
     fn from(err: ValidationError) -> Self {
-        UiError::Generic(err.to_string())
+        Self::Generic(err.to_string())
     }
 }
 
@@ -267,7 +269,7 @@ mod tests {
         ];
 
         for (error, expected) in errors {
-            assert_eq!(format!("{}", error), expected);
+            assert_eq!(format!("{error}"), expected);
         }
     }
 
@@ -275,7 +277,7 @@ mod tests {
     fn test_error_code() {
         assert_eq!(UiError::invalid_config("", "").code(), "INVALID_CONFIG");
         assert_eq!(
-            UiError::InvalidPlatform("".to_string()).code(),
+            UiError::InvalidPlatform(String::new()).code(),
             "INVALID_PLATFORM"
         );
         assert_eq!(UiError::missing_property("", "").code(), "MISSING_PROPERTY");
@@ -284,7 +286,7 @@ mod tests {
             "INVALID_PROPERTY_VALUE"
         );
         assert_eq!(UiError::render("").code(), "RENDER_ERROR");
-        assert_eq!(UiError::Generic("".to_string()).code(), "GENERIC_ERROR");
+        assert_eq!(UiError::Generic(String::new()).code(), "GENERIC_ERROR");
     }
 
     #[test]
@@ -293,13 +295,13 @@ mod tests {
         assert!(UiError::missing_property("", "").is_recoverable());
         assert!(UiError::invalid_value("", "", "", "").is_recoverable());
         assert!(!UiError::render("").is_recoverable());
-        assert!(!UiError::Generic("".to_string()).is_recoverable());
+        assert!(!UiError::Generic(String::new()).is_recoverable());
     }
 
     #[test]
     fn test_validation_error() {
         let error = ValidationError::new("Button", "Invalid type").with_property("type");
-        assert_eq!(format!("{}", error), "[Button::type] Invalid type");
+        assert_eq!(format!("{error}"), "[Button::type] Invalid type");
     }
 
     #[test]

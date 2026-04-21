@@ -5,7 +5,7 @@
 
 use std::fmt;
 
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub enum AlertKind {
     #[default]
     Info,
@@ -21,31 +21,37 @@ pub struct Alert {
 }
 
 impl Alert {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             kind:    AlertKind::Info,
             message: String::new()
         }
     }
 
-    pub fn kind(&self) -> &AlertKind {
+    #[must_use]
+    pub const fn kind(&self) -> &AlertKind {
         &self.kind
     }
 
-    pub fn set_kind(mut self, kind: AlertKind) -> Self {
+    #[must_use]
+    pub const fn set_kind(mut self, kind: AlertKind) -> Self {
         self.kind = kind;
         self
     }
 
+    #[must_use]
     pub fn message(&self) -> &str {
         &self.message
     }
 
+    #[must_use]
     pub fn set_message(mut self, message: &str) -> Self {
         self.message = message.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let kind_class = match self.kind {
             AlertKind::Info => "telegram-ui-alert--info",

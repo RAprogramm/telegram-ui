@@ -12,7 +12,8 @@ pub struct Checkbox {
 
 impl Checkbox {
     /// Creates a new Checkbox with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             checked:  false,
             disabled: false,
@@ -21,13 +22,15 @@ impl Checkbox {
     }
 
     /// Sets the checked state
-    pub fn checked(mut self, checked: bool) -> Self {
+    #[must_use]
+    pub const fn checked(mut self, checked: bool) -> Self {
         self.checked = checked;
         self
     }
 
     /// Sets the disabled state
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
@@ -39,6 +42,7 @@ impl Checkbox {
     }
 
     /// Renders the checkbox to HTML
+    #[must_use]
     pub fn render(&self) -> String {
         let mut html = String::from("<label class=\"telegram-ui-checkbox\"");
 
@@ -63,8 +67,7 @@ impl Checkbox {
 
         if let Some(ref label) = self.label {
             html.push_str(&format!(
-                "<span class=\"telegram-ui-checkbox-label\">{}</span>",
-                label
+                "<span class=\"telegram-ui-checkbox-label\">{label}</span>"
             ));
         }
 

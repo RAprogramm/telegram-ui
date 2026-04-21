@@ -5,7 +5,7 @@
 
 use std::fmt;
 
-#[derive(Clone, Debug, Default, PartialEq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub enum SpinnerSize {
     #[default]
     S,
@@ -19,21 +19,25 @@ pub struct Spinner {
 }
 
 impl Spinner {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             size: SpinnerSize::M
         }
     }
 
-    pub fn size(&self) -> &SpinnerSize {
+    #[must_use]
+    pub const fn size(&self) -> &SpinnerSize {
         &self.size
     }
 
-    pub fn set_size(mut self, size: SpinnerSize) -> Self {
+    #[must_use]
+    pub const fn set_size(mut self, size: SpinnerSize) -> Self {
         self.size = size;
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!(
             "<div class=\"telegram-ui-spinner telegram-ui-spinner--{}\"></div>",

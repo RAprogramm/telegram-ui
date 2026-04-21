@@ -12,13 +12,15 @@ pub enum BlockquoteType {
 }
 
 impl Blockquote {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             r#type:   BlockquoteType::Text,
             children: String::new()
         }
     }
 
+    #[must_use]
     pub fn with_type(mut self, r#type: &str) -> Self {
         self.r#type = match r#type {
             "other" => BlockquoteType::Other,
@@ -27,11 +29,13 @@ impl Blockquote {
         self
     }
 
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let type_class = match self.r#type {
             BlockquoteType::Text => "blockquote--text",
@@ -47,10 +51,9 @@ impl Blockquote {
         };
 
         format!(
-            r#"<div class="telegram-ui-blockquote {}">
-  {}
-</div>"#,
-            type_class, content
+            r#"<div class="telegram-ui-blockquote {type_class}">
+  {content}
+</div>"#
         )
     }
 }

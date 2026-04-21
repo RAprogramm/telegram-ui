@@ -13,7 +13,8 @@ pub struct Radio {
 
 impl Radio {
     /// Creates a new Radio with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             checked:  false,
             disabled: false,
@@ -23,13 +24,15 @@ impl Radio {
     }
 
     /// Sets the checked state
-    pub fn checked(mut self, checked: bool) -> Self {
+    #[must_use]
+    pub const fn checked(mut self, checked: bool) -> Self {
         self.checked = checked;
         self
     }
 
     /// Sets the disabled state
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
@@ -47,6 +50,7 @@ impl Radio {
     }
 
     /// Renders the radio button to HTML
+    #[must_use]
     pub fn render(&self) -> String {
         let mut html = String::from("<label class=\"telegram-ui-radio\"");
 
@@ -60,7 +64,7 @@ impl Radio {
         );
 
         if let Some(ref value) = self.value {
-            html.push_str(&format!(" value=\"{}\"", value));
+            html.push_str(&format!(" value=\"{value}\""));
         }
 
         if self.checked {
@@ -75,8 +79,7 @@ impl Radio {
 
         if let Some(ref label) = self.label {
             html.push_str(&format!(
-                "<span class=\"telegram-ui-radio-label\">{}</span>",
-                label
+                "<span class=\"telegram-ui-radio-label\">{label}</span>"
             ));
         }
 

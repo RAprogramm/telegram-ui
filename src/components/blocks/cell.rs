@@ -1,91 +1,154 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
-// SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2026 Telegram UI contributors
 //! Cell component for Telegram UI
 
+mod button_cell;
+mod info;
+mod navigation;
+
 use std::fmt;
+
+pub use button_cell::ButtonCell;
+pub use info::Info;
+pub use navigation::Navigation;
 
 use crate::helpers::escape_html;
 
 /// Cell component
 #[derive(Debug, Clone)]
 pub struct Cell {
-    ios:     bool,
-    hovered: bool,
-    before:  Option<String>,
-    after:   Option<String>,
-    middle:  String
+    ios:           bool,
+    hovered:       bool,
+    id:            Option<String>,
+    aria_expanded: Option<bool>,
+    aria_controls: Option<String>,
+    before:        Option<String>,
+    after:         Option<String>,
+    middle:        String
 }
 
 impl Cell {
     /// Creates a new Cell with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
-            ios:     false,
-            hovered: false,
-            before:  None,
-            after:   None,
-            middle:  String::new()
+            ios:           false,
+            hovered:       false,
+            id:            None,
+            aria_expanded: None,
+            aria_controls: None,
+            before:        None,
+            after:         None,
+            middle:        String::new()
         }
     }
 
     /// Sets whether the cell should use iOS styling
-    pub fn ios(mut self, ios: bool) -> Self {
+    #[must_use]
+    pub const fn ios(mut self, ios: bool) -> Self {
         self.ios = ios;
         self
     }
 
     /// Sets whether the cell should show hover state
-    pub fn hovered(mut self, hovered: bool) -> Self {
+    #[must_use]
+    pub const fn hovered(mut self, hovered: bool) -> Self {
         self.hovered = hovered;
         self
     }
 
     /// Sets content to show before the cell content
+    #[must_use]
     pub fn before(mut self, content: &str) -> Self {
         self.before = Some(content.to_string());
         self
     }
 
     /// Sets content to show after the cell content
+    #[must_use]
     pub fn after(mut self, content: &str) -> Self {
         self.after = Some(content.to_string());
         self
     }
 
     /// Sets the middle content of the cell
+    #[must_use]
     pub fn middle(mut self, content: &str) -> Self {
         self.middle = content.to_string();
         self
     }
 
+    /// Sets the element id
+    #[must_use]
+    pub fn id(mut self, id: &str) -> Self {
+        self.id = Some(id.to_string());
+        self
+    }
+
+    /// Sets aria-expanded attribute
+    #[must_use]
+    pub const fn aria_expanded(mut self, expanded: bool) -> Self {
+        self.aria_expanded = Some(expanded);
+        self
+    }
+
+    /// Sets aria-controls attribute
+    #[must_use]
+    pub fn aria_controls(mut self, controls: &str) -> Self {
+        self.aria_controls = Some(controls.to_string());
+        self
+    }
+
+    /// Returns the element id
+    #[must_use]
+    pub fn get_id(&self) -> Option<&str> {
+        self.id.as_deref()
+    }
+
+    /// Returns aria-expanded attribute
+    #[must_use]
+    pub const fn get_aria_expanded(&self) -> Option<bool> {
+        self.aria_expanded
+    }
+
+    /// Returns aria-controls attribute
+    #[must_use]
+    pub fn get_aria_controls(&self) -> Option<&str> {
+        self.aria_controls.as_deref()
+    }
+
     /// Returns whether the cell uses iOS styling
-    pub fn is_ios(&self) -> bool {
+    #[must_use]
+    pub const fn is_ios(&self) -> bool {
         self.ios
     }
 
     /// Returns whether the cell shows hover state
-    pub fn is_hovered(&self) -> bool {
+    #[must_use]
+    pub const fn is_hovered(&self) -> bool {
         self.hovered
     }
 
     /// Returns the cell before content
+    #[must_use]
     pub fn get_before(&self) -> Option<&str> {
         self.before.as_deref()
     }
 
     /// Returns the cell after content
+    #[must_use]
     pub fn get_after(&self) -> Option<&str> {
         self.after.as_deref()
     }
 
     /// Returns the cell middle content
+    #[must_use]
     pub fn get_middle(&self) -> &str {
         &self.middle
     }
 
     /// Render the cell as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let mut classes = vec!["telegram-ui-cell"];
 
@@ -98,6 +161,23 @@ impl Cell {
         }
 
         let class_str = classes.join(" ");
+
+        let mut attrs = vec![];
+        if let Some(id) = &self.id {
+            attrs.push(format!(" id=\"{}\"", escape_html(id)));
+        }
+        if let Some(expanded) = self.aria_expanded {
+            attrs.push(format!(" aria-expanded=\"{expanded}\""));
+        }
+        if let Some(controls) = &self.aria_controls {
+            attrs.push(format!(" aria-controls=\"{}\"", escape_html(controls)));
+        }
+
+        let attr_str = if attrs.is_empty() {
+            String::new()
+        } else {
+            format!(" {}", attrs.join(" "))
+        };
 
         let mut content = String::new();
 
@@ -120,7 +200,7 @@ impl Cell {
             ));
         }
 
-        format!("<div class=\"{}\">{}</div>", class_str, content)
+        format!("<div class=\"{class_str}\"{attr_str}>{content}</div>")
     }
 }
 
@@ -146,6 +226,9 @@ mod tests {
         assert!(!cell.is_ios());
         assert!(!cell.is_hovered());
         assert_eq!(cell.get_middle(), "");
+        assert!(cell.get_id().is_none());
+        assert!(cell.get_aria_expanded().is_none());
+        assert!(cell.get_aria_controls().is_none());
     }
 
     #[test]
@@ -200,5 +283,19 @@ mod tests {
         let cell = Cell::new().hovered(true);
         let html = cell.render();
         assert!(html.contains("telegram-ui-cell--hovered"));
+    }
+
+    #[test]
+    fn test_cell_attributes() {
+        let cell = Cell::new()
+            .id("test-id")
+            .aria_expanded(true)
+            .aria_controls("content-id")
+            .middle("Text");
+
+        let html = cell.render();
+        assert!(html.contains("id=\"test-id\""));
+        assert!(html.contains("aria-expanded=\"true\""));
+        assert!(html.contains("aria-controls=\"content-id\""));
     }
 }

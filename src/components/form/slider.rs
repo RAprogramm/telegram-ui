@@ -9,7 +9,8 @@ pub struct Slider {
 }
 
 impl Slider {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             min:      0.0,
             max:      100.0,
@@ -20,36 +21,43 @@ impl Slider {
         }
     }
 
-    pub fn min(mut self, min: f64) -> Self {
+    #[must_use]
+    pub const fn min(mut self, min: f64) -> Self {
         self.min = min;
         self
     }
 
-    pub fn max(mut self, max: f64) -> Self {
+    #[must_use]
+    pub const fn max(mut self, max: f64) -> Self {
         self.max = max;
         self
     }
 
-    pub fn value(mut self, value: f64) -> Self {
+    #[must_use]
+    pub const fn value(mut self, value: f64) -> Self {
         self.value = value.clamp(self.min, self.max);
         self
     }
 
-    pub fn step(mut self, step: f64) -> Self {
+    #[must_use]
+    pub const fn step(mut self, step: f64) -> Self {
         self.step = step;
         self
     }
 
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 
-    pub fn ios(mut self, ios: bool) -> Self {
+    #[must_use]
+    pub const fn ios(mut self, ios: bool) -> Self {
         self.ios = ios;
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let ios_class = if self.ios { "slider--ios" } else { "" };
         let disabled_class = if self.disabled {

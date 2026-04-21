@@ -8,7 +8,7 @@ use std::fmt;
 use crate::helpers::escape_html;
 
 /// Banner type/variant
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum BannerType {
     #[default]
     /// Regular banner
@@ -32,7 +32,8 @@ pub struct Banner {
 
 impl Banner {
     /// Create a new Banner
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             banner_type: BannerType::Regular,
             title:       String::new(),
@@ -44,42 +45,49 @@ impl Banner {
     }
 
     /// Set banner type
-    pub fn banner_type(mut self, banner_type: BannerType) -> Self {
+    #[must_use]
+    pub const fn banner_type(mut self, banner_type: BannerType) -> Self {
         self.banner_type = banner_type;
         self
     }
 
     /// Set the title
+    #[must_use]
     pub fn title(mut self, title: &str) -> Self {
         self.title = title.to_string();
         self
     }
 
     /// Set the subtitle
+    #[must_use]
     pub fn subtitle(mut self, subtitle: &str) -> Self {
         self.subtitle = Some(subtitle.to_string());
         self
     }
 
     /// Set the description
+    #[must_use]
     pub fn description(mut self, description: &str) -> Self {
         self.description = Some(description.to_string());
         self
     }
 
     /// Set the link URL
+    #[must_use]
     pub fn link(mut self, link: &str) -> Self {
         self.link = Some(link.to_string());
         self
     }
 
     /// Set the image URL
+    #[must_use]
     pub fn image(mut self, image: &str) -> Self {
         self.image = Some(image.to_string());
         self
     }
 
     /// Render the banner as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let type_class = match self.banner_type {
             BannerType::Regular => "banner--regular",
@@ -87,10 +95,7 @@ impl Banner {
             BannerType::Promo => "banner--promo"
         };
 
-        let mut html = format!(
-            r#"<div class="telegram-ui-banner {type_class}">"#,
-            type_class = type_class
-        );
+        let mut html = format!(r#"<div class="telegram-ui-banner {type_class}">"#);
 
         if let Some(ref image) = self.image {
             html.push_str(&format!(

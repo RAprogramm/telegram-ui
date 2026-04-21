@@ -15,27 +15,32 @@ pub struct Backdrop {
 }
 
 impl Backdrop {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             visible:  false,
             children: String::new()
         }
     }
 
-    pub fn visible(mut self, visible: bool) -> Self {
+    #[must_use]
+    pub const fn visible(mut self, visible: bool) -> Self {
         self.visible = visible;
         self
     }
 
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
-    pub fn is_visible(&self) -> bool {
+    #[must_use]
+    pub const fn is_visible(&self) -> bool {
         self.visible
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let class = if self.visible {
             "telegram-ui-backdrop telegram-ui-backdrop--visible"

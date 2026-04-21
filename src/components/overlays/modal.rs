@@ -19,7 +19,8 @@ pub struct Modal {
 
 impl Modal {
     /// Creates a new Modal instance
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             header:    String::new(),
             footer:    String::new(),
@@ -30,51 +31,60 @@ impl Modal {
     }
 
     /// Sets the modal header
+    #[must_use]
     pub fn header(mut self, header: &str) -> Self {
         self.header = header.to_string();
         self
     }
 
     /// Sets the modal footer
+    #[must_use]
     pub fn footer(mut self, footer: &str) -> Self {
         self.footer = footer.to_string();
         self
     }
 
     /// Sets the modal content
+    #[must_use]
     pub fn children(mut self, content: &str) -> Self {
         self.content = content.to_string();
         self
     }
 
     /// Sets whether the modal is visible
-    pub fn visible(mut self, visible: bool) -> Self {
+    #[must_use]
+    pub const fn visible(mut self, visible: bool) -> Self {
         self.visible = visible;
         self
     }
 
     /// Sets whether to show the close button
-    pub fn close_button(mut self, close: bool) -> Self {
+    #[must_use]
+    pub const fn close_button(mut self, close: bool) -> Self {
         self.has_close = close;
         self
     }
 
     /// Get the header
+    #[must_use]
     pub fn header_text(&self) -> &str {
         &self.header
     }
 
     /// Get the footer
+    #[must_use]
     pub fn footer_text(&self) -> &str {
         &self.footer
     }
 
     /// Get the content
+    #[must_use]
     pub fn content_text(&self) -> &str {
         &self.content
     }
 
     /// Render the modal as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let mut html = String::new();
 

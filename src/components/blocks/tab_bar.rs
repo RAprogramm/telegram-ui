@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 
-//! TabBar component for Telegram UI (iOS-style)
+//! `TabBar` component for Telegram UI (iOS-style)
 
 use std::fmt;
 
 use crate::helpers::escape_html;
 
-/// TabBar component
+/// `TabBar` component
 #[derive(Debug, Clone)]
 pub struct TabBar {
     active_tab: usize,
@@ -20,7 +20,7 @@ pub struct TabBar {
     style:      Option<String>
 }
 
-/// Tab item in TabBar
+/// Tab item in `TabBar`
 #[derive(Debug, Clone)]
 pub struct Tab {
     index:    usize,
@@ -32,6 +32,7 @@ pub struct Tab {
 
 impl Tab {
     /// Creates a new tab
+    #[must_use]
     pub fn new(index: usize, label: &str, icon: &str) -> Self {
         Self {
             index,
@@ -43,21 +44,24 @@ impl Tab {
     }
 
     /// Sets the badge for this tab
+    #[must_use]
     pub fn badge(mut self, badge: &str) -> Self {
         self.badge = Some(badge.to_string());
         self
     }
 
     /// Sets whether this tab is disabled
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 }
 
 impl TabBar {
-    /// Creates a new TabBar instance
-    pub fn new() -> Self {
+    /// Creates a new `TabBar` instance
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             active_tab: 0,
             tabs:       Vec::new(),
@@ -71,60 +75,70 @@ impl TabBar {
     }
 
     /// Sets the active tab index
-    pub fn active_tab(mut self, index: usize) -> Self {
+    #[must_use]
+    pub const fn active_tab(mut self, index: usize) -> Self {
         self.active_tab = index;
         self
     }
 
-    /// Adds a tab to the TabBar
+    /// Adds a tab to the `TabBar`
+    #[must_use]
     pub fn tab(mut self, tab: Tab) -> Self {
         self.tabs.push(tab);
         self
     }
 
     /// Adds multiple tabs at once
+    #[must_use]
     pub fn tabs(mut self, tabs: Vec<Tab>) -> Self {
         self.tabs = tabs;
         self
     }
 
     /// Sets the children content
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = Some(children.to_string());
         self
     }
 
-    /// Sets whether the TabBar should be stretched to full width
-    pub fn stretched(mut self, stretched: bool) -> Self {
+    /// Sets whether the `TabBar` should be stretched to full width
+    #[must_use]
+    pub const fn stretched(mut self, stretched: bool) -> Self {
         self.stretched = stretched;
         self
     }
 
-    /// Sets whether the TabBar should be scrollable
-    pub fn scrollable(mut self, scrollable: bool) -> Self {
+    /// Sets whether the `TabBar` should be scrollable
+    #[must_use]
+    pub const fn scrollable(mut self, scrollable: bool) -> Self {
         self.scrollable = scrollable;
         self
     }
 
     /// Adds a custom CSS class
+    #[must_use]
     pub fn class(mut self, class: &str) -> Self {
         self.class = Some(class.to_string());
         self
     }
 
     /// Sets the element ID
+    #[must_use]
     pub fn id(mut self, id: &str) -> Self {
         self.id = Some(id.to_string());
         self
     }
 
     /// Sets inline styles
+    #[must_use]
     pub fn style(mut self, style: &str) -> Self {
         self.style = Some(style.to_string());
         self
     }
 
-    /// Render the TabBar as HTML string
+    /// Render the `TabBar` as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let mut classes = vec!["tgui-tab-bar".to_string()];
 
@@ -299,7 +313,7 @@ mod tests {
 
         let html = tab_bar.render();
         assert!(html.contains("tgui-tab-badge"));
-        assert!(html.contains("3"));
+        assert!(html.contains('3'));
     }
 
     #[test]

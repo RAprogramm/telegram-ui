@@ -11,7 +11,8 @@ pub struct Switch {
 
 impl Switch {
     /// Creates a new Switch with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             checked:  false,
             disabled: false
@@ -19,18 +20,21 @@ impl Switch {
     }
 
     /// Sets the checked state
-    pub fn checked(mut self, checked: bool) -> Self {
+    #[must_use]
+    pub const fn checked(mut self, checked: bool) -> Self {
         self.checked = checked;
         self
     }
 
     /// Sets the disabled state
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 
     /// Renders the switch to HTML
+    #[must_use]
     pub fn render(&self) -> String {
         let mut html = String::from("<div class=\"telegram-ui-switch\"");
 

@@ -29,7 +29,7 @@ pub use blocks::{
     inline_buttons::InlineButtons,
     list::List,
     placeholder::Placeholder,
-    section::{Section, SectionHeader},
+    section::{Footer, Header, HeaderVariant, Section},
     segmented_control::{Segment, SegmentedControl, SegmentedControlSize},
     steps::{Orientation, StepState, Steps},
     tab_bar::{Tab, TabBar},

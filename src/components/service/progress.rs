@@ -12,28 +12,33 @@ pub struct Progress {
 }
 
 impl Progress {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             value: 0.0,
             max:   100.0
         }
     }
 
-    pub fn with_value(mut self, value: f64) -> Self {
+    #[must_use]
+    pub const fn with_value(mut self, value: f64) -> Self {
         self.value = value;
         self
     }
 
-    pub fn value(&self) -> f64 {
+    #[must_use]
+    pub const fn value(&self) -> f64 {
         self.value
     }
 
-    pub fn with_max(mut self, max: f64) -> Self {
+    #[must_use]
+    pub const fn with_max(mut self, max: f64) -> Self {
         self.max = max;
         self
     }
 
-    pub fn max(&self) -> f64 {
+    #[must_use]
+    pub const fn max(&self) -> f64 {
         self.max
     }
 }

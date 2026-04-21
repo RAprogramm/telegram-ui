@@ -5,23 +5,27 @@ pub struct Spoiler {
 }
 
 impl Spoiler {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             visible:  false,
             children: String::new()
         }
     }
 
-    pub fn visible(mut self, visible: bool) -> Self {
+    #[must_use]
+    pub const fn visible(mut self, visible: bool) -> Self {
         self.visible = visible;
         self
     }
 
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let visible_class = if self.visible { "spoiler--visible" } else { "" };
 

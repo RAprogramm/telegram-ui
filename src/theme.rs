@@ -69,11 +69,12 @@ impl Theme {
     /// assert_eq!(Theme::Dark.css_class(), "tg-theme-dark");
     /// assert_eq!(Theme::Auto.css_class(), "tg-theme-auto");
     /// ```
-    pub fn css_class(&self) -> &'static str {
+    #[must_use]
+    pub const fn css_class(&self) -> &'static str {
         match self {
-            Theme::Light => "tg-theme-light",
-            Theme::Dark => "tg-theme-dark",
-            Theme::Auto => "tg-theme-auto"
+            Self::Light => "tg-theme-light",
+            Self::Dark => "tg-theme-dark",
+            Self::Auto => "tg-theme-auto"
         }
     }
 }
@@ -81,9 +82,9 @@ impl Theme {
 impl fmt::Display for Theme {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Theme::Light => write!(f, "light"),
-            Theme::Dark => write!(f, "dark"),
-            Theme::Auto => write!(f, "auto")
+            Self::Light => write!(f, "light"),
+            Self::Dark => write!(f, "dark"),
+            Self::Auto => write!(f, "auto")
         }
     }
 }
@@ -93,17 +94,17 @@ impl std::str::FromStr for Theme {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
-            "light" => Ok(Theme::Light),
-            "dark" => Ok(Theme::Dark),
-            "auto" => Ok(Theme::Auto),
-            _ => Err(format!("Invalid theme: {}", s))
+            "light" => Ok(Self::Light),
+            "dark" => Ok(Self::Dark),
+            "auto" => Ok(Self::Auto),
+            _ => Err(format!("Invalid theme: {s}"))
         }
     }
 }
 
 /// Theme context containing Telegram color scheme values.
 ///
-/// This struct holds all the color parameters provided by Telegram's WebApp
+/// This struct holds all the color parameters provided by Telegram's `WebApp`
 /// API. These colors can be applied to the document root or used directly in
 /// component styling.
 ///
@@ -142,7 +143,7 @@ impl std::str::FromStr for Theme {
 /// // Apply to document root
 /// theme_context.apply_to_root().ok();
 /// ```
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct ThemeContext {
     /// Primary background color
     pub bg_color:                  Option<String>,
@@ -187,8 +188,9 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new();
     /// assert!(theme_context.bg_color.is_none());
     /// ```
+    #[must_use]
     pub fn new() -> Self {
-        ThemeContext::default()
+        Self::default()
     }
 
     /// Sets the primary background color.
@@ -205,6 +207,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_bg_color("#ffffff");
     /// assert_eq!(theme_context.bg_color, Some("#ffffff".to_string()));
     /// ```
+    #[must_use]
     pub fn with_bg_color(mut self, color: &str) -> Self {
         self.bg_color = Some(color.to_string());
         self
@@ -224,6 +227,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_text_color("#000000");
     /// assert_eq!(theme_context.text_color, Some("#000000".to_string()));
     /// ```
+    #[must_use]
     pub fn with_text_color(mut self, color: &str) -> Self {
         self.text_color = Some(color.to_string());
         self
@@ -243,6 +247,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_hint_color("#999999");
     /// assert_eq!(theme_context.hint_color, Some("#999999".to_string()));
     /// ```
+    #[must_use]
     pub fn with_hint_color(mut self, color: &str) -> Self {
         self.hint_color = Some(color.to_string());
         self
@@ -262,6 +267,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_link_color("#3390ec");
     /// assert_eq!(theme_context.link_color, Some("#3390ec".to_string()));
     /// ```
+    #[must_use]
     pub fn with_link_color(mut self, color: &str) -> Self {
         self.link_color = Some(color.to_string());
         self
@@ -281,6 +287,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_button_color("#3390ec");
     /// assert_eq!(theme_context.button_color, Some("#3390ec".to_string()));
     /// ```
+    #[must_use]
     pub fn with_button_color(mut self, color: &str) -> Self {
         self.button_color = Some(color.to_string());
         self
@@ -300,6 +307,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_button_text_color("#ffffff");
     /// assert_eq!(theme_context.button_text_color, Some("#ffffff".to_string()));
     /// ```
+    #[must_use]
     pub fn with_button_text_color(mut self, color: &str) -> Self {
         self.button_text_color = Some(color.to_string());
         self
@@ -322,6 +330,7 @@ impl ThemeContext {
     ///     Some("#f4f4f5".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn with_secondary_bg_color(mut self, color: &str) -> Self {
         self.secondary_bg_color = Some(color.to_string());
         self
@@ -341,6 +350,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_header_bg_color("#ffffff");
     /// assert_eq!(theme_context.header_bg_color, Some("#ffffff".to_string()));
     /// ```
+    #[must_use]
     pub fn with_header_bg_color(mut self, color: &str) -> Self {
         self.header_bg_color = Some(color.to_string());
         self
@@ -363,6 +373,7 @@ impl ThemeContext {
     ///     Some("#ffffff".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn with_bottom_bar_bg_color(mut self, color: &str) -> Self {
         self.bottom_bar_bg_color = Some(color.to_string());
         self
@@ -382,6 +393,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_accent_text_color("#3390ec");
     /// assert_eq!(theme_context.accent_text_color, Some("#3390ec".to_string()));
     /// ```
+    #[must_use]
     pub fn with_accent_text_color(mut self, color: &str) -> Self {
         self.accent_text_color = Some(color.to_string());
         self
@@ -401,6 +413,7 @@ impl ThemeContext {
     /// let theme_context = ThemeContext::new().with_section_bg_color("#ffffff");
     /// assert_eq!(theme_context.section_bg_color, Some("#ffffff".to_string()));
     /// ```
+    #[must_use]
     pub fn with_section_bg_color(mut self, color: &str) -> Self {
         self.section_bg_color = Some(color.to_string());
         self
@@ -423,6 +436,7 @@ impl ThemeContext {
     ///     Some("#707579".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn with_section_header_text_color(mut self, color: &str) -> Self {
         self.section_header_text_color = Some(color.to_string());
         self
@@ -445,6 +459,7 @@ impl ThemeContext {
     ///     Some("#c8c7cc".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn with_section_separator_color(mut self, color: &str) -> Self {
         self.section_separator_color = Some(color.to_string());
         self
@@ -467,6 +482,7 @@ impl ThemeContext {
     ///     Some("#707579".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn with_subtitle_text_color(mut self, color: &str) -> Self {
         self.subtitle_text_color = Some(color.to_string());
         self
@@ -489,6 +505,7 @@ impl ThemeContext {
     ///     Some("#e53935".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn with_destructive_text_color(mut self, color: &str) -> Self {
         self.destructive_text_color = Some(color.to_string());
         self
@@ -521,13 +538,14 @@ impl ThemeContext {
     ///     Some(&"#000000".to_string())
     /// );
     /// ```
+    #[must_use]
     pub fn css_vars(&self) -> std::collections::HashMap<String, String> {
         let mut vars: std::collections::HashMap<String, String> =
             std::collections::HashMap::with_capacity(16);
 
         let mut push = |key: &str, value: Option<&String>| {
             if let Some(v) = value {
-                vars.insert(format!("--tg-theme-{}", key), v.clone());
+                vars.insert(format!("--tg-theme-{key}"), v.clone());
             }
         };
 
@@ -572,7 +590,8 @@ impl ThemeContext {
     ///
     /// assert_eq!(theme_context.len(), 2);
     /// ```
-    pub fn len(&self) -> usize {
+    #[must_use]
+    pub const fn len(&self) -> usize {
         let mut count = 0;
         if self.bg_color.is_some() {
             count += 1;
@@ -635,7 +654,8 @@ impl ThemeContext {
     /// let theme_context = theme_context.with_bg_color("#ffffff");
     /// assert!(!theme_context.is_empty());
     /// ```
-    pub fn is_empty(&self) -> bool {
+    #[must_use]
+    pub const fn is_empty(&self) -> bool {
         self.len() == 0
     }
 

@@ -15,7 +15,8 @@ pub struct Placeholder {
 
 impl Placeholder {
     /// Creates a new Placeholder with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             title:       String::new(),
             description: None
@@ -23,38 +24,38 @@ impl Placeholder {
     }
 
     /// Sets the placeholder title
+    #[must_use]
     pub fn title(mut self, title: &str) -> Self {
         self.title = title.to_string();
         self
     }
 
     /// Sets the placeholder description
+    #[must_use]
     pub fn description(mut self, description: &str) -> Self {
         self.description = Some(description.to_string());
         self
     }
 
     /// Returns the placeholder title
+    #[must_use]
     pub fn get_title(&self) -> &str {
         &self.title
     }
 
     /// Returns the placeholder description
+    #[must_use]
     pub fn get_description(&self) -> Option<&str> {
         self.description.as_deref()
     }
 
     /// Render the placeholder as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let description_html = self
             .description
             .as_ref()
-            .map(|d| {
-                format!(
-                    "<div class=\"telegram-ui-placeholder-description\">{}</div>",
-                    d
-                )
-            })
+            .map(|d| format!("<div class=\"telegram-ui-placeholder-description\">{d}</div>"))
             .unwrap_or_default();
 
         format!(

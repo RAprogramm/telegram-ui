@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 
-//! SegmentedControl component for Telegram UI
+//! `SegmentedControl` component for Telegram UI
 
 use std::fmt;
 
 use crate::helpers::escape_html;
 
-/// SegmentedControl component
+/// `SegmentedControl` component
 #[derive(Debug, Clone)]
 pub struct SegmentedControl {
     active_value: String,
@@ -20,7 +20,7 @@ pub struct SegmentedControl {
     style:        Option<String>
 }
 
-/// Segment option in SegmentedControl
+/// Segment option in `SegmentedControl`
 #[derive(Debug, Clone)]
 pub struct Segment {
     value: String,
@@ -30,6 +30,7 @@ pub struct Segment {
 
 impl Segment {
     /// Creates a new segment
+    #[must_use]
     pub fn new(value: &str, label: &str) -> Self {
         Self {
             value: value.to_string(),
@@ -39,14 +40,15 @@ impl Segment {
     }
 
     /// Sets an icon for this segment
+    #[must_use]
     pub fn icon(mut self, icon: &str) -> Self {
         self.icon = Some(icon.to_string());
         self
     }
 }
 
-/// SegmentedControl size
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+/// `SegmentedControl` size
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum SegmentedControlSize {
     /// Small size
     #[default]
@@ -59,18 +61,20 @@ pub enum SegmentedControlSize {
 
 impl SegmentedControlSize {
     /// Convert to CSS class suffix
-    pub fn css_class(&self) -> &'static str {
+    #[must_use]
+    pub const fn css_class(&self) -> &'static str {
         match self {
-            SegmentedControlSize::S => "tgui-segmented-control--s",
-            SegmentedControlSize::M => "tgui-segmented-control--m",
-            SegmentedControlSize::L => "tgui-segmented-control--l"
+            Self::S => "tgui-segmented-control--s",
+            Self::M => "tgui-segmented-control--m",
+            Self::L => "tgui-segmented-control--l"
         }
     }
 }
 
 impl SegmentedControl {
-    /// Creates a new SegmentedControl instance
-    pub fn new() -> Self {
+    /// Creates a new `SegmentedControl` instance
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             active_value: String::new(),
             options:      Vec::new(),
@@ -84,42 +88,49 @@ impl SegmentedControl {
     }
 
     /// Sets the currently active value
+    #[must_use]
     pub fn active_value(mut self, value: &str) -> Self {
         self.active_value = value.to_string();
         self
     }
 
     /// Adds an option to the control
+    #[must_use]
     pub fn option(mut self, option: Segment) -> Self {
         self.options.push(option);
         self
     }
 
     /// Adds multiple options at once
+    #[must_use]
     pub fn options(mut self, options: Vec<Segment>) -> Self {
         self.options = options;
         self
     }
 
     /// Sets whether the control is disabled
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 
     /// Sets whether the control should be stretched to full width
-    pub fn stretched(mut self, stretched: bool) -> Self {
+    #[must_use]
+    pub const fn stretched(mut self, stretched: bool) -> Self {
         self.stretched = stretched;
         self
     }
 
     /// Sets the size of the control
-    pub fn size(mut self, size: SegmentedControlSize) -> Self {
+    #[must_use]
+    pub const fn size(mut self, size: SegmentedControlSize) -> Self {
         self.size = size;
         self
     }
 
     /// Sets the size from string
+    #[must_use]
     pub fn size_str(mut self, size: &str) -> Self {
         self.size = match size {
             "s" => SegmentedControlSize::S,
@@ -130,29 +141,34 @@ impl SegmentedControl {
     }
 
     /// Adds a custom CSS class
+    #[must_use]
     pub fn class(mut self, class: &str) -> Self {
         self.class = Some(class.to_string());
         self
     }
 
     /// Sets the element ID
+    #[must_use]
     pub fn id(mut self, id: &str) -> Self {
         self.id = Some(id.to_string());
         self
     }
 
     /// Sets inline styles
+    #[must_use]
     pub fn style(mut self, style: &str) -> Self {
         self.style = Some(style.to_string());
         self
     }
 
     /// Get the active value
+    #[must_use]
     pub fn get_active_value(&self) -> &str {
         &self.active_value
     }
 
-    /// Render the SegmentedControl as HTML string
+    /// Render the `SegmentedControl` as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let mut classes = vec!["tgui-segmented-control".to_string()];
 

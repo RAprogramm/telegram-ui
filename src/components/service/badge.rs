@@ -5,15 +5,17 @@
 
 use std::fmt;
 
+use crate::components::typography::{Caption, Subheadline};
+
 /// Badge type: number (shows numeric value) or dot (simple dot indicator)
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum BadgeType {
     Number,
     Dot
 }
 
 /// Badge visual modes matching Telegram UI design system
-#[derive(Clone, Debug, PartialEq, Default)]
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub enum BadgeMode {
     #[default]
     Primary,
@@ -35,6 +37,7 @@ pub struct Badge {
 
 impl Badge {
     /// Create a new Badge
+    #[must_use]
     pub fn new() -> Self {
         Self {
             badge_type: BadgeType::Number,
@@ -45,31 +48,46 @@ impl Badge {
         }
     }
 
-    /// Set badge type: number or dot
-    pub fn badge_type(mut self, badge_type: BadgeType) -> Self {
+    /// Set badge type by enum
+    #[must_use]
+    pub const fn badge_type(mut self, badge_type: BadgeType) -> Self {
         self.badge_type = badge_type;
         self
     }
 
+    /// Set badge type by string (for dynamic type selection)
+    #[must_use]
+    pub fn with_type_str(mut self, badge_type: &str) -> Self {
+        self.badge_type = match badge_type {
+            "dot" | "Dot" => BadgeType::Dot,
+            _ => BadgeType::Number
+        };
+        self
+    }
+
     /// Set number value (for type=number)
-    pub fn with_value(mut self, value: i32) -> Self {
+    #[must_use]
+    pub const fn with_value(mut self, value: i32) -> Self {
         self.value = Some(value);
         self
     }
 
     /// Set dot mode
-    pub fn with_dot(mut self) -> Self {
+    #[must_use]
+    pub const fn with_dot(mut self) -> Self {
         self.badge_type = BadgeType::Dot;
         self
     }
 
     /// Set mode: primary, critical, secondary, gray, white
-    pub fn mode(mut self, mode: BadgeMode) -> Self {
+    #[must_use]
+    pub const fn mode(mut self, mode: BadgeMode) -> Self {
         self.mode = mode;
         self
     }
 
     /// Set mode by string
+    #[must_use]
     pub fn with_mode(mut self, mode: &str) -> Self {
         self.mode = match mode {
             "primary" => BadgeMode::Primary,
@@ -83,18 +101,21 @@ impl Badge {
     }
 
     /// Make badge larger (only for number type)
-    pub fn large(mut self, large: bool) -> Self {
+    #[must_use]
+    pub const fn large(mut self, large: bool) -> Self {
         self.large = large;
         self
     }
 
     /// Set custom children text
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = Some(children.to_string());
         self
     }
 
     /// Render the badge as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let type_class = match self.badge_type {
             BadgeType::Number => "telegram-ui-badge--number",
@@ -115,24 +136,29 @@ impl Badge {
             ""
         };
 
-        let class = format!(
-            "telegram-ui-badge {} {} {}",
-            type_class, mode_class, large_class
-        )
-        .trim()
-        .to_string();
+        let class = format!("telegram-ui-badge {type_class} {mode_class} {large_class}")
+            .trim()
+            .to_string();
 
         if self.badge_type == BadgeType::Dot {
-            return format!("<span class=\"{}\"></span>", class);
+            return format!("<span class=\"{class}\"></span>");
         }
 
-        let content = self
-            .children
-            .clone()
-            .or(self.value.map(|v| v.to_string()))
-            .unwrap_or_default();
+        if let Some(ref text) = self.children {
+            if self.large {
+                return Subheadline::new()
+                    .with_text(text)
+                    .with_level("2")
+                    .with_weight("2")
+                    .with_component("span")
+                    .render();
+            }
+            return Caption::new().with_text(text).with_bold(false).render();
+        }
 
-        format!("<span class=\"{}\">{}</span>", class, content)
+        let content = self.value.map(|v| v.to_string()).unwrap_or_default();
+
+        format!("<span class=\"{class}\">{content}</span>")
     }
 }
 
@@ -148,7 +174,7 @@ impl fmt::Display for Badge {
             BadgeType::Dot => write!(f, "Badge(dot)"),
             BadgeType::Number => {
                 let val = self.children.clone().or(self.value.map(|v| v.to_string()));
-                write!(f, "Badge({:?})", val)
+                write!(f, "Badge({val:?})")
             }
         }
     }
@@ -201,11 +227,31 @@ mod tests {
     }
 
     #[test]
-    fn test_badge_children() {
-        let badge = Badge::new().children("NEW");
-        assert_eq!(
-            badge.render(),
-            "<span class=\"telegram-ui-badge telegram-ui-badge--number telegram-ui-badge--primary\">NEW</span>"
-        );
+    fn test_badge_children_large() {
+        let badge = Badge::new().children("NEW").large(true);
+        let html = badge.render();
+        assert!(html.contains("telegram-ui-subheadline"));
+        assert!(html.contains("telegram-ui-subheadline--2"));
+        assert!(html.contains("NEW"));
+    }
+
+    #[test]
+    fn test_badge_children_small() {
+        let badge = Badge::new().children("OK");
+        let html = badge.render();
+        assert!(html.contains("telegram-ui-caption"));
+        assert!(html.contains("OK"));
+    }
+
+    #[test]
+    fn test_badge_type_str() {
+        let badge = Badge::new().with_type_str("dot");
+        assert_eq!(badge.badge_type, BadgeType::Dot);
+    }
+
+    #[test]
+    fn test_badge_with_mode_str() {
+        let badge = Badge::new().with_value(5).with_mode("critical");
+        assert_eq!(badge.mode, BadgeMode::Critical);
     }
 }

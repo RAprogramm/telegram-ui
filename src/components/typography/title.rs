@@ -12,6 +12,7 @@ pub struct Title {
 }
 
 impl Title {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             text:  String::new(),
@@ -19,29 +20,35 @@ impl Title {
         }
     }
 
+    #[must_use]
     pub fn with_text(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn text(&self) -> &str {
         &self.text
     }
 
+    #[must_use]
     pub fn text_mut(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn with_align(mut self, align: &str) -> Self {
         self.align = align.to_string();
         self
     }
 
+    #[must_use]
     pub fn align(&self) -> &str {
         &self.align
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!(
             "<div class=\"telegram-ui-title\" style=\"text-align: {}\">{}</div>",

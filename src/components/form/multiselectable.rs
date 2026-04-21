@@ -7,6 +7,7 @@ pub struct Multiselectable {
 }
 
 impl Multiselectable {
+    #[must_use]
     pub fn new(value: &str) -> Self {
         Self {
             value:    value.to_string(),
@@ -16,21 +17,25 @@ impl Multiselectable {
         }
     }
 
+    #[must_use]
     pub fn label(mut self, label: &str) -> Self {
         self.label = label.to_string();
         self
     }
 
-    pub fn checked(mut self, checked: bool) -> Self {
+    #[must_use]
+    pub const fn checked(mut self, checked: bool) -> Self {
         self.checked = checked;
         self
     }
 
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let disabled_class = if self.disabled {
             "multiselectable--disabled"

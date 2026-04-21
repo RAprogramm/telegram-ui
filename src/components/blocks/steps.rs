@@ -6,7 +6,7 @@
 use std::fmt;
 
 /// Step state
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum StepState {
     #[default]
     /// Step is pending
@@ -38,7 +38,7 @@ pub struct Steps {
 }
 
 /// Steps orientation
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum Orientation {
     #[default]
     /// Vertical orientation
@@ -49,7 +49,8 @@ pub enum Orientation {
 
 impl Steps {
     /// Create a new Steps
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             steps:       Vec::new(),
             current:     0,
@@ -58,6 +59,7 @@ impl Steps {
     }
 
     /// Add a step
+    #[must_use]
     pub fn add_step(mut self, number: usize, title: &str) -> Self {
         self.steps.push(Step {
             number,
@@ -69,18 +71,21 @@ impl Steps {
     }
 
     /// Set current active step
-    pub fn current(mut self, current: usize) -> Self {
+    #[must_use]
+    pub const fn current(mut self, current: usize) -> Self {
         self.current = current;
         self
     }
 
     /// Set orientation
-    pub fn orientation(mut self, orientation: Orientation) -> Self {
+    #[must_use]
+    pub const fn orientation(mut self, orientation: Orientation) -> Self {
         self.orientation = orientation;
         self
     }
 
     /// Set subtitle for last step
+    #[must_use]
     pub fn with_subtitle(mut self, subtitle: &str) -> Self {
         if let Some(step) = self.steps.last_mut() {
             step.subtitle = Some(subtitle.to_string());
@@ -89,16 +94,14 @@ impl Steps {
     }
 
     /// Render the steps as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let orient_class = match self.orientation {
             Orientation::Vertical => "steps--vertical",
             Orientation::Horizontal => "steps--horizontal"
         };
 
-        let mut html = format!(
-            r#"<div class="telegram-ui-steps {orient_class}">"#,
-            orient_class = orient_class
-        );
+        let mut html = format!(r#"<div class="telegram-ui-steps {orient_class}">"#);
 
         for (i, step) in self.steps.iter().enumerate() {
             let state_class = if i < self.current {
@@ -126,10 +129,7 @@ impl Steps {
             ));
 
             if let Some(ref subtitle) = step.subtitle {
-                html.push_str(&format!(
-                    r#"<div class="step-subtitle">{subtitle}</div>"#,
-                    subtitle = subtitle
-                ));
+                html.push_str(&format!(r#"<div class="step-subtitle">{subtitle}</div>"#));
             }
 
             html.push_str("</div></div>");

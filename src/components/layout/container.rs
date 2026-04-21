@@ -12,18 +12,21 @@ pub struct Container {
 }
 
 impl Container {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             children: Vec::new(),
             padding:  16
         }
     }
 
+    #[must_use]
     pub fn children(&self) -> &[String] {
         &self.children
     }
 
-    pub fn padding(&self) -> u32 {
+    #[must_use]
+    pub const fn padding(&self) -> u32 {
         self.padding
     }
 }

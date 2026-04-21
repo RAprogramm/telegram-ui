@@ -6,6 +6,7 @@ pub struct Multiselect {
 }
 
 impl Multiselect {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             placeholder: "Select options".to_string(),
@@ -14,21 +15,28 @@ impl Multiselect {
         }
     }
 
+    #[must_use]
     pub fn placeholder(mut self, placeholder: &str) -> Self {
         self.placeholder = placeholder.to_string();
         self
     }
 
+    #[must_use]
     pub fn add_option(mut self, value: &str, label: &str) -> Self {
         self.options.push((value.to_string(), label.to_string()));
         self
     }
 
+    #[must_use]
     pub fn selected(mut self, selected: Vec<&str>) -> Self {
-        self.selected = selected.iter().map(|s| s.to_string()).collect();
+        self.selected = selected
+            .iter()
+            .map(std::string::ToString::to_string)
+            .collect();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let options_html: String = self
             .options
@@ -39,10 +47,7 @@ impl Multiselect {
                 } else {
                     ""
                 };
-                format!(
-                    "<option class=\"multiselect-option\" value=\"{}\">{}</option>",
-                    value, label
-                )
+                format!("<option class=\"multiselect-option\" value=\"{value}\">{label}</option>")
             })
             .collect();
 
@@ -56,8 +61,7 @@ impl Multiselect {
         };
 
         format!(
-            "<div class=\"telegram-ui-multiselect\">{}<select class=\"multiselect-select\">{}</select></div>",
-            placeholder, options_html
+            "<div class=\"telegram-ui-multiselect\">{placeholder}<select class=\"multiselect-select\">{options_html}</select></div>"
         )
     }
 }

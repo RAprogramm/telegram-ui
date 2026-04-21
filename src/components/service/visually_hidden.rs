@@ -4,17 +4,20 @@ pub struct VisuallyHidden {
 }
 
 impl VisuallyHidden {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             children: String::new()
         }
     }
 
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!(
             "<div class=\"telegram-ui-visually-hidden\">{}</div>",

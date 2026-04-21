@@ -4,17 +4,20 @@ pub struct FileInput {
 }
 
 impl FileInput {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             label: "Attach file".to_string()
         }
     }
 
+    #[must_use]
     pub fn label(mut self, label: &str) -> Self {
         self.label = label.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!(
             r#"<div class="telegram-ui-file-input">

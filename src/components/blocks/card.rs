@@ -15,7 +15,8 @@ pub struct Card {
 
 impl Card {
     /// Creates a new Card with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             ambient:  false,
             children: String::new()
@@ -23,28 +24,33 @@ impl Card {
     }
 
     /// Sets whether the card should use ambient style
-    pub fn ambient(mut self, ambient: bool) -> Self {
+    #[must_use]
+    pub const fn ambient(mut self, ambient: bool) -> Self {
         self.ambient = ambient;
         self
     }
 
     /// Sets the card children content
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
     /// Returns whether the card uses ambient style
-    pub fn is_ambient(&self) -> bool {
+    #[must_use]
+    pub const fn is_ambient(&self) -> bool {
         self.ambient
     }
 
     /// Returns the card children content
+    #[must_use]
     pub fn get_children(&self) -> &str {
         &self.children
     }
 
     /// Render the card as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let class = if self.ambient {
             "telegram-ui-card telegram-ui-card--ambient"
@@ -57,6 +63,92 @@ impl Card {
             class,
             escape_html(&self.children)
         )
+    }
+}
+
+/// `CardCell` component - displays cell content in a Card
+#[derive(Debug, Clone)]
+pub struct CardCell {
+    title:       String,
+    description: String
+}
+
+impl CardCell {
+    /// Creates a new `CardCell` with default settings
+    #[must_use]
+    pub const fn new() -> Self {
+        Self {
+            title:       String::new(),
+            description: String::new()
+        }
+    }
+
+    /// Sets the cell title
+    #[must_use]
+    pub fn title(mut self, title: &str) -> Self {
+        self.title = title.to_string();
+        self
+    }
+
+    /// Sets the cell description
+    #[must_use]
+    pub fn description(mut self, description: &str) -> Self {
+        self.description = description.to_string();
+        self
+    }
+
+    /// Render the card cell as HTML string
+    #[must_use]
+    pub fn render(&self) -> String {
+        format!(
+            "<div class=\"telegram-ui-card-cell\">\n  <h3>{}</h3>\n  <p>{}</p>\n</div>",
+            escape_html(&self.title),
+            escape_html(&self.description)
+        )
+    }
+}
+
+impl Default for CardCell {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// `CardChip` component - displays a small badge/label in a Card
+#[derive(Debug, Clone)]
+pub struct CardChip {
+    text: String
+}
+
+impl CardChip {
+    /// Creates a new `CardChip` with default settings
+    #[must_use]
+    pub const fn new() -> Self {
+        Self {
+            text: String::new()
+        }
+    }
+
+    /// Sets the chip text
+    #[must_use]
+    pub fn text(mut self, text: &str) -> Self {
+        self.text = text.to_string();
+        self
+    }
+
+    /// Render the card chip as HTML string
+    #[must_use]
+    pub fn render(&self) -> String {
+        format!(
+            "<span class=\"telegram-ui-card-chip\">{}</span>",
+            escape_html(&self.text)
+        )
+    }
+}
+
+impl Default for CardChip {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

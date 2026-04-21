@@ -4,34 +4,35 @@
 //!
 //! # Features
 //!
-//! - **Button** - Multiple button styles (filled, outline, plain, gray, white)
-//! - **Spinner** - Loading indicators in multiple sizes
-//! - **Card** - Container with optional ambient style
-//! - **Cell** - List item with before/after content
-//! - **List** - Container for cells
-//! - **Avatar** - User avatar with image or initials
-//! - **Input** - Text input field with validation
-//! - **Textarea** - Multi-line text input with validation
-//! - **Select** - Dropdown select with validation
-//! - **Checkbox** - Checkbox with label
-//! - **Radio** - Radio button with label
-//! - **Switch** - Toggle switch
-//! - **Text** - Customizable text element
-//! - **Title/Subtitle/Headline/Caption** - Typography elements
-//! - **Alert** - Info/success/warning/error messages
-//! - **Modal** - Overlay modal dialog
-//! - **Toast** - Floating notification
-//! - **Backdrop** - Overlay backdrop
-//! - **Divider** - Horizontal separator
-//! - **Badge** - Notification badge
-//! - **Progress** - Progress indicator
-//! - **Skeleton** - Loading placeholder
-//! - **EmptyState** - Empty state with action
-//! - **Container/Row/Column** - Layout components
-//! - **Framework Support** - Works with Leptos and Yew web frameworks
-//! - **CSS Variables** - Customizable via CSS custom properties
-//! - **Responsive Design** - Mobile-first approach with breakpoints
-//! - **Platform Detection** - Automatic iOS/Android/Base detection
+//! - **`Button`** - Multiple button styles (filled, outline, plain, gray,
+//!   white)
+//! - **`Spinner`** - Loading indicators in multiple sizes
+//! - **`Card`** - Container with optional ambient style
+//! - **`Cell`** - List item with before/after content
+//! - **`List`** - Container for cells
+//! - **`Avatar`** - User avatar with image or initials
+//! - **`Input`** - Text input field with validation
+//! - **`Textarea`** - Multi-line text input with validation
+//! - **`Select`** - Dropdown select with validation
+//! - **`Checkbox`** - Checkbox with label
+//! - **`Radio`** - Radio button with label
+//! - **`Switch`** - Toggle switch
+//! - **`Text`** - Customizable text element
+//! - **`Title/Subtitle/Headline/Caption`** - Typography elements
+//! - **`Alert`** - Info/success/warning/error messages
+//! - **`Modal`** - Overlay modal dialog
+//! - **`Toast`** - Floating notification
+//! - **`Backdrop`** - Overlay backdrop
+//! - **`Divider`** - Horizontal separator
+//! - **`Badge`** - Notification badge
+//! - **`Progress`** - Progress indicator
+//! - **`Skeleton`** - Loading placeholder
+//! - **`EmptyState`** - Empty state with action
+//! - **`Container/Row/Column`** - Layout components
+//! - **`Framework Support`** - Works with Leptos and Yew web frameworks
+//! - **`CSS Variables`** - Customizable via CSS custom properties
+//! - **`Responsive Design`** - Mobile-first approach with breakpoints
+//! - **`Platform Detection`** - Automatic iOS/Android/Base detection
 //!
 //! # Examples
 //!
@@ -59,7 +60,7 @@
 //! - `--telegram-button-gray-bg`: Background color for gray buttons (#f0f0f0)
 //! - `--telegram-button-gray-color`: Text color for gray buttons (#333)
 //!
-//! # AppRoot Component
+//! # `AppRoot` Component
 //!
 //! The `AppRoot` component is the root wrapper for your Telegram Mini App.
 //! It provides platform detection, theme support, and automatic styling.
@@ -128,6 +129,7 @@
 //! - Auto dark/light theme via `prefers-color-scheme`
 
 mod error;
+mod hooks;
 mod platform;
 mod theme;
 
@@ -139,8 +141,9 @@ pub use platform::Platform;
 pub use theme::{Theme, ThemeContext};
 
 /// Get the CSS styles for Telegram UI
-pub fn get_styles() -> &'static str {
-    include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/styles.css"))
+#[must_use]
+pub const fn get_styles() -> &'static str {
+    include_str!("/home/ra/Projects/telegram/telegram-ui/styles.css")
 }
 
 // Re-export all components
@@ -150,8 +153,8 @@ pub use components::{
     Cell, Checkbox, Chip, CircularProgress, ColorInput, Column, Container, Divider, EmptyState,
     FileInput, FormInput, Headline, HorizontalScroll, IconButton, IconContainer, Image,
     InlineButtons, Input, List, Modal, Multiselect, Multiselectable, Orientation, PinInput,
-    Placeholder, Progress, Radio, Rating, RootRenderer, Row, Section, SectionHeader, Segment,
-    SegmentedControl, SegmentedControlSize, Select, Selectable, Skeleton, Slider, Snackbar,
-    Spacer, Spinner, SpinnerSize, Spoiler, StepState, Steps, Subtitle, Switch, Tab, TabBar,
-    Tappable, Text, Textarea, Timeline, Title, Toast, Touch, VisuallyHidden
+    Placeholder, Progress, Radio, Rating, RootRenderer, Row, Section, Segment, SegmentedControl,
+    SegmentedControlSize, Select, Selectable, Skeleton, Slider, Snackbar, Spacer, Spinner,
+    SpinnerSize, Spoiler, StepState, Steps, Subtitle, Switch, Tab, TabBar, Tappable, Text,
+    Textarea, Timeline, Title, Toast, Touch, VisuallyHidden
 };

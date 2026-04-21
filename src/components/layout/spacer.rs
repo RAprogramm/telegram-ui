@@ -11,13 +11,15 @@ pub struct Spacer {
 }
 
 impl Spacer {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             size: 16
         }
     }
 
-    pub fn size(&self) -> u32 {
+    #[must_use]
+    pub const fn size(&self) -> u32 {
         self.size
     }
 }

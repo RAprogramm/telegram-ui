@@ -6,7 +6,8 @@ pub struct Tappable {
 }
 
 impl Tappable {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             interactive: true,
             disabled:    false,
@@ -14,21 +15,25 @@ impl Tappable {
         }
     }
 
-    pub fn interactive(mut self, interactive: bool) -> Self {
+    #[must_use]
+    pub const fn interactive(mut self, interactive: bool) -> Self {
         self.interactive = interactive;
         self
     }
 
-    pub fn disabled(mut self, disabled: bool) -> Self {
+    #[must_use]
+    pub const fn disabled(mut self, disabled: bool) -> Self {
         self.disabled = disabled;
         self
     }
 
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = children.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let interactive_class = if self.interactive {
             "tappable--interactive"

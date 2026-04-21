@@ -12,17 +12,20 @@ pub struct Link {
 }
 
 impl Link {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             href: String::new(),
             text: String::new()
         }
     }
 
+    #[must_use]
     pub fn href(&self) -> &str {
         &self.href
     }
 
+    #[must_use]
     pub fn text(&self) -> &str {
         &self.text
     }

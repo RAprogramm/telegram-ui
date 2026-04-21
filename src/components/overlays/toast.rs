@@ -16,7 +16,8 @@ pub struct Toast {
 }
 
 impl Toast {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             message:  String::new(),
             duration: 3000,
@@ -24,38 +25,45 @@ impl Toast {
         }
     }
 
+    #[must_use]
     pub fn message(mut self, message: &str) -> Self {
         self.message = message.to_string();
         self
     }
 
-    pub fn duration(mut self, duration: u64) -> Self {
+    #[must_use]
+    pub const fn duration(mut self, duration: u64) -> Self {
         self.duration = duration;
         self
     }
 
+    #[must_use]
     pub fn action(mut self, action: &str) -> Self {
         self.action = action.to_string();
         self
     }
 
+    #[must_use]
     pub fn message_text(&self) -> &str {
         &self.message
     }
 
-    pub fn duration_time(&self) -> u64 {
+    #[must_use]
+    pub const fn duration_time(&self) -> u64 {
         self.duration
     }
 
+    #[must_use]
     pub fn action_text(&self) -> &str {
         &self.action
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
-        let _action_html = if !self.action.is_empty() {
-            format!("<button>{}</button>", escape_html(&self.action))
-        } else {
+        let _action_html = if self.action.is_empty() {
             String::new()
+        } else {
+            format!("<button>{}</button>", escape_html(&self.action))
         };
 
         format!(

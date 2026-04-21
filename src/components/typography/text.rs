@@ -14,6 +14,7 @@ pub struct Text {
 }
 
 impl Text {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             text:  String::new(),
@@ -21,29 +22,35 @@ impl Text {
         }
     }
 
+    #[must_use]
     pub fn with_text(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn text(&self) -> &str {
         &self.text
     }
 
+    #[must_use]
     pub fn text_mut(mut self, text: &str) -> Self {
         self.text = text.to_string();
         self
     }
 
+    #[must_use]
     pub fn with_color(mut self, color: &str) -> Self {
         self.color = color.to_string();
         self
     }
 
+    #[must_use]
     pub fn color(&self) -> &str {
         &self.color
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         format!(
             "<div class=\"telegram-ui-text\" style=\"color: {}\">{}</div>",

@@ -20,6 +20,7 @@ impl Platform {
     ///
     /// Detects platform by analyzing the user agent string.
     /// iOS is detected first, then Android, falling back to Base.
+    #[must_use]
     pub fn from_user_agent(user_agent: &str) -> Self {
         let ua_lower = user_agent.to_lowercase();
 
@@ -30,15 +31,15 @@ impl Platform {
             || (ua_lower.contains("mac")
                 && (ua_lower.contains("touch") || ua_lower.contains("mobile")))
         {
-            return Platform::Ios;
+            return Self::Ios;
         }
 
         // Android detection
         if ua_lower.contains("android") {
-            return Platform::Android;
+            return Self::Android;
         }
 
-        Platform::Base
+        Self::Base
     }
 
     /// Detect platform from current environment
@@ -56,45 +57,51 @@ impl Platform {
 
     /// Detect platform from current environment (non-WASM)
     #[cfg(not(target_arch = "wasm32"))]
+    #[must_use]
     pub fn detect() -> Self {
-        std::env::var("USER_AGENT").map_or(Platform::Base, |ua| Platform::from_user_agent(&ua))
+        std::env::var("USER_AGENT").map_or(Self::Base, |ua| Self::from_user_agent(&ua))
     }
 
     /// Check if this is iOS platform
     #[inline]
-    pub fn is_ios(&self) -> bool {
-        matches!(self, Platform::Ios)
+    #[must_use]
+    pub const fn is_ios(&self) -> bool {
+        matches!(self, Self::Ios)
     }
 
     /// Check if this is Android platform
     #[inline]
-    pub fn is_android(&self) -> bool {
-        matches!(self, Platform::Android)
+    #[must_use]
+    pub const fn is_android(&self) -> bool {
+        matches!(self, Self::Android)
     }
 
     /// Check if this is base platform
     #[inline]
-    pub fn is_base(&self) -> bool {
-        matches!(self, Platform::Base)
+    #[must_use]
+    pub const fn is_base(&self) -> bool {
+        matches!(self, Self::Base)
     }
 
     /// Get CSS class name for this platform
     ///
     /// Returns the platform-specific CSS class name for styling.
-    pub fn css_class(&self) -> &'static str {
+    #[must_use]
+    pub const fn css_class(&self) -> &'static str {
         match self {
-            Platform::Ios => "tgui-platform-ios",
-            Platform::Android => "tgui-platform-android",
-            Platform::Base => "tgui-platform-base"
+            Self::Ios => "tgui-platform-ios",
+            Self::Android => "tgui-platform-android",
+            Self::Base => "tgui-platform-base"
         }
     }
 
     /// Get the platform name as a string
-    pub fn name(&self) -> &'static str {
+    #[must_use]
+    pub const fn name(&self) -> &'static str {
         match self {
-            Platform::Ios => "ios",
-            Platform::Android => "android",
-            Platform::Base => "base"
+            Self::Ios => "ios",
+            Self::Android => "android",
+            Self::Base => "base"
         }
     }
 }
@@ -110,9 +117,9 @@ impl std::str::FromStr for Platform {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
-            "ios" => Ok(Platform::Ios),
-            "android" => Ok(Platform::Android),
-            "base" | "web" | "desktop" => Ok(Platform::Base),
+            "ios" => Ok(Self::Ios),
+            "android" => Ok(Self::Android),
+            "base" | "web" | "desktop" => Ok(Self::Base),
             _ => Err(crate::error::UiError::InvalidPlatform(s.to_string()))
         }
     }

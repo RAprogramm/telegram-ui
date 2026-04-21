@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: 2026 Telegram UI contributors
 
-//! AppRoot - Root wrapper component for Telegram Mini Apps
+//! `AppRoot` - Root wrapper component for Telegram Mini Apps
 
 use crate::{Platform, Theme, ThemeContext, helpers::escape_html};
 
-/// AppRoot is the root wrapper component for Telegram Mini Apps.
+/// `AppRoot` is the root wrapper component for Telegram Mini Apps.
 ///
 /// It provides:
 /// - Platform detection (iOS/Android/Base)
@@ -39,7 +39,8 @@ pub struct AppRoot {
 }
 
 impl AppRoot {
-    /// Create a new AppRoot instance
+    /// Create a new `AppRoot` instance
+    #[must_use]
     pub fn new() -> Self {
         Self::default()
     }
@@ -51,7 +52,8 @@ impl AppRoot {
     /// # Arguments
     ///
     /// * `platform` - The platform to use (iOS, Android, or Base)
-    pub fn platform(mut self, platform: Platform) -> Self {
+    #[must_use]
+    pub const fn platform(mut self, platform: Platform) -> Self {
         self.platform = Some(platform);
         self
     }
@@ -63,7 +65,8 @@ impl AppRoot {
     /// # Arguments
     ///
     /// * `theme` - The theme mode (Light, Dark, or Auto)
-    pub fn theme(mut self, theme: Theme) -> Self {
+    #[must_use]
+    pub const fn theme(mut self, theme: Theme) -> Self {
         self.theme = Some(theme);
         self
     }
@@ -75,6 +78,7 @@ impl AppRoot {
     /// # Arguments
     ///
     /// * `theme_context` - The theme context containing color values
+    #[must_use]
     pub fn theme_context(mut self, theme_context: ThemeContext) -> Self {
         self.theme_context = Some(theme_context);
         self
@@ -85,6 +89,7 @@ impl AppRoot {
     /// # Arguments
     ///
     /// * `class` - The CSS class to add
+    #[must_use]
     pub fn class(mut self, class: &str) -> Self {
         self.class = Some(class.to_string());
         self
@@ -94,7 +99,8 @@ impl AppRoot {
     ///
     /// # Arguments
     ///
-    /// * `children` - The HTML content to render inside the AppRoot
+    /// * `children` - The HTML content to render inside the `AppRoot`
+    #[must_use]
     pub fn children(mut self, children: &str) -> Self {
         self.children = Some(children.to_string());
         self
@@ -105,6 +111,7 @@ impl AppRoot {
     /// # Arguments
     ///
     /// * `id` - The ID to set on the element
+    #[must_use]
     pub fn id(mut self, id: &str) -> Self {
         self.id = Some(id.to_string());
         self
@@ -115,6 +122,7 @@ impl AppRoot {
     /// # Arguments
     ///
     /// * `style` - Inline CSS styles
+    #[must_use]
     pub fn style(mut self, style: &str) -> Self {
         self.style = Some(style.to_string());
         self
@@ -163,7 +171,7 @@ impl AppRoot {
 
     /// Auto-detect the platform (non-WASM fallback)
     #[cfg(not(target_arch = "wasm32"))]
-    fn detect_platform() -> Platform {
+    const fn detect_platform() -> Platform {
         // In non-WASM environments (e.g., tests), default to Base
         Platform::Base
     }
@@ -196,6 +204,7 @@ impl AppRoot {
     }
 
     /// Render the component to HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let mut html = String::new();
 
@@ -220,7 +229,7 @@ impl AppRoot {
                 if !style_attrs.is_empty() {
                     style_attrs.push(' ');
                 }
-                style_attrs.push_str(&format!("{}: {}", key, value));
+                style_attrs.push_str(&format!("{key}: {value}"));
             }
         }
 

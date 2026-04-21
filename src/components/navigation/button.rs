@@ -12,18 +12,21 @@ pub struct Button {
 }
 
 impl Button {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             text:   String::new(),
             active: false
         }
     }
 
+    #[must_use]
     pub fn text(&self) -> &str {
         &self.text
     }
 
-    pub fn active(&self) -> bool {
+    #[must_use]
+    pub const fn active(&self) -> bool {
         self.active
     }
 }

@@ -12,21 +12,25 @@ pub struct Divider {
 }
 
 impl Divider {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             inset: false
         }
     }
 
-    pub fn with_inset(mut self, inset: bool) -> Self {
+    #[must_use]
+    pub const fn with_inset(mut self, inset: bool) -> Self {
         self.inset = inset;
         self
     }
 
-    pub fn is_inset(&self) -> bool {
+    #[must_use]
+    pub const fn is_inset(&self) -> bool {
         self.inset
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let class = if self.inset {
             "telegram-ui-divider telegram-ui-divider--inset"
@@ -34,7 +38,7 @@ impl Divider {
             "telegram-ui-divider"
         };
 
-        format!("<div class=\"{}\"></div>", class)
+        format!("<div class=\"{class}\"></div>")
     }
 }
 

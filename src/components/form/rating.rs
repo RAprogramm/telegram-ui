@@ -6,6 +6,7 @@ pub struct Rating {
 }
 
 impl Rating {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             max_stars: 5,
@@ -14,21 +15,25 @@ impl Rating {
         }
     }
 
-    pub fn max_stars(mut self, max: usize) -> Self {
+    #[must_use]
+    pub const fn max_stars(mut self, max: usize) -> Self {
         self.max_stars = max;
         self
     }
 
-    pub fn value(mut self, value: f64) -> Self {
+    #[must_use]
+    pub const fn value(mut self, value: f64) -> Self {
         self.value = value;
         self
     }
 
+    #[must_use]
     pub fn size(mut self, size: &str) -> Self {
         self.size = size.to_string();
         self
     }
 
+    #[must_use]
     pub fn render(&self) -> String {
         let stars: String = (0..self.max_stars)
             .map(|i| {
@@ -37,7 +42,7 @@ impl Rating {
                 } else {
                     ""
                 };
-                format!("<span class=\"rating-star {}\">⭐</span>", filled)
+                format!("<span class=\"rating-star {filled}\">⭐</span>")
             })
             .collect();
 

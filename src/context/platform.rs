@@ -10,29 +10,34 @@ pub struct PlatformContext {
 
 impl PlatformContext {
     /// Create a new platform context
-    pub fn new(platform: Platform) -> Self {
+    #[must_use]
+    pub const fn new(platform: Platform) -> Self {
         Self {
             platform
         }
     }
 
     /// Get the current platform
-    pub fn platform(&self) -> Platform {
+    #[must_use]
+    pub const fn platform(&self) -> Platform {
         self.platform
     }
 
     /// Check if platform is iOS
-    pub fn is_ios(&self) -> bool {
+    #[must_use]
+    pub const fn is_ios(&self) -> bool {
         self.platform.is_ios()
     }
 
     /// Check if platform is Android
-    pub fn is_android(&self) -> bool {
+    #[must_use]
+    pub const fn is_android(&self) -> bool {
         self.platform.is_android()
     }
 
     /// Check if platform is Base
-    pub fn is_base(&self) -> bool {
+    #[must_use]
+    pub const fn is_base(&self) -> bool {
         self.platform.is_base()
     }
 }

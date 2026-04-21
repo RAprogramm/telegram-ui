@@ -15,7 +15,8 @@ pub struct List {
 
 impl List {
     /// Creates a new List with default settings
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             ios:   false,
             cells: Vec::new()
@@ -23,18 +24,21 @@ impl List {
     }
 
     /// Sets whether the list should use iOS styling
-    pub fn ios(mut self, ios: bool) -> Self {
+    #[must_use]
+    pub const fn ios(mut self, ios: bool) -> Self {
         self.ios = ios;
         self
     }
 
     /// Adds a cell to the list
+    #[must_use]
     pub fn add_cell(mut self, cell: &str) -> Self {
         self.cells.push(cell.to_string());
         self
     }
 
     /// Adds multiple cells to the list
+    #[must_use]
     pub fn add_cells(mut self, cells: &[&str]) -> Self {
         for cell in cells {
             self.cells.push(cell.to_string());
@@ -43,26 +47,31 @@ impl List {
     }
 
     /// Returns whether the list uses iOS styling
-    pub fn is_ios(&self) -> bool {
+    #[must_use]
+    pub const fn is_ios(&self) -> bool {
         self.ios
     }
 
     /// Returns the number of cells in the list
-    pub fn len(&self) -> usize {
+    #[must_use]
+    pub const fn len(&self) -> usize {
         self.cells.len()
     }
 
     /// Returns whether the list is empty
-    pub fn is_empty(&self) -> bool {
+    #[must_use]
+    pub const fn is_empty(&self) -> bool {
         self.cells.is_empty()
     }
 
     /// Returns the cells in the list
+    #[must_use]
     pub fn get_cells(&self) -> &[String] {
         &self.cells
     }
 
     /// Render the list as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let mut classes = vec!["telegram-ui-list"];
 
@@ -74,7 +83,7 @@ impl List {
 
         let cells_html = self.cells.join("");
 
-        format!("<div class=\"{}\">{}</div>", class_str, cells_html)
+        format!("<div class=\"{class_str}\">{cells_html}</div>")
     }
 }
 

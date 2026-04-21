@@ -3,6 +3,7 @@
 //! Helper functions for Telegram UI
 
 /// Escape HTML special characters to prevent XSS attacks
+#[must_use]
 pub fn escape_html(s: &str) -> String {
     let mut escaped = String::with_capacity(s.len());
     for c in s.chars() {
@@ -19,11 +20,13 @@ pub fn escape_html(s: &str) -> String {
 }
 
 /// Check if a string is empty or contains only whitespace
+#[must_use]
 pub fn is_empty_or_whitespace(s: &str) -> bool {
     s.trim().is_empty()
 }
 
 /// Truncate a string to a maximum length with ellipsis
+#[must_use]
 pub fn truncate_with_ellipsis(s: &str, max_length: usize) -> String {
     if s.len() <= max_length {
         s.to_string()
@@ -32,7 +35,8 @@ pub fn truncate_with_ellipsis(s: &str, max_length: usize) -> String {
     }
 }
 
-/// Convert snake_case to camelCase
+/// Convert `snake_case` to camelCase
+#[must_use]
 pub fn to_camel_case(s: &str) -> String {
     let mut result = String::new();
     let mut capitalize = false;
@@ -51,7 +55,8 @@ pub fn to_camel_case(s: &str) -> String {
     result
 }
 
-/// Convert snake_case to CSS class name
+/// Convert `snake_case` to CSS class name
+#[must_use]
 pub fn to_css_class(s: &str) -> String {
     s.replace('_', "-")
 }

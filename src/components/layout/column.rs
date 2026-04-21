@@ -11,12 +11,14 @@ pub struct Column {
 }
 
 impl Column {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             children: Vec::new()
         }
     }
 
+    #[must_use]
     pub fn children(&self) -> &[String] {
         &self.children
     }

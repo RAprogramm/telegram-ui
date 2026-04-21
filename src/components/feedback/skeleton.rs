@@ -12,6 +12,7 @@ pub struct Skeleton {
 }
 
 impl Skeleton {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             width:  "100%".to_string(),
@@ -19,10 +20,12 @@ impl Skeleton {
         }
     }
 
+    #[must_use]
     pub fn width(&self) -> &str {
         &self.width
     }
 
+    #[must_use]
     pub fn height(&self) -> &str {
         &self.height
     }

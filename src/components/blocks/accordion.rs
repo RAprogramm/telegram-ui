@@ -17,7 +17,8 @@ pub struct Accordion {
 
 impl Accordion {
     /// Create a new Accordion
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self {
             expanded: false,
             summary:  String::new(),
@@ -26,24 +27,28 @@ impl Accordion {
     }
 
     /// Set whether the accordion is expanded
-    pub fn expanded(mut self, expanded: bool) -> Self {
+    #[must_use]
+    pub const fn expanded(mut self, expanded: bool) -> Self {
         self.expanded = expanded;
         self
     }
 
     /// Set the summary/header text
+    #[must_use]
     pub fn summary(mut self, summary: &str) -> Self {
         self.summary = summary.to_string();
         self
     }
 
     /// Set the content text
+    #[must_use]
     pub fn content(mut self, content: &str) -> Self {
         self.content = content.to_string();
         self
     }
 
     /// Render the accordion as HTML string
+    #[must_use]
     pub fn render(&self) -> String {
         let expanded = if self.expanded { " expanded" } else { "" };
 
